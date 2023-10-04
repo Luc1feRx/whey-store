@@ -3,84 +3,76 @@
 @section('title') Quản lý danh mục @stop
 
 @section('content')
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Quản lý danh mục</h1>
-        </div>
-
-        <!-- Content Row -->
-
-        <div class="row">
-            <div class="col-xl-12 col-lg-7">
-                <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <div id="dataTable_filter" class="dataTables_filter">
-                                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder=""
-                                                    aria-controls="dataTable"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
-                                            role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
-                                                        style="width: 165.547px;">Tên danh mục</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                        colspan="1" aria-label="Position: activate to sort column ascending"
-                                                        style="width: 271.609px;">Slug</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                        colspan="1" aria-label="Office: activate to sort column ascending"
-                                                        style="width: 117.859px;">Ngày tạo</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                        colspan="1" aria-label="Office: activate to sort column ascending"
-                                                        style="width: 117.859px;">Hành động</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($categories as $key => $cate)
-                                                <tr class={{ $key % 2==0 ? "odd" : "even" }}>
-                                                    <td class="sorting_1 update_record" data-name="name_category" data-type="text"
-                                                        data-pk="{{ $cate->id }}">{{ $cate->name_category }}</td>
-                                                    <td class="update_record" data-name="category_slug" data-type="text"
-                                                        data-pk="{{ $cate->id }}">{{ $cate->category_slug }}</td>
-                                                    <td>{{ $cate->created_at }}</td>
-                                                    <td>
-                                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            Dropdown
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-7">
-                                        {{ $categories->links('pagination::bootstrap-4') }}
+<div class="content-wrapper">
+    <section class="content">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Simple Tables</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Simple Tables</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="#" class="btn btn-info">Tạo danh mục</a>
+    
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right"
+                                        placeholder="Search">
+    
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên danh mục</th>
+                                        <th>Slug danh mục</th>
+                                        <th>Danh mục cha</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($categories as $cate)
+                                        <tr>
+                                            <td>{{ $cate->id }}</td>
+                                            <td>{{ $cate->name_category }}</td>
+                                            <td>{{ $cate->category_slug }}</td>
+                                            <td>{{ $cate->parent_id }}</td>
+                                            <td><span class="tag tag-success">Approved</span></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="card-footer clearfix">
+                                {!! $categories->links('pagination::bootstrap-4') !!}
+                              </div>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
         </div>
-
-    </div>
-    <!-- /.container-fluid -->
-@endsection
+    </section>
+</div>
+@endsection 

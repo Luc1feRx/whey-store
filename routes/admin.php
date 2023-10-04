@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\LoginController;
-use App\Http\Controllers\Backend\Category\CategoryController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Upload\UploadController;
 use Illuminate\Http\UploadedFile;
