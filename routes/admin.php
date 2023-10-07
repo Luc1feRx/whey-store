@@ -32,8 +32,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
             Route::get('/',[CategoryController::class, 'index'])->name('index');
             Route::get('/create',[CategoryController::class, 'create'])->name('create');
-            // Route::post('/update', [CategoryController::class, 'update'])->name('update');
-
+            Route::post('/store', [CategoryController::class, 'store'])->name('store');
         });
     });
 

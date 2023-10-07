@@ -1,27 +1,39 @@
-<div class="col-xl-12 col-lg-7">
-    <!-- Collapsable Card Example -->
-    <div class="card shadow mb-4">
-        <!-- Card Header - Accordion -->
-        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Thêm mới danh mục</h6>
-        </a>
-        <!-- Card Content - Collapse -->
-        <div class="collapse show" id="collapseCardExample" style="">
+<div class="card-body" style="display: block;">
+    <div class="card card-primary">
+        <!-- /.card-header -->
+
+        <!-- form start -->
+        <form action="{{ route('admin.categories.store') }}" method="POST">
+            {{ csrf_field() }}
             <div class="card-body">
-                <form class="user">
-                    <div class="form-group">
-                        <input wire:model="name_category" type="text" id="convert_slug" class="form-control" placeholder="Nhập tên danh mục">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên danh mục</label>
+                    <input type="text" class="form-control"
+                        placeholder="Nhập tên danh mục" id="convert_slug" name="name_category">
                         @error('name_category') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <input type="text" wire:model="category_slug" id="slug" class="form-control" placeholder="Nhập slug">
-                        @error('category_slug') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                    <button wire:click.prevent="store" type="submit" class="btn btn-primary btn-block">
-                        Thêm mới
-                    </button>    
-                </form>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Slug</label>
+                    <input type="text" class="form-control" id="slug" name="slug_category" id="exampleInputPassword1"
+                        placeholder="Nhập slug danh mục">
+                        @error('slug_category') <span class="error">{{ $message }}</span> @enderror
+                </div>
+                <div class="form-group">
+                    <label for="catetory">Danh mục cha</label>
+                    <select name="parent_id" class="form-control select2-data-category" id="">
+                        <option value="">Chọn danh mục</option>
+                        @foreach ($getParentCategory as $getItem)
+                            <option value="{{ $getItem->id }}">{{ $getItem->name_category }}</option>
+                        @endforeach
+                    </select>
+                    @error('parent_id') <span class="error">{{ $message }}</span> @enderror
+                </div>
             </div>
-        </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Thêm</button>
+            </div>
+        </form>
     </div>
 </div>
