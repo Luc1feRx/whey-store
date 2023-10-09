@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Thêm mới danh mục @stop
+@section('title') Sửa danh mục @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -14,15 +14,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Tạo mới danh mục</h1>
+                    <h1>Sửa danh mục</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
-                    'breadcrumb'=> [
-                    ['title' => 'Danh sách danh mục', 'url' => route('admin.categories.index')],
-                    ['title' => 'Tạo danh mục', 'url' => '#']
-                    ]
+                        'breadcrumb'=> [
+                            ['title' => 'Danh sách danh mục', 'url' => route('admin.categories.index')],
+                            ['title' => 'Sửa danh mục', 'url' => '#']
+                        ]
                     ])
                 </div>
             </div>
@@ -68,7 +68,7 @@
 @endsection
 
 @section('addJs')
-<script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
-<script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
-@include('backend.category.script')
+    <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
+    <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
+    @include('backend.category.script')
 @endsection

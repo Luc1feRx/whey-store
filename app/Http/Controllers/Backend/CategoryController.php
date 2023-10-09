@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Common;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
@@ -14,7 +15,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 class CategoryController extends Controller
 {
     public function index (Request $request){
-        $categories = Category::orderBy('id', 'desc')->paginate(10);
+        $categories = Category::with('parentCategory');
+
+        if($request->keyword){
+            $searchKeyword = Common::escapeLike($request->keyword);
+            $categories->where(function ($q) use ($searchKeyword) {
+                $q->where('name_category', 'LIKE', "%" . $searchKeyword . "%")
+                    ->orWhere('slug_category', 'LIKE', "%" . $searchKeyword . "%");
+            });
+        }
+        
+        $categories = $categories->orderBy('id', 'desc')->paginate(10);
         return view('backend.category.index', [
             'categories' => $categories
         ]);
@@ -42,6 +53,10 @@ class CategoryController extends Controller
             DB::rollBack();
             return redirect()->back()->with(['error' => 'Thêm danh mục thất bại']);
         }
+    }
+
+    public function edit($id){
+        
     }
       
 }

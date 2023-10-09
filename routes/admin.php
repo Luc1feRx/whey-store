@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::get('/',[CategoryController::class, 'index'])->name('index');
             Route::get('/create',[CategoryController::class, 'create'])->name('create');
             Route::post('/store', [CategoryController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[CategoryController::class, 'edit'])->name('edit');
         });
     });
 

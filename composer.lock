@@ -94,7 +94,10 @@
             "autoload": {
                 "psr-4": {
                     "Dflydev\\DotAccessData\\": "src/"
-                }
+                },
+                "files": [
+                    "app/Helpers/Common.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [

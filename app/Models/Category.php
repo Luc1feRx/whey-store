@@ -13,7 +13,13 @@ class Category extends Model
 
     protected $fillable = [
         'name_category',
-        'category_slug',
+        'slug_category',
         'parent_id'
     ];
+
+    // Định nghĩa mối quan hệ để lấy danh mục cha
+    public function parentCategory()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
 }
