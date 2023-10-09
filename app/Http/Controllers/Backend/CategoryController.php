@@ -56,7 +56,12 @@ class CategoryController extends Controller
     }
 
     public function edit($id){
-        
+        $cate = Category::find($id);
+        $getParentCategory = Category::whereNull('parent_id')->orderBy('id', 'desc')->get();
+        return view('backend.category.edit', [
+            'cate' => $cate,
+            'getParentCategory' => $getParentCategory
+        ]);
     }
       
 }

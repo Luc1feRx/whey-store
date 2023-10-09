@@ -61,7 +61,7 @@
                                                     <td>{{ $cate->slug_category }}</td>
                                                     <td>{{ optional($cate->parentCategory)->name_category }}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-icon btn-sm tip"><i
+                                                        <a href="{{ route('admin.categories.edit', ['id'=>$cate->id]) }}" class="btn btn-icon btn-sm tip"><i
                                                                 class="fas fa-pencil-alt"></i></a>
                                                         <a data-id="" class="btn btn-icon btn-sm deleteDialog tip "
                                                             data-toggle="tooltip" title=""><i
