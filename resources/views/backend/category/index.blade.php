@@ -63,7 +63,7 @@
                                                     <td>
                                                         <a href="{{ route('admin.categories.edit', ['id'=>$cate->id]) }}" class="btn btn-icon btn-sm tip"><i
                                                                 class="fas fa-pencil-alt"></i></a>
-                                                        <a data-id="" class="btn btn-icon btn-sm deleteDialog tip "
+                                                        <a data-id="{{ $cate->id }}" class="btn btn-icon btn-sm deleteDialog tip "
                                                             data-toggle="tooltip" title=""><i
                                                                 class="fa fa-trash"></i></a>
                                                     </td>
@@ -89,4 +89,17 @@
     @if (session('success'))
         @include('backend.layouts.toastr')
     @endif
+    <script type="text/javascript">
+        var data_model = 'category';
+        $(document).ready(function () {
+            $('.deleteDialog').on('click', function () {
+                var data_id = $(this).data('id');
+                destroy(data_id, data_model, '{{ route('admin.ajax.destroy') }}', 'Bạn đã chắc chắn chưa?');
+            });
+        });
+
+        // $('.grid-batch-0').on('click', function () {
+        //     destroyAll(data_model,'{{ route('admin.ajax.destroy') }}', '{{ __('admin::messages.common.areYouSure') }}');
+        // });
+    </script>
 @endsection

@@ -15,13 +15,14 @@
             <span class="error">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group">
-        <label for="catetory">Danh mục cha</label>
-        <select name="parent_id" class="form-control select2-data-category" id="">
-            @foreach ($getParentCategory as $getItem)
-                @php
-                    $selectedParentId = old('parent_id', $cate->parent_id ?? ''); // Lấy danh mục cha của category (nếu có)
-                @endphp
+    @php
+        $selectedParentId = old('parent_id', $cate->parent_id ?? ''); // Lấy danh mục cha của category (nếu có)
+    @endphp
+    @if (!empty($cate->parent_id))
+        <div class="form-group">
+            <label for="category">Danh mục cha</label>
+            <select name="parent_id" class="form-control select2-data-category" id="category">
+                <option value="">Chọn danh mục</option>
 
                 @foreach ($getParentCategory as $getItem)
                     @if ($selectedParentId == $getItem->id)
@@ -30,12 +31,12 @@
                         <option value="{{ $getItem->id }}">{{ $getItem->name_category }}</option>
                     @endif
                 @endforeach
-            @endforeach
-        </select>
-        @error('parent_id')
-            <span class="error">{{ $message }}</span>
-        @enderror
-    </div>
+            </select>
+            @error('parent_id')
+                <span class="error">{{ $message }}</span>
+            @enderror
+        </div>
+    @endif
 </div>
 <!-- /.card-body -->
 

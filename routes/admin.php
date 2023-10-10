@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\DestroyController;
 use App\Http\Controllers\Upload\UploadController;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
 
     Route::middleware(['admin'])->group(function () {
 
+        Route::delete('ajax/destroy', [DestroyController::class, 'destroy'])->name('ajax.destroy');
+
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -34,6 +37,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::get('/create',[CategoryController::class, 'create'])->name('create');
             Route::post('/store', [CategoryController::class, 'store'])->name('store');
             Route::get('/edit/{id}',[CategoryController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[CategoryController::class, 'update'])->name('update');
         });
     });
 

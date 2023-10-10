@@ -15,7 +15,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 class CategoryController extends Controller
 {
     public function index (Request $request){
-        $categories = Category::with('parentCategory');
+        $categories = Category::with('parentCategory')
+            ->whereNull('deleted_at');
 
         if($request->keyword){
             $searchKeyword = Common::escapeLike($request->keyword);
@@ -62,6 +63,22 @@ class CategoryController extends Controller
             'cate' => $cate,
             'getParentCategory' => $getParentCategory
         ]);
+    }
+    public function update(CategoryRequest $request,$id){
+        try {
+            DB::beginTransaction();
+            $cate = Category::findOrFail($id);
+            $cate->name_category = $request->name_category;
+            $cate->slug_category = $request->slug_category;
+            $cate->parent_id = $request->parent_id;
+            $cate->save();
+            DB::commit();
+            return redirect()->route('admin.categories.index')->with(['success' => 'Sửa danh mục thành công']);
+        } catch (Exception $e) {
+            Log::error('[CategoryController][store] error ' . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with(['error' => 'Sửa danh mục thất bại']);
+        }
     }
       
 }

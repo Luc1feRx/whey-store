@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="{{ asset('backend\dist\css\toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/plugins/summernote/summernote-bs4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{ asset('backend\dist\css\customSweetAlert.css') }}">
   @yield('addCss')
 </head>
@@ -62,8 +63,11 @@
 <script src="{{ asset('backend\dist\js\toastr.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.3/icheck.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('backend/dist/js/adminlte.js') }}"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('backend/dist/js/adminlte.js') }}"></script>
+<script src="{{ asset('backend\common\admin_common.js') }}"></script>
 @include('sweetalert::alert')
 @yield('addJs')
 </body>
