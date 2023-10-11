@@ -14,7 +14,8 @@ class Category extends Model
     protected $fillable = [
         'name_category',
         'slug_category',
-        'parent_id'
+        'parent_id',
+        'thumbnail'
     ];
 
     // Định nghĩa mối quan hệ để lấy danh mục cha

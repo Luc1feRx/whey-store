@@ -173,34 +173,21 @@ class Common
      *
      * @param array $datas
      */
-    public static function showDaySchedule($datas)
+    public static function handleUploadFile($uploadPath, $name, $request)
     {
-        foreach ($datas as $data) {
-            $doctorName = $data->doctor_name;
-            $weekdays = $data->days_week;
-            $daystart = $data->time_work_start;
-            $timework = $data->time_working;
-            $leave = json_decode($data->days_leave);
-            $repeat = $data->number_repeat;
-            $dayofweek = date('w', strtotime($daystart)) + 1;
-
-            if ($weekdays >= $dayofweek) {
-                $result = date('Y-m-d', strtotime(($weekdays - $dayofweek) . ' day', strtotime($daystart)));
-            } else {
-                $result = date('Y-m-d', strtotime(($weekdays - $dayofweek + 7) . ' day', strtotime($daystart)));
-            }
-            foreach (json_decode($timework) as $k => $value) {
-                $timestart = $value->from;
-                $datee = strtotime($result);
-                for ($i = 0; $i < $repeat; $i++) {
-                    $date = strtotime('+' . $i . ' week', $datee);
-                    $show = date('Y-m-d', $date);
-                    if (!is_null($leave) && !in_array($show, $leave)) {
-                        echo "{groupId: '999',title:' " . $doctorName . "',start: '" . $show . "T" . $timestart . ":00' },";
-                    }
-                }
-            }
+        $fullPath = '';
+        if (!$request->hasFile($name)) {
+            return $fullPath;
         }
+        $file = $request->file($name);
+//        $saveName = $file->hashName();
+        $saveName = date('YmdHis') . '_' . sha1(Str::uuid()) . '.' . $file->getClientOriginalExtension();
+        $fullPath = $uploadPath . $saveName;
+        if (!Storage::disk()->exists($uploadPath)) {
+            Storage::disk()->makeDirectory($uploadPath);
+        }
+        Storage::disk()->put($fullPath, file_get_contents($file));
+        return $fullPath;
     }
 
     /**

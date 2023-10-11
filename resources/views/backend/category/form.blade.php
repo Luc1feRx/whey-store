@@ -18,7 +18,7 @@
     @php
         $selectedParentId = old('parent_id', $cate->parent_id ?? ''); // Lấy danh mục cha của category (nếu có)
     @endphp
-    @if (!empty($cate->parent_id))
+    @if (isset($cate->parent_id) && Route::currentRouteName() === 'admin.categories.edit')
         <div class="form-group">
             <label for="category">Danh mục cha</label>
             <select name="parent_id" class="form-control select2-data-category" id="category">
@@ -36,7 +36,33 @@
                 <span class="error">{{ $message }}</span>
             @enderror
         </div>
+    @else
+        <div class="form-group">
+            <label for="category">Danh mục cha</label>
+            <select name="parent_id" class="form-control select2-data-category" id="category">
+                <option value="">Chọn danh mục</option>
+
+                @foreach ($getParentCategory as $getItem)
+                    <option value="{{ $getItem->id }}">{{ $getItem->name_category }}</option>
+                @endforeach
+            </select>
+            @error('parent_id')
+                <span class="error">{{ $message }}</span>
+            @enderror
+        </div>
     @endif
+    <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" name="thumbnail" class="custom-file-input" id="exampleInputFile">
+            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+          </div>
+          <div class="input-group-append">
+            <span class="input-group-text">Upload</span>
+          </div>
+        </div>
+      </div>
 </div>
 <!-- /.card-body -->
 

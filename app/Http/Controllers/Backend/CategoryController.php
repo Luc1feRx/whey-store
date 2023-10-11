@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
@@ -46,6 +47,17 @@ class CategoryController extends Controller
             $cate->name_category = $request->name_category;
             $cate->slug_category = $request->slug_category;
             $cate->parent_id = $request->parent_id;
+            $thumbnail = $request->file('thumbnail');
+            if ($thumbnail && Storage::disk()->exists($thumbnail)) {
+                $fileName = $thumbnail->getClientOriginalName();
+                $imagePath = 'img/category/';
+                $storagePath = $imagePath . $fileName;
+                if(!Storage::disk('public')->exists($storagePath)){
+                    Storage::makeDirectory($storagePath);
+                }
+                $thumbnail->storeAs('your_folder', $fileName, 'public');
+                $cate->thumbnail = $storagePath;
+            }
             $cate->save();
             DB::commit();
             return redirect()->route('admin.categories.index')->with(['success' => 'Thêm danh mục thành công']);

@@ -61,6 +61,7 @@
 <!-- Summernote -->
 <script src="{{ asset('backend/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('backend\dist\js\toastr.min.js') }}"></script>
+<script src="{{ asset('backend\plugins\bs-custom-file-input\bs-custom-file-input.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.3/icheck.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -68,6 +69,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('backend/dist/js/adminlte.js') }}"></script>
 <script src="{{ asset('backend\common\admin_common.js') }}"></script>
+<script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+  </script>
 @include('sweetalert::alert')
 @yield('addJs')
 </body>
