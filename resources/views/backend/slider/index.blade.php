@@ -1,9 +1,9 @@
 @extends('backend.layouts.master')
 
-@section('title') Quản lý danh mục @stop
+@section('title') Quản lý thương hiệu @stop
 
 @section('content')
-    @if (count($categories) <= 0) @include('backend.partials.noData')
+    @if (count($brands) <= 0) @include('backend.partials.noData')
     @else
         <div class="content-wrapper">
             <section class="content">
@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-sm-6">
                                 @include('backend.partials.breadcrumb', [
-                                    'breadcrumb' => [['title' => 'Danh sách danh mục', 'url' => '#']],
+                                    'breadcrumb' => [['title' => 'Danh sách thương hiệu', 'url' => '#']],
                                 ])
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('admin.categories.create') }}" class="btn btn-info">Tạo danh mục</a>
+                                    <a href="{{ route('admin.brands.create') }}" class="btn btn-info">Thêm thương hiệu</a>
 
                                     <form class="card-tools" action="" method="GET">
                                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -120,27 +120,25 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Tên danh mục</th>
-                                                <th>Slug danh mục</th>
+                                                <th>Tên thương hiệu</th>
+                                                <th>Slug thương hiệu</th>
                                                 <th>Ảnh</th>
-                                                <th>Danh mục cha</th>
                                                 <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($categories as $cate)
+                                            @foreach ($brands as $brand)
                                                 <tr>
-                                                    <td>{{ $cate->id }}</td>
-                                                    <td>{{ $cate->name_category }}</td>
-                                                    <td>{{ $cate->slug_category }}</td>
+                                                    <td>{{ $brand->id }}</td>
+                                                    <td>{{ $brand->name }}</td>
+                                                    <td>{{ $brand->slug }}</td>
                                                     <td>
-                                                        <img style="width: 300px;" src="{{ asset('storage/'.$cate->thumbnail) }}" alt="" srcset="">
+                                                        <img style="width: 300px;" src="{{ asset('storage/'.$brand->thumbnail) }}" alt="" srcset="">
                                                     </td>
-                                                    <td>{{ optional($cate->parentCategory)->name_category }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.categories.edit', ['id'=>$cate->id]) }}" class="btn btn-icon btn-sm tip"><i
+                                                        <a href="{{ route('admin.brands.edit', ['id'=>$brand->id]) }}" class="btn btn-icon btn-sm tip"><i
                                                                 class="fas fa-pencil-alt"></i></a>
-                                                        <a data-id="{{ $cate->id }}" data-image="{{ $cate->thumbnail }}" class="btn btn-icon btn-sm deleteDialog tip "
+                                                        <a data-id="{{ $brand->id }}" data-image="{{ $brand->thumbnail }}" class="btn btn-icon btn-sm deleteDialog tip "
                                                             data-toggle="tooltip" title=""><i
                                                                 class="fa fa-trash"></i></a>
                                                     </td>
@@ -149,7 +147,7 @@
                                         </tbody>
                                     </table>
                                     <div class="card-footer clearfix">
-                                        {!! $categories->links('pagination::bootstrap-4') !!}
+                                        {!! $brands->links('pagination::bootstrap-4') !!}
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -167,7 +165,7 @@
         @include('backend.layouts.toastr')
     @endif
     <script type="text/javascript">
-        var data_model = 'category';
+        var data_model = 'brand';
         $(document).ready(function () {
             $('.deleteDialog').on('click', function () {
                 var data_id = $(this).data('id');
@@ -176,5 +174,5 @@
             });
         });
     </script>
-    @include('backend.category.script')
+    @include('backend.brand.script')
 @endsection

@@ -96,7 +96,8 @@
                     "Dflydev\\DotAccessData\\": "src/"
                 },
                 "files": [
-                    "app/Helpers/Common.php"
+                    "app/Helpers/Common.php",
+                    "app/Helpers/UploadImage.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",

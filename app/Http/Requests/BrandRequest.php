@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class BrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,14 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name_category' => 'required|max:255|unique:categories,name_category,' . $this->route('id'),
-            'slug_category' => 'required|max:255|unique:categories,slug_category,' . $this->route('id'),
-            'parent_id' => 'nullable|sometimes|exists:categories,id',
+            'name' => 'required|max:255|unique:categories,name_category,' . $this->route('id'),
+            'slug' => 'required|max:255|unique:categories,slug_category,' . $this->route('id'),
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ];
         return $rules;
     }
 
-    /**
+        /**
      * Get the validation messages that apply to the request.
      *
      * @return array
@@ -38,13 +37,12 @@ class CategoryRequest extends FormRequest
     public function messages()
     {
         $messages = array(
-            'name_category.required' => "Tên danh mục không được để trống",
-            'name_category.max' => "Tên danh mục không quá 255 ký tự",
-            'name_category.unique' => "Tên danh mục không được trùng nhau",
-            'slug_category.required' => "Tên slug không được để trống",
-            'slug_category.max' => "Tên slug không quá 255 ký tự",
-            'slug_category.unique' => "Tên slug không được trùng nhau",
-            'parent_id.exists' => "Vui lòng chọn đúng danh mục cha",
+            'name.required' => "Tên thương hiệu không được để trống",
+            'name.max' => "Tên thương hiệu không quá 255 ký tự",
+            'name.unique' => "Tên thương hiệu không được trùng nhau",
+            'slug.required' => "Tên slug không được để trống",
+            'slug.max' => "Tên slug không quá 255 ký tự",
+            'slug.unique' => "Tên slug không được trùng nhau",
             'thumbnail.required' => "Vui lòng chọn ảnh",
             'thumbnail.image' => "Tệp upload phải là ảnh",
             'thumbnail.mimes' => "Tệp đúng định dạng jpeg,png,jpg,gif",

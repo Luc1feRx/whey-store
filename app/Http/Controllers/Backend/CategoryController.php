@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Helpers\Common;
+use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
@@ -47,17 +48,8 @@ class CategoryController extends Controller
             $cate->name_category = $request->name_category;
             $cate->slug_category = $request->slug_category;
             $cate->parent_id = $request->parent_id;
-            $thumbnail = $request->file('thumbnail');
-            if ($thumbnail && Storage::disk()->exists($thumbnail)) {
-                $fileName = $thumbnail->getClientOriginalName();
-                $imagePath = 'img/category/';
-                $storagePath = $imagePath . $fileName;
-                if(!Storage::disk('public')->exists($storagePath)){
-                    Storage::makeDirectory($storagePath);
-                }
-                $thumbnail->storeAs('your_folder', $fileName, 'public');
-                $cate->thumbnail = $storagePath;
-            }
+            $thumbnail_upload = UploadImage::handleUploadFile('thumbnail', 'img/category/', $request);
+            $cate->thumbnail = $thumbnail_upload;
             $cate->save();
             DB::commit();
             return redirect()->route('admin.categories.index')->with(['success' => 'Thêm danh mục thành công']);
@@ -83,6 +75,11 @@ class CategoryController extends Controller
             $cate->name_category = $request->name_category;
             $cate->slug_category = $request->slug_category;
             $cate->parent_id = $request->parent_id;
+            if($request->hasFile('thumbnail')){
+                $deletedExist = UploadImage::handleDeleteFileExist($cate->thumbnail);
+                $thumbnail_upload = UploadImage::handleUploadFile('thumbnail', 'img/category/', $request);
+            }
+            $cate->thumbnail = $thumbnail_upload;
             $cate->save();
             DB::commit();
             return redirect()->route('admin.categories.index')->with(['success' => 'Sửa danh mục thành công']);

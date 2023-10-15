@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,18 +35,22 @@ class DestroyController extends Controller
     {
         $id = $this->request->get('id');
         $model = $this->request->get('model');
+        $thumbnail = $this->request->get('thumbnail');
         switch ($model) {
             case 'category':
                 $model = Category::class;
+                break;
+            case 'brand':
+                $model = Brand::class;
                 break;
             default:
                 # code...
                 break;
         }
         if ($this->request->has('checkAll')) {
-            return $this->destroyModel($id, $model, true);
+            return $this->destroyModel($id, $model, true, $thumbnail);
         }
-        return $this->destroyModel($id, $model);
+        return $this->destroyModel($id, $model, false, $thumbnail);
     }
 
     /*
@@ -54,7 +60,7 @@ class DestroyController extends Controller
     * @return Return \Illuminate\Support\Facades\View
     *--------------------------------------------------------------------------
     */
-    public function destroyModel($id, $model, $checkAll = false)
+    public function destroyModel($id, $model, $checkAll = false, $imagePath = null)
     {
         $model = ucfirst($model);
         try {
@@ -74,6 +80,7 @@ class DestroyController extends Controller
                 $datas = $model::whereIn('id', $arr_id)->update([
                     'deleted_at' => Carbon::now()
                 ]);
+                $deleteThumb = UploadImage::handleRemoveFile($imagePath);
             }
             $msg = 'Xóa thành công';
             return response()->json(array('status' => true, 'msg' => $msg));

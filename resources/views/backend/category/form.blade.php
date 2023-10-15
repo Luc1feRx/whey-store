@@ -52,20 +52,24 @@
         </div>
     @endif
     <div class="form-group">
-        <label for="exampleInputFile">File input</label>
+        <label for="exampleInputFile">Chọn Ảnh</label>
         <div class="input-group">
           <div class="custom-file">
-            <input type="file" name="thumbnail" class="custom-file-input" id="exampleInputFile">
-            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+            <input type="file" name="thumbnail" class="custom-file-input" id="imageInput">
+            <label class="custom-file-label" for="exampleInputFile">Chọn Ảnh</label>
           </div>
           <div class="input-group-append">
-            <span class="input-group-text">Upload</span>
+            <span class="input-group-text">Tải lên</span>
           </div>
         </div>
+        @error('thumbnail')
+            <span class="error">{{ $message }}</span>
+        @enderror
+        <img id="imagePreview" src="{{ isset($cate->thumbnail) ? asset('storage/'.$cate->thumbnail) : '' }}" alt="Image Preview" style="{{ isset($cate->thumbnail) ? '' : 'display: none;' }}">
       </div>
 </div>
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn btn-primary">Thêm</button>
+    <button type="submit" class="btn btn-primary">{{ isset($cate) ? 'Sửa' : 'Thêm' }}</button>
 </div>

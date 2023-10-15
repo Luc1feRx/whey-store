@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\LoginController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
@@ -38,6 +39,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/store', [CategoryController::class, 'store'])->name('store');
             Route::get('/edit/{id}',[CategoryController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[CategoryController::class, 'update'])->name('update');
+        });
+        //categories
+        Route::group(['prefix' => 'brands', 'as' => 'brands.'], function () {
+            Route::get('/',[BrandController::class, 'index'])->name('index');
+            Route::get('/create',[BrandController::class, 'create'])->name('create');
+            Route::post('/store', [BrandController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[BrandController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[BrandController::class, 'update'])->name('update');
+        });
+        //slider
+        Route::group(['prefix' => 'sliders', 'as' => 'sliders.'], function () {
+            Route::get('/',[BrandController::class, 'index'])->name('index');
+            Route::get('/create',[BrandController::class, 'create'])->name('create');
+            Route::post('/store', [BrandController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[BrandController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[BrandController::class, 'update'])->name('update');
         });
     });
 

@@ -91,7 +91,7 @@ var selectedRows = function () {
     return selected;
 }
 
-function destroy(id, model, url, title = 'Bạn chắc chắn không?', text, current_page = false) {
+function destroy(id, model, url, title = 'Bạn chắc chắn không?', text, current_page = false, data_thumbnail) {
     Swal.fire({
         title: title,
         text: text,
@@ -113,6 +113,7 @@ function destroy(id, model, url, title = 'Bạn chắc chắn không?', text, cu
                         data: {
                             id: id,
                             model: model,
+                            thumbnail: data_thumbnail,
                             _method: 'delete',
                             current_page: current_page
                         },

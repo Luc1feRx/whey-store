@@ -26,9 +26,10 @@
   <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{ asset('backend\dist\css\customSweetAlert.css') }}">
+  <link rel="stylesheet" href="{{ asset('backend\common\css\admin_common.css') }}">
   @yield('addCss')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition skin-blue sidebar-mini layout-fixed">
 <div class="wrapper">
 
   @include('backend.layouts.header')
