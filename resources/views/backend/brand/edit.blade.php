@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Sửa danh mục @stop
+@section('title') Sửa thương hiệu @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -14,14 +14,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sửa danh mục</h1>
+                    <h1>Sửa thương hiệu</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                         'breadcrumb'=> [
-                            ['title' => 'Danh sách danh mục', 'url' => route('admin.categories.index')],
-                            ['title' => 'Sửa danh mục', 'url' => '#']
+                            ['title' => 'Danh sách thương hiệu', 'url' => route('admin.brands.index')],
+                            ['title' => 'Sửa thương hiệu', 'url' => '#']
                         ]
                     ])
                 </div>

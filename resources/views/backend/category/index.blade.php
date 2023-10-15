@@ -121,7 +121,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Tên danh mục</th>
-                                                <th>Slug danh mục</th>
+                                                <th>Slug</th>
                                                 <th>Ảnh</th>
                                                 <th>Danh mục cha</th>
                                                 <th>Hành động</th>

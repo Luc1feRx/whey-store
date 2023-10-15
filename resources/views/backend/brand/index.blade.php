@@ -121,7 +121,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Tên thương hiệu</th>
-                                                <th>Slug thương hiệu</th>
+                                                <th>Slug</th>
                                                 <th>Ảnh</th>
                                                 <th>Hành động</th>
                                             </tr>

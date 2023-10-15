@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
+use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Upload\UploadController;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Route;
@@ -50,11 +51,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         });
         //slider
         Route::group(['prefix' => 'sliders', 'as' => 'sliders.'], function () {
-            Route::get('/',[BrandController::class, 'index'])->name('index');
-            Route::get('/create',[BrandController::class, 'create'])->name('create');
-            Route::post('/store', [BrandController::class, 'store'])->name('store');
-            Route::get('/edit/{id}',[BrandController::class, 'edit'])->name('edit');
-            Route::post('/update/{id}',[BrandController::class, 'update'])->name('update');
+            Route::get('/',[SliderController::class, 'index'])->name('index');
+            Route::get('/create',[SliderController::class, 'create'])->name('create');
+            Route::post('/store', [SliderController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[SliderController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[SliderController::class, 'update'])->name('update');
         });
     });
 

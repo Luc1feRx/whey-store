@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Thêm mới danh mục @stop
+@section('title') Thêm mới thương hiệu @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">

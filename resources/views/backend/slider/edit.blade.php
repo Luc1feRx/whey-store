@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Sửa danh mục @stop
+@section('title') Sửa slider @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -14,14 +14,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sửa danh mục</h1>
+                    <h1>Sửa slider</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                         'breadcrumb'=> [
-                            ['title' => 'Danh sách danh mục', 'url' => route('admin.categories.index')],
-                            ['title' => 'Sửa danh mục', 'url' => '#']
+                            ['title' => 'Danh sách slider', 'url' => route('admin.sliders.index')],
+                            ['title' => 'Sửa slider', 'url' => '#']
                         ]
                     ])
                 </div>

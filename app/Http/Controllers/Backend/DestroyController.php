@@ -6,6 +6,7 @@ use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Slider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,9 @@ class DestroyController extends Controller
                 break;
             case 'brand':
                 $model = Brand::class;
+                break;
+            case 'slider':
+                $model = Slider::class;
                 break;
             default:
                 # code...

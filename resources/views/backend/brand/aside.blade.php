@@ -1,7 +1,7 @@
 @php
 $arg_aside= array(
 'admin.brands.index',
-// 'admin.categories.create',
+'admin.brands.create',
 );
 $active = '';
 if ( in_array($name, $arg_aside) ) {

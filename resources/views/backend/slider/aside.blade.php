@@ -1,7 +1,7 @@
 @php
 $arg_aside= array(
-'admin.brands.index',
-// 'admin.categories.create',
+'admin.sliders.index',
+'admin.sliders.create',
 );
 $active = '';
 if ( in_array($name, $arg_aside) ) {
@@ -12,22 +12,22 @@ $active = 'active';
   <a href="#" class="nav-link {{ $active }}">
     <i class="nav-icon fas fa-tachometer-alt"></i>
     <p>
-      Quản lý thương hiệu
+      Quản lý Slider
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="{{ route('admin.brands.index') }}"
-        class="nav-link {{ Request::routeIs('admin.brands.index') ? 'active' : '' }}">
+      <a href="{{ route('admin.sliders.index') }}"
+        class="nav-link {{ Request::routeIs('admin.sliders.index') ? 'active' : '' }}">
         <i class="far fa-circle nav-icon"></i>
-        <p>Danh sách thương hiệu</p>
+        <p>Danh sách Slider</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('admin.brands.create') }}" class="nav-link {{ Request::routeIs('admin.brands.create') ? 'active' : '' }}">
+      <a href="{{ route('admin.sliders.create') }}" class="nav-link {{ Request::routeIs('admin.sliders.create') ? 'active' : '' }}">
         <i class="far fa-circle nav-icon"></i>
-        <p>Thêm mới thương hiệu</p>
+        <p>Thêm mới Slider</p>
       </a>
     </li>
   </ul>

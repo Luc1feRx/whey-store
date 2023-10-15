@@ -1,9 +1,9 @@
 @extends('backend.layouts.master')
 
-@section('title') Quản lý thương hiệu @stop
+@section('title') Quản lý slider @stop
 
 @section('content')
-    @if (count($brands) <= 0) @include('backend.partials.noData')
+    @if (count($sliders) <= 0) @include('backend.partials.noData')
     @else
         <div class="content-wrapper">
             <section class="content">
@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-sm-6">
                                 @include('backend.partials.breadcrumb', [
-                                    'breadcrumb' => [['title' => 'Danh sách thương hiệu', 'url' => '#']],
+                                    'breadcrumb' => [['title' => 'Danh sách slider', 'url' => '#']],
                                 ])
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('admin.brands.create') }}" class="btn btn-info">Thêm thương hiệu</a>
+                                    <a href="{{ route('admin.sliders.create') }}" class="btn btn-info">Thêm mới slider</a>
 
                                     <form class="card-tools" action="" method="GET">
                                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -120,25 +120,25 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Tên thương hiệu</th>
-                                                <th>Slug thương hiệu</th>
+                                                <th>Tên slider</th>
+                                                <th>Slug</th>
                                                 <th>Ảnh</th>
                                                 <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($brands as $brand)
+                                            @foreach ($sliders as $slider)
                                                 <tr>
-                                                    <td>{{ $brand->id }}</td>
-                                                    <td>{{ $brand->name }}</td>
-                                                    <td>{{ $brand->slug }}</td>
+                                                    <td>{{ $slider->id }}</td>
+                                                    <td>{{ $slider->name }}</td>
+                                                    <td>{{ $slider->slug }}</td>
                                                     <td>
-                                                        <img style="width: 300px;" src="{{ asset('storage/'.$brand->thumbnail) }}" alt="" srcset="">
+                                                        <img style="width: 300px;" src="{{ asset('storage/'.$slider->thumbnail) }}" alt="" srcset="">
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('admin.brands.edit', ['id'=>$brand->id]) }}" class="btn btn-icon btn-sm tip"><i
+                                                        <a href="{{ route('admin.sliders.edit', ['id'=>$slider->id]) }}" class="btn btn-icon btn-sm tip"><i
                                                                 class="fas fa-pencil-alt"></i></a>
-                                                        <a data-id="{{ $brand->id }}" data-image="{{ $brand->thumbnail }}" class="btn btn-icon btn-sm deleteDialog tip "
+                                                        <a data-id="{{ $slider->id }}" data-image="{{ $slider->thumbnail }}" class="btn btn-icon btn-sm deleteDialog tip "
                                                             data-toggle="tooltip" title=""><i
                                                                 class="fa fa-trash"></i></a>
                                                     </td>
@@ -147,7 +147,7 @@
                                         </tbody>
                                     </table>
                                     <div class="card-footer clearfix">
-                                        {!! $brands->links('pagination::bootstrap-4') !!}
+                                        {!! $sliders->links('pagination::bootstrap-4') !!}
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -165,7 +165,7 @@
         @include('backend.layouts.toastr')
     @endif
     <script type="text/javascript">
-        var data_model = 'brand';
+        var data_model = 'slider';
         $(document).ready(function () {
             $('.deleteDialog').on('click', function () {
                 var data_id = $(this).data('id');
@@ -174,5 +174,5 @@
             });
         });
     </script>
-    @include('backend.brand.script')
+    @include('backend.slider.script')
 @endsection

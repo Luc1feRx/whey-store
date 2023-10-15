@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Thêm mới danh mục @stop
+@section('title') Thêm mới slider @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -14,14 +14,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thêm mới thương hiệu</h1>
+                    <h1>Thêm mới slider</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                     'breadcrumb'=> [
-                    ['title' => 'Danh sách thương hiệu', 'url' => route('admin.brands.index')],
-                    ['title' => 'Thêm thương hiệu', 'url' => '#']
+                    ['title' => 'Danh sách slider', 'url' => route('admin.sliders.index')],
+                    ['title' => 'Thêm mới slider', 'url' => '#']
                     ]
                     ])
                 </div>
@@ -52,9 +52,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.brands.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.sliders.store') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            @include('backend.brand.form')
+                            @include('backend.slider.form')
                         </form>
                     </div>
                 </div>

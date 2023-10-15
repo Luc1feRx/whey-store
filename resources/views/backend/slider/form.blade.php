@@ -1,8 +1,8 @@
 <div class="card-body">
     <div class="form-group">
-        <label for="exampleInputEmail1">Tên thương hiệu</label>
+        <label for="exampleInputEmail1">Tên slider</label>
         <input type="text" class="form-control" placeholder="Nhập tên thương hiệu" id="convert_slug" name="name"
-            value="{{ old('name', $brand->name ?? '') }}">
+            value="{{ old('name', $slider->name ?? '') }}">
         @error('name')
             <span class="error">{{ $message }}</span>
         @enderror
@@ -10,7 +10,7 @@
     <div class="form-group">
         <label for="exampleInputPassword1">Slug</label>
         <input type="text" class="form-control" id="slug" name="slug" id="exampleInputPassword1"
-            placeholder="Nhập slug" value="{{ old('slug', $brand->slug ?? '') }}">
+            placeholder="Nhập slug" value="{{ old('slug', $slider->slug ?? '') }}">
         @error('slug')
             <span class="error">{{ $message }}</span>
         @enderror
@@ -29,11 +29,11 @@
         @error('thumbnail')
             <span class="error">{{ $message }}</span>
         @enderror
-        <img id="imagePreview" src="{{ isset($brand->thumbnail) ? asset('storage/'.$brand->thumbnail) : '' }}" alt="Image Preview" style="{{ isset($brand->thumbnail) ? '' : 'display: none;' }}">
+        <img id="imagePreview" src="{{ isset($slider->thumbnail) ? asset('storage/'.$slider->thumbnail) : '' }}" alt="Image Preview" style="{{ isset($slider->thumbnail) ? '' : 'display: none;' }}">
     </div>
 </div>
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn btn-primary">{{ isset($brand) ? 'Sửa' : 'Thêm' }}</button>
+    <button type="submit" class="btn btn-primary">{{ isset($slider) ? 'Sửa' : 'Thêm' }}</button>
 </div>
