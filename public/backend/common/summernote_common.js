@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    $('#content-post').summernote({
+    $('.content-post').summernote({
         toolbar: [
         ['style', ['style']],
         ['font', ['bold', 'underline', 'clear']],
@@ -16,13 +16,6 @@ $(document).ready(function () {
             { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
             'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
         ],
-    callbacks: {
-        onImageUpload: function(files) {
-            for(var i = files.length - 1; i >= 0; i--) {
-                sendFile(files[i]);
-            }
-        }
-    },
     codeviewFilter: true,
     codeviewIframeFilter: true,
     imageTitle: {

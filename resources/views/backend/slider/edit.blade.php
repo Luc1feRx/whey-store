@@ -52,7 +52,7 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.brands.update', ['id' => $brand->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.sliders.update', ['id' => $slider->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             @include('backend.brand.form')
                         </form>

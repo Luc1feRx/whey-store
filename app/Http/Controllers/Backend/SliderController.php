@@ -62,17 +62,17 @@ class SliderController extends Controller
     public function update(SliderRequest $request,$id){
         try {
             DB::beginTransaction();
-            $brand = Brand::findOrFail($id);
-            $brand->name = $request->name;
-            $brand->slug = $request->slug;
+            $slider = Slider::findOrFail($id);
+            $slider->name = $request->name;
+            $slider->slug = $request->slug;
             $thumbnail_upload = '';
             if($request->hasFile('thumbnail')){
-                $deletedExist = UploadImage::handleDeleteFileExist($brand->thumbnail);
-                $thumbnail_upload = UploadImage::handleUploadFile('thumbnail', 'img/brand/', $request);
+                $deletedExist = UploadImage::handleDeleteFileExist($slider->thumbnail);
+                $thumbnail_upload = UploadImage::handleUploadFile('thumbnail', 'img/slider/', $request);
             }
             
-            $brand->thumbnail = $thumbnail_upload;
-            $brand->save();
+            $slider->thumbnail = $thumbnail_upload;
+            $slider->save();
             DB::commit();
             return redirect()->route('admin.brands.index')->with(['success' => 'Sửa thương hiệu thành công']);
         } catch (Exception $e) {

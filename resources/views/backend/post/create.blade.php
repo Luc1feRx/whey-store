@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Thêm mới danh mục @stop
+@section('title') Thêm mới tin tức @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -76,4 +76,7 @@
 <script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
 <script src="{{ asset('backend\common\summernote_common.js') }}"></script>
 @include('backend.post.script')
+@if (session('error'))
+    @include('backend.layouts.toastr')
+@endif
 @endsection

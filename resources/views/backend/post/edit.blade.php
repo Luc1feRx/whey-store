@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Sửa danh mục @stop
+@section('title') Sửa tin tức @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -16,14 +16,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sửa danh mục</h1>
+                    <h1>Sửa tin tức</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                         'breadcrumb'=> [
-                            ['title' => 'Danh sách danh mục', 'url' => route('admin.categories.index')],
-                            ['title' => 'Sửa danh mục', 'url' => '#']
+                            ['title' => 'Danh sách tin tức', 'url' => route('admin.posts.index')],
+                            ['title' => 'Sửa tin tức', 'url' => '#']
                         ]
                     ])
                 </div>
@@ -54,9 +54,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.categories.update', ['id' => $cate->id]) }}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+                        <form action="{{ route('admin.posts.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            @include('backend.category.form')
+                            @include('backend.post.form')
                         </form>
                     </div>
                 </div>
@@ -74,5 +74,9 @@
     <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
     <script src="{{ asset('backend\plugins\summernote\summernote.min.js') }}"></script>
     <script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
+    <script src="{{ asset('backend\common\summernote_common.js') }}"></script>
     @include('backend.post.script')
+    @if (session('error'))
+    @include('backend.layouts.toastr')
+@endif
 @endsection

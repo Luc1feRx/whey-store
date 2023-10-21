@@ -71,4 +71,7 @@
 <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
 <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
 @include('backend.category.script')
+@if (session('error'))
+    @include('backend.layouts.toastr')
+@endif
 @endsection
