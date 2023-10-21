@@ -11,7 +11,7 @@
                     <div class="container-fluid">
 
                         <div class="col-xs-12">
-                            <div class="table-configuration-wrap">
+                            <div class="table-configuration-wrap" style="display: block">
                                 <span class="configuration-close-btn btn-show-table-options"><i class="fa fa-times"></i></span>
                                 <div class="wrapper-filter">
                                     <form action="" method="GET">

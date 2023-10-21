@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
+use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Upload\UploadController;
 use Illuminate\Http\UploadedFile;
@@ -56,6 +57,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/store', [SliderController::class, 'store'])->name('store');
             Route::get('/edit/{id}',[SliderController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[SliderController::class, 'update'])->name('update');
+        });
+        //post
+        Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
+            Route::get('/',[PostController::class, 'index'])->name('index');
+            Route::get('/create',[PostController::class, 'create'])->name('create');
+            Route::post('/store', [PostController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[PostController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[PostController::class, 'update'])->name('update');
         });
     });
 

@@ -20,5 +20,6 @@
                 $('#imagePreview').css('display', 'none'); // Hide the image
             }
         });
+
     });
 </script>

@@ -42,6 +42,7 @@
             @include('backend.category.aside')
             @include('backend.brand.aside')
             @include('backend.slider.aside')
+            @include('backend.post.aside')
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
