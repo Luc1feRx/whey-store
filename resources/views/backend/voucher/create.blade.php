@@ -1,10 +1,12 @@
 @extends('backend.layouts.master')
 
-@section('title') Thêm mới slider @stop
+@section('title') Thêm mới mã giảm giá @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2-bootstrap4-theme\select2-bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('backend\plugins\summernote\summernote.min.css') }}">
+<link rel="stylesheet" href="{{ asset('backend\plugins\summernote\summernote-bs4.css') }}">
 @endsection
 
 @section('content')
@@ -14,14 +16,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thêm mới slider</h1>
+                    <h1>Tạo mới mã giảm giá</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                     'breadcrumb'=> [
-                    ['title' => 'Danh sách slider', 'url' => route('admin.sliders.index')],
-                    ['title' => 'Thêm mới slider', 'url' => '#']
+                    ['title' => 'Danh sách mã giảm giá', 'url' => route('admin.vouchers.index')],
+                    ['title' => 'Tạo mã giảm giá', 'url' => '#']
                     ]
                     ])
                 </div>
@@ -52,9 +54,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.sliders.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.vouchers.store') }}" method="POST" novalidate="novalidate">
                             {{ csrf_field() }}
-                            @include('backend.slider.form')
+                            @include('backend.voucher.form')
                         </form>
                     </div>
                 </div>
@@ -70,7 +72,10 @@
 @section('addJs')
 <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
 <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
-@include('backend.sliders.script')
+<script src="{{ asset('backend\plugins\summernote\summernote.min.js') }}"></script>
+<script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
+<script src="{{ asset('backend\common\summernote_common.js') }}"></script>
+@include('backend.voucher.script')
 @if (session('error'))
     @include('backend.layouts.toastr')
 @endif

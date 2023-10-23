@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Slider;
+use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -51,6 +52,9 @@ class DestroyController extends Controller
             case 'post':
                 $model = Post::class;
                 break;
+            case 'voucher':
+                $model = Voucher::class;
+                break;
             default:
                 # code...
                 break;
@@ -78,12 +82,8 @@ class DestroyController extends Controller
                 $arr_id = [$id];
             }
 
-            if ($model == Service::class) {
+            if ($model == Voucher::class) {
                 $datas = $model::whereIn('id', $arr_id)->delete();
-            } elseif ($model == User::class) {
-                $datas = $model::whereIn('id', $arr_id)->update([
-                    'status' => self::PENDING
-                ]);
             } else {
                 $datas = $model::whereIn('id', $arr_id)->update([
                     'deleted_at' => Carbon::now()

@@ -1,5 +1,8 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="display: grid;
+grid-template-columns: 1481px 37fr 329px;
+grid-gap: 62px;
+">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -8,30 +11,7 @@
     </ul>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
-
+    {{-- <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -62,16 +42,45 @@
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
-            </a>
-        </li>
-    </ul>
+    </ul> --}}
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            @php
+                $user = Auth::guard('admin')->user();
+            @endphp
+            <li class="dropdown user user-menu">
+                <a href="javascript:void(0)" style="color: white;" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                    <span class="hidden-xs">{{ $user->name ?? 'HSBA - Beetech' }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header">
+                        <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                        <p>
+                            <small style="font-size: 20px">{{ $user->name ?? 'HSBA - Beetech' }}</small>
+                        </p>
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer" style="display: flex; justify-content: space-between;">
+                        <div class="pull-left">
+                            <a target="_blank" href="#" class="btn btn-info btn-flat">
+                                Xem website
+                            </a>
+                        </div>
+                        <div class="pull-right" style="margin-left: 53px;">
+                            <a href="" class="btn btn-warning btn-flat" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                Đăng xuất
+                            </a>
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
 <!-- /.navbar -->

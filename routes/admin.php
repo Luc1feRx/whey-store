@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\VoucherController;
 use App\Http\Controllers\Upload\UploadController;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Route;
@@ -65,6 +66,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/store', [PostController::class, 'store'])->name('store');
             Route::get('/edit/{id}',[PostController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[PostController::class, 'update'])->name('update');
+        });
+        //voucher
+        Route::group(['prefix' => 'vouchers', 'as' => 'vouchers.'], function () {
+            Route::get('/',[VoucherController::class, 'index'])->name('index');
+            Route::get('/create',[VoucherController::class, 'create'])->name('create');
+            Route::post('/store', [VoucherController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[VoucherController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[VoucherController::class, 'update'])->name('update');
         });
     });
 

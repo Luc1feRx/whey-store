@@ -43,6 +43,7 @@
             @include('backend.brand.aside')
             @include('backend.slider.aside')
             @include('backend.post.aside')
+            @include('backend.voucher.aside')
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
