@@ -39,6 +39,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             @include('backend.dashboard.aside')
+            @include('backend.profile.aside')
             @include('backend.category.aside')
             @include('backend.brand.aside')
             @include('backend.slider.aside')

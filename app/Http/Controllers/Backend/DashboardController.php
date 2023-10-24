@@ -11,4 +11,13 @@ class DashboardController extends Controller
     {
         return view('backend.dashboard.dashboard');
     }
+
+    public function profile()
+    {
+        return view('backend.profile.profile');
+    }
+
+    public function update(){
+        
+    }
 }

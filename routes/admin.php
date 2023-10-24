@@ -35,6 +35,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
+        Route::get('profile', [DashboardController::class, 'profile'])->name('profile.index');
+        Route::get('profile/update', [DashboardController::class, 'update'])->name('profile.update');
+
         //categories
         Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
             Route::get('/',[CategoryController::class, 'index'])->name('index');
