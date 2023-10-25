@@ -43,7 +43,7 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="row">
@@ -64,7 +64,11 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">Password</label>
-                                                            <input type="text" class="form-control" placeholder="Nhập password"
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="password-checkbox" onclick="openInputPassword()">
+                                                                <label class="form-check-label" style="margin-bottom: 10px">Đổi mật khẩu</label>
+                                                            </div>
+                                                            <input type="text" style="display:none" class="form-control" id="password" placeholder="Nhập password"
                                                                 name="password"
                                                                 value="{{ old('password') }}">
                                                             @error('password')
@@ -121,7 +125,7 @@
                                                         <input type="file" name="avatar" id="thumbnail" class="form-control btn_gallery d-none" placeholder="" value="" accept="images/*">
                                                     </div>
                                                     <img
-                                                        src="{{ !empty(auth()->guard('admin')->user()->avatar) ? asset('storage/' .auth()->guard('admin')->user()->phone) : asset('backend\dist\img\placeholder.png') }}"
+                                                        src="{{ !empty(auth()->guard('admin')->user()->avatar) ? asset('storage/' .auth()->guard('admin')->user()->avatar) : asset('backend\dist\img\placeholder.png') }}"
                                                         alt="Preview image" class="preview_image" width="150">
                                                     <a class="btn_remove_image" title="Remove image">
                                                         <i class="fa fa-times"></i>
@@ -145,4 +149,23 @@
     </section>
     <!-- /.content -->
 </div>
+@endsection
+
+@section('addJs')
+    <script>
+        function openInputPassword() {
+        // Get the checkbox
+            var checkBox = document.getElementById("password-checkbox");
+            // Get the output text
+            var password = document.getElementById("password");
+
+            // If the checkbox is checked, display the output text
+            if (checkBox.checked == true){
+                password.style.display = "block";
+            } else {
+                password.style.display = "none";
+            }
+        }
+        preViewImage($('.parent-thumbnail'), $('.old_thumbnail'));
+    </script>
 @endsection
