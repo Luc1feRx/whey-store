@@ -152,6 +152,9 @@
 @endsection
 
 @section('addJs')
+    @if (session('success'))
+    @include('backend.layouts.toastr')
+    @endif
     <script>
         function openInputPassword() {
         // Get the checkbox

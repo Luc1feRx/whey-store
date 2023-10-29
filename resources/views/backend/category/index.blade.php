@@ -3,8 +3,6 @@
 @section('title') Quản lý danh mục @stop
 
 @section('content')
-    @if (count($categories) <= 0) @include('backend.partials.noData')
-    @else
         <div class="content-wrapper">
             <section class="content">
                 <section class="content-header">
@@ -49,6 +47,8 @@
                                     </form>
                                 </div>
                                 <!-- /.card-header -->
+                                @if (count($categories) <= 0) @include('backend.partials.noData')
+                                @else
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover table-bordered text-nowrap">
                                         <thead>
@@ -86,6 +86,7 @@
                                         {!! $categories->links('pagination::bootstrap-4') !!}
                                     </div>
                                 </div>
+                                @endif
                                 <!-- /.card-body -->
                             </div>
                         </div>
@@ -93,7 +94,6 @@
                 </div>
             </section>
         </div>
-    @endif
 @endsection
 
 @section('addJs')

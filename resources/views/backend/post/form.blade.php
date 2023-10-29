@@ -40,7 +40,7 @@
                                     <input class="form-check-input" {{ isset($post) ? ($post->is_featured == 1 ? 'checked' : '') : '' }} name="is_feature" value="1" type="checkbox">
                                     <label class="form-check-label">Tin nổi bật</label>
                                   </div>
-                              </div>
+                            </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nội dung</label>
                                 <textarea id="content" name="content" cols="30" rows="10" placeholder="Nhập nội dung" class="form-control content-post summernote">{!! old('content', $post->content ?? '') !!}</textarea>

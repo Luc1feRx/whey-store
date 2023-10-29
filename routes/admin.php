@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\VoucherController;
 use App\Http\Controllers\Upload\UploadController;
@@ -77,6 +78,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/store', [VoucherController::class, 'store'])->name('store');
             Route::get('/edit/{id}',[VoucherController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[VoucherController::class, 'update'])->name('update');
+        });
+
+        //product
+        Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
+            Route::get('/',[ProductController::class, 'index'])->name('index');
+            Route::get('/create',[ProductController::class, 'create'])->name('create');
+            Route::post('/store', [ProductController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[ProductController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[ProductController::class, 'update'])->name('update');
         });
     });
 

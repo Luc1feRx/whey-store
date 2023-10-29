@@ -40,6 +40,7 @@
                with font-awesome or any other icon font library -->
             @include('backend.dashboard.aside')
             @include('backend.profile.aside')
+            @include('backend.product.aside')
             @include('backend.category.aside')
             @include('backend.brand.aside')
             @include('backend.slider.aside')

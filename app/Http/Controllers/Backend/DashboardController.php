@@ -30,7 +30,7 @@ class DashboardController extends Controller
             $admin = Admin::findOrFail(Auth::guard('admin')->user()->id);
             $admin->name = $request->name;
             $admin->address = $request->address;
-            if($request->has('password')){
+            if(!empty($request->password)){
                 $admin->password = Hash::make($request->input('password'));
             }
             if($request->hasFile('avatar')){

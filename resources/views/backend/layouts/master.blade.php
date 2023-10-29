@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{ asset('backend\dist\css\customSweetAlert.css') }}">
   <link rel="stylesheet" href="{{ asset('backend\common\css\admin_common.css') }}">
+  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
   @yield('addCss')
 </head>
 <body class="hold-transition skin-blue sidebar-mini layout-fixed">
@@ -70,6 +71,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('backend/dist/js/adminlte.js') }}"></script>
 <script src="{{ asset('backend\common\admin_common.js') }}"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 <script>
   $(function () {
     bsCustomFileInput.init();
