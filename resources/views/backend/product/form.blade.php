@@ -198,9 +198,9 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="file" name="image[]" id="images" multiple accept="images/*">
+                        <input type="file" name="image[]" id="images" class="" multiple accept="images/*">
                     </div>
-                    <div id="image-preview">
+                    <div id="image-preview" style="margin-top: 10px">
                         <img src="{{ asset('backend\dist\img\placeholder.png') }}" class="preview-image" alt="">
                     </div>
                 </div>

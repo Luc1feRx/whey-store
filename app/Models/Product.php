@@ -12,6 +12,9 @@ class Product extends Model
 
     protected $guard = 'products';
 
+    CONST HIDDEN = 0;
+    CONST DISPLAY = 1;
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -28,5 +31,10 @@ class Product extends Model
     public function flavors()
     {
         return $this->belongsToMany(Flavor::class, 'product_flavors', 'product_id', 'flavor_id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 }

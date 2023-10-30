@@ -86,7 +86,7 @@
                                         <td>{{ $product->origin }}</td>
                                         <td>{{ \App\Helpers\Common::numberFormat($product->price) }}</td>
                                         <td>{{ \App\Helpers\Common::numberFormat($product->discount_price) }}</td>
-                                        <td>{{ $product->status == 1 ? 'Hiển thị' : 'Ẩn' }}</td>
+                                        <td>{{ $product->status == App\Models\Product::DISPLAY ? 'Hiển thị' : 'Ẩn' }}</td>
                                         <td>
                                             <a href="{{ route('admin.posts.edit', ['id'=>$product->id]) }}"
                                                 class="btn btn-icon btn-sm tip"><i class="fas fa-pencil-alt"></i></a>
