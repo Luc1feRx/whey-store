@@ -15,6 +15,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -105,7 +106,7 @@ class ProductController extends Controller
     
                 foreach ($images as $image) {
                     // Xử lý và lưu từng ảnh
-                    $imagePath = $this->storeImage($image, 'product_images');
+                    $imagePath = $this->storeImage($image, 'img/product_images');
     
                     // Tạo và lưu bản ghi ảnh vào bảng product_images
                     $productImage = new ProductImage;
@@ -116,12 +117,25 @@ class ProductController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('admin.posts.index')->with(['success' => 'Thêm tin tức thành công']);
+            return redirect()->route('admin.products.index')->with(['success' => 'Thêm sản phẩm thành công']);
         } catch (Exception $e) {
             Log::error('[Controllercontroller][store] error ' . $e->getMessage());
             DB::rollBack();
-            return redirect()->back()->with(['error' => 'Thêm tin tức thất bại']);
+            return redirect()->back()->with(['error' => 'Thêm sản phẩm thất bại']);
         }
+    }
+
+    public function edit($id) {
+        $product = Product::with(['categories', 'flavors'])->where('products.id',$id)->first();
+        $flavors = Flavor::orderBy('id','desc')->get();
+        $brands = Brand::orderBy('id','desc')->get();
+        $categories = Category::orderBy('id','desc')->get();
+        return view('backend.product.edit', [
+            'flavors' => $flavors,
+            'brands' => $brands,
+            'categories' => $categories,
+            'product' => $product
+        ]);
     }
 
     function storeImage($image, $path)
@@ -129,5 +143,25 @@ class ProductController extends Controller
         $filename = time() . '_' . $image->getClientOriginalName();
         $imagePath = $image->storeAs($path, $filename, 'public');
         return $imagePath;
+    }
+
+    public function getProductImage($productId){
+        // Lấy sản phẩm dựa trên product_id
+        $product = Product::find($productId);
+
+        if ($product) {
+            // Tìm tất cả các ảnh từ thư mục cụ thể và tạo đường dẫn URL cho chúng
+            $images = [];
+            foreach ($product->images as $img) {
+                $imagePath =  $img->image;
+                if (Storage::exists($imagePath)) {
+                    $images[] = '/storage/'.$imagePath;
+                }
+            }
+
+            return response()->json(['images' => $images]);
+        } else {
+            return response()->json(['images' => []]);
+        }
     }
 }

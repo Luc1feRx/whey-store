@@ -58,7 +58,7 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.products.store') }}" method="POST" class="form-product" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             @include('backend.product.form')
                         </form>
@@ -79,7 +79,6 @@
 <script src="{{ asset('backend\plugins\summernote\summernote.min.js') }}"></script>
 <script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
 <script src="{{ asset('backend\common\summernote_common.js') }}"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
 <script>
         $('#images').on('change', function(e) {
             $('#image-preview').html(''); // Clear previous previews
@@ -108,7 +107,7 @@
         liveSearch: true
     });
 </script>
-@include('backend.post.script')
+@include('backend.product.script')
 @if (session('error'))
     @include('backend.layouts.toastr')
 @endif

@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class DestroyController extends Controller
 {
@@ -55,6 +58,12 @@ class DestroyController extends Controller
             case 'voucher':
                 $model = Voucher::class;
                 break;
+            case 'product':
+                $model = Product::class;
+                break;
+            case 'role':
+                $model = Role::class;
+                break;
             default:
                 # code...
                 break;
@@ -84,7 +93,19 @@ class DestroyController extends Controller
 
             if ($model == Voucher::class) {
                 $datas = $model::whereIn('id', $arr_id)->delete();
-            } else {
+            } else if($model == Product::class){
+                $datas = $model::whereIn('id', $arr_id)->delete();
+                if($datas){
+                    $datas->images()->detach();
+                    foreach ($datas->images as $productImage) {
+                        // Xóa tệp lưu trữ
+                        Storage::delete($productImage->image);
+                    }
+                    $deleteThumb = UploadImage::handleRemoveFile($imagePath);
+                }
+            } else if($model == Role::class){
+                $datas = $model::whereIn('id', $arr_id)->delete();
+            }else {
                 $datas = $model::whereIn('id', $arr_id)->update([
                     'deleted_at' => Carbon::now()
                 ]);

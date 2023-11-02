@@ -35,11 +35,11 @@
                                 <div class="form-check">
                                     <input class="form-check-input" {{ isset($product) ? ($product->is_featured_product == 1 ? 'checked' : '') : '' }} name="is_featured_product" value="1" type="checkbox">
                                     <label class="form-check-label">Sản phẩm nổi bật</label>
-                                  </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nội dung</label>
-                                <textarea id="description" name="description" cols="30" rows="10" placeholder="Nhập nội dung" class="form-control content-post summernote">{!! old('content', $post->content ?? '') !!}</textarea>
+                                <textarea id="description" name="description" cols="30" rows="10" placeholder="Nhập nội dung" class="form-control content-post summernote">{!! old('content', $product->description ?? '') !!}</textarea>
                                 @error('description')
                                 <span class="error">{{ $message }}</span>
                                 @enderror
@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Trọng lượng</label>
                                 <input type="text" class="form-control" placeholder="Nhập trọng lượng"
-                                    id="convert_slug" name="weight"
+                                    name="weight"
                                     value="{{ old('weight', $product->weight ?? '') }}">
                                 @error('weight')
                                 <span class="error">{{ $message }}</span>
@@ -113,7 +113,7 @@
                                 <select class="form-control select2-common" name="brand_id" aria-hidden="true">
                                     <option value="">Chọn thương hiệu</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        <option value="{{ $brand->id }}" {{ $product->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('brand_id')
@@ -122,9 +122,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Danh mục</label>
-                                <select class="form-control select2-common-multiple" data-live-search="true" data-placeholder="Chọn danh mục" name="category_id[]" multiple="multiple" aria-hidden="true">
+                                <select class="form-control select2-common-multiple " data-live-search="true" data-placeholder="Chọn danh mục" name="category_id[]" multiple="multiple" aria-hidden="true">
                                     @foreach ($categories as $cate)
-                                        <option value="{{ $cate->id }}">{{ $cate->name_category }}</option>
+                                        <option value="{{ $cate->id }}" {{ $product->categories->contains($cate->id) ? 'selected' : '' }}>{{ $cate->name_category }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -132,7 +132,7 @@
                                 <label>Loại vị</label>
                                 <select class="form-control select2-common-multiple" data-live-search="true" data-placeholder="Chọn loại vị" name="flavor_id[]" multiple="multiple" aria-hidden="true">
                                     @foreach ($flavors as $flavor)
-                                        <option value="{{ $flavor->id }}">{{ $flavor->name }}</option>
+                                        <option value="{{ $flavor->id }}" {{ $product->flavors->contains($flavor->id) ? 'selected' : '' }}>{{ $flavor->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -161,7 +161,7 @@
                 </div>
                 <div class="card-body">
                     <button type="submit" type="submit" name="btnSubmit" value="save" class="btn btn-primary submit btnCreate">
-                        <i class="fa fa-save"></i> {{ isset($post) ? 'Sửa' : 'Thêm' }}
+                        <i class="fa fa-save"></i> {{ isset($product) ? 'Sửa' : 'Thêm' }}
                     </button>
                     <input name="router" type="hidden" value="" id="router">
                 </div>
@@ -179,7 +179,7 @@
                             <input type="file" name="thumbnail" id="thumbnail" class="form-control btn_gallery d-none" placeholder="" value="" accept="images/*">
                         </div>
                         <img
-                            src="{{ !empty($post->thumbnail) ? asset('storage/' .$post->thumbnail) : asset('backend\dist\img\placeholder.png') }}"
+                            src="{{ !empty($product->thumbnail) ? asset('storage/' .$product->thumbnail) : asset('backend\dist\img\placeholder.png') }}"
                             alt="Preview image" class="preview_image" width="150">
                         <a class="btn_remove_image" title="Remove image">
                             <i class="fa fa-times"></i>
@@ -200,8 +200,8 @@
                     <div class="form-group">
                         <input type="file" name="image[]" id="images" class="" multiple accept="images/*">
                     </div>
-                    <div id="image-preview" style="margin-top: 10px">
-                        <img src="{{ asset('backend\dist\img\placeholder.png') }}" class="preview-image" alt="">
+                    <div id="image-preview" style="margin-top: 10px" data-product-id="{{ isset($product->id) ? $product->id : '' }}">
+                        <img src="{{ asset('backend\dist\img\placeholder.png') }}" class="preview-image" alt="" id="placeholder-image">
                     </div>
                 </div>
             </div>

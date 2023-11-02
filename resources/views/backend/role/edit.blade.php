@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Sửa sản phẩm @stop
+@section('title') Sửa tin tức @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -16,14 +16,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sửa sản phẩm</h1>
+                    <h1>Sửa tin tức</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                         'breadcrumb'=> [
-                            ['title' => 'Danh sách sản phẩm', 'url' => route('admin.products.index')],
-                            ['title' => 'Sửa sản phẩm', 'url' => '#']
+                            ['title' => 'Danh sách tin tức', 'url' => route('admin.posts.index')],
+                            ['title' => 'Sửa tin tức', 'url' => '#']
                         ]
                     ])
                 </div>
@@ -54,9 +54,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.products.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.posts.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            @include('backend.product.form')
+                            @include('backend.post.form')
                         </form>
                     </div>
                 </div>
@@ -75,58 +75,7 @@
     <script src="{{ asset('backend\plugins\summernote\summernote.min.js') }}"></script>
     <script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
     <script src="{{ asset('backend\common\summernote_common.js') }}"></script>
-    <script>
-        $('#images').on('change', function(e) {
-            $('#image-preview').html(''); // Clear previous previews
-            var files = e.target.files;
-
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    var img = $('<img>').addClass('preview-image').attr('src', e.target.result);
-                    $('#image-preview').append(img);
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
-    $('.select2-common').select2({
-      theme: 'bootstrap4'
-    })
-    var getplaceSelect = $(this).data("placeholder");
-    $('.select2-common-multiple').select2({
-        placeholder: getplaceSelect,
-        allowClear: true,
-        theme: 'bootstrap4',
-        liveSearch: true
-    });
-
-    $(document).ready(function () {
-        var imagePreview = $('#image-preview');
-        var product_id = imagePreview.data('product-id');
-        var placeholderImage = $('#placeholder-image');
-
-        
-        // Sử dụng Ajax để lấy danh sách ảnh từ máy chủ
-        $.ajax({
-            type: 'GET',
-            url: '/admin/products/get-product-images/' + product_id,
-            success: function (response) {
-                var images = response.images;
-                $.each(images, function (index, imagePath) {
-                    var img = $('<img>');
-                    img.attr('src', imagePath);
-                    img.addClass('preview-image');
-                    imagePreview.append(img);
-                });
-                placeholderImage.css('display', 'none');
-            }
-        });
-    });
-</script>
-    @include('backend.product.script')
+    @include('backend.post.script')
     @if (session('error'))
     @include('backend.layouts.toastr')
 @endif

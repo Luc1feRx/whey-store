@@ -1,7 +1,6 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="display: grid;
-grid-template-columns: 1481px 37fr 329px;
-grid-gap: 62px;
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="display: flex;
+justify-content: space-between;
 ">
     <!-- Left navbar links -->
     <ul class="navbar-nav">

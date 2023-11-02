@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductImage extends Model
+class Permission extends Model
 {
     use HasFactory;
 
-    protected $guard = 'product_images';
+    protected $guard = 'permissions';
 
     /**
      * The attributes that aren't mass assignable.

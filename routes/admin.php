@@ -7,11 +7,13 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\VoucherController;
 use App\Http\Controllers\Upload\UploadController;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,7 +89,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/store', [ProductController::class, 'store'])->name('store');
             Route::get('/edit/{id}',[ProductController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[ProductController::class, 'update'])->name('update');
+            Route::get('/get-product-images/{productId}', [ProductController::class, 'getProductImage'])->name('getProductImage');
         });
+    });
+
+    Route::middleware(['auth:admin', 'permission:manage decentralized'])->group(function () {
+        //role
+        Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
+            Route::get('/',[RoleController::class, 'index'])->name('index');
+            Route::get('/create',[RoleController::class, 'create'])->name('create');
+            Route::post('/store', [RoleController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[RoleController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[RoleController::class, 'update'])->name('update');
+        });
+
     });
 
 });
