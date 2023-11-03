@@ -42,8 +42,6 @@
             @include('backend.profile.aside')
             @if (Auth::guard('admin')->user()->hasPermissionTo('manage decentralized'))
               @include('backend.role.aside')
-            @endif
-            @if (Auth::guard('admin')->user()->hasPermissionTo('manage decentralized'))
               @include('backend.permission.aside')
             @endif
             @include('backend.product.aside')
