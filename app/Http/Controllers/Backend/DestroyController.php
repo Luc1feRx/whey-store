@@ -13,6 +13,7 @@ use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class DestroyController extends Controller
@@ -64,6 +65,9 @@ class DestroyController extends Controller
             case 'role':
                 $model = Role::class;
                 break;
+            case 'permission':
+                $model = Permission::class;
+                break;
             default:
                 # code...
                 break;
@@ -104,6 +108,16 @@ class DestroyController extends Controller
                     $deleteThumb = UploadImage::handleRemoveFile($imagePath);
                 }
             } else if($model == Role::class){
+                $roles = $model::whereIn('id', $arr_id)->get();
+
+                // Xóa quyền của từng vai trò
+                foreach ($roles as $role) {
+                    $role->permissions()->detach();
+                }
+            
+                // Sau đó xóa các vai trò
+                $datas = $model::whereIn('id', $arr_id)->delete();
+            } else if($model == Permission::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
             }else {
                 $datas = $model::whereIn('id', $arr_id)->update([

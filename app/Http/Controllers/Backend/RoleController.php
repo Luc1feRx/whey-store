@@ -22,7 +22,7 @@ class RoleController extends Controller
     }
 
     public function create(){
-        $permissions = Permission::all();
+        $permissions = Permission::whereNotIn('name', ['manage decentralized'])->get();
         return view('backend.role.create', [
             'permissions' => $permissions
         ]);
@@ -31,8 +31,14 @@ class RoleController extends Controller
     public function store(Request $request){
         try {
             DB::beginTransaction();
+            $request->validate([
+                'name' => 'required|unique:roles,name',
+                'permission' => 'required|array',
+            ]);
             $role = new Role();
             $role->name = $request->name;
+            $permissions = Permission::whereIn('id', $request->input('permission'))->pluck('id')->toArray();
+            $role->syncPermissions($permissions);
             $role->save();
             DB::commit();
             return redirect()->route('admin.roles.index')->with(['success' => 'Thêm vai trò thành công']);
@@ -44,11 +50,32 @@ class RoleController extends Controller
     }
 
 
-    public function edit(){
-        
+    public function edit($id){
+        $role = Role::findOrFail($id);
+        $permissions = Permission::whereNotIn('name', ['manage decentralized'])->get();
+        $assignPermissions = $role->permissions->pluck('id')->toArray();
+        return view('backend.role.edit', [
+            'permissions' => $permissions,
+            'role' => $role,
+            'assignPermissions' => $assignPermissions
+        ]);
     }
 
-    public function update(){
-        
+    public function update(Request $request, $id)
+    {
+        try {
+            // Xử lý việc cập nhật tên của vai trò (nếu cần)
+            $role = Role::findOrFail($id);
+            $role->name = $request->name;
+            $permissions = Permission::whereIn('id', $request->input('permission'))->pluck('id')->toArray();
+            $role->syncPermissions($permissions);
+            $role->save();
+
+            return redirect()->route('admin.roles.index')->with(['success' => 'Sửa vai trò thành công']);
+        } catch (Exception $e) {
+            Log::error('[RoleController][update] error ' . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with(['error' => 'Sửa vai trò thất bại']);
+        }
     }
 }

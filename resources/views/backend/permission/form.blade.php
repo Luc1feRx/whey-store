@@ -7,24 +7,13 @@
                         <input type="hidden" name="old_thumbnail" value="" class="old_thumbnail">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tên vai trò</label>
-                                <input type="text" class="form-control" placeholder="Nhập tên vai trò"
+                                <label for="exampleInputEmail1">Tên quyền</label>
+                                <input type="text" class="form-control" placeholder="Nhập tên quyền"
                                     name="name"
-                                    value="{{ old('name', $role->name ?? '') }}">
+                                    value="{{ old('name', $permission->name ?? '') }}">
                                 @error('name')
                                 <span class="error">{{ $message }}</span>
                                 @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Gán quyền</label>
-                                @php
-                                    isset($assignPermissions) ? $assignPermissions = collect($assignPermissions) : '';
-                                @endphp
-                                <select class="form-control select2-common-multiple" data-live-search="true" data-placeholder="Chọn quyền" name="permission[]" multiple="multiple" aria-hidden="true">
-                                    @foreach ($permissions as $permission)
-                                        <option value="{{ $permission->id }}" {{ isset($assignPermissions) ? ($assignPermissions->contains($permission->id) ? 'selected' : '') : '' }}>{{ $permission->name }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -40,7 +29,7 @@
                 </div>
                 <div class="card-body">
                     <button type="submit" type="submit" name="btnSubmit" value="save" class="btn btn-primary submit btnCreate">
-                        <i class="fa fa-save"></i> {{ isset($role) ? 'Sửa' : 'Thêm' }}
+                        <i class="fa fa-save"></i> {{ isset($permission) ? 'Sửa' : 'Thêm' }}
                     </button>
                     <input name="router" type="hidden" value="" id="router">
                 </div>

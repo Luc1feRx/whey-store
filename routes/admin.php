@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
+use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
@@ -101,6 +102,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/store', [RoleController::class, 'store'])->name('store');
             Route::get('/edit/{id}',[RoleController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[RoleController::class, 'update'])->name('update');
+        });
+
+    });
+
+    Route::middleware(['auth:admin', 'permission:manage decentralized'])->group(function () {
+        //role
+        Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function () {
+            Route::get('/',[PermissionController::class, 'index'])->name('index');
+            Route::get('/create',[PermissionController::class, 'create'])->name('create');
+            Route::post('/store', [PermissionController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[PermissionController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[PermissionController::class, 'update'])->name('update');
         });
 
     });

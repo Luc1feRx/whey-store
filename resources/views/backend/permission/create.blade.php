@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Sửa vai trò @stop
+@section('title') Thêm mới quyền @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -16,15 +16,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sửa vai trò</h1>
+                    <h1>Tạo mới quyền</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
-                        'breadcrumb'=> [
-                            ['title' => 'Danh sách vai trò', 'url' => route('admin.roles.index')],
-                            ['title' => 'Sửa vai trò', 'url' => '#']
-                        ]
+                    'breadcrumb'=> [
+                    ['title' => 'Danh sách quyền', 'url' => route('admin.permissions.index')],
+                    ['title' => 'Tạo quyền', 'url' => '#']
+                    ]
                     ])
                 </div>
             </div>
@@ -54,9 +54,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.roles.update', ['id' => $role->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.permissions.store') }}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
                             {{ csrf_field() }}
-                            @include('backend.role.form')
+                            @include('backend.permission.form')
                         </form>
                     </div>
                 </div>
@@ -70,12 +70,12 @@
 @endsection
 
 @section('addJs')
-    <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
-    <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
-    <script src="{{ asset('backend\plugins\summernote\summernote.min.js') }}"></script>
-    <script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
-    <script src="{{ asset('backend\common\summernote_common.js') }}"></script>
-    <script>
+<script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
+<script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
+<script src="{{ asset('backend\plugins\summernote\summernote.min.js') }}"></script>
+<script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
+<script src="{{ asset('backend\common\summernote_common.js') }}"></script>
+<script>
     $('.select2-common').select2({
       theme: 'bootstrap4'
     })
@@ -86,9 +86,9 @@
         theme: 'bootstrap4',
         liveSearch: true
     });
-    </script>
-    @include('backend.post.script')
-    @if (session('error'))
+</script>
+@include('backend.permission.script')
+@if (session('error'))
     @include('backend.layouts.toastr')
 @endif
 @endsection

@@ -40,7 +40,12 @@
                with font-awesome or any other icon font library -->
             @include('backend.dashboard.aside')
             @include('backend.profile.aside')
-            @include('backend.role.aside')
+            @if (Auth::guard('admin')->user()->hasPermissionTo('manage decentralized'))
+              @include('backend.role.aside')
+            @endif
+            @if (Auth::guard('admin')->user()->hasPermissionTo('manage decentralized'))
+              @include('backend.permission.aside')
+            @endif
             @include('backend.product.aside')
             @include('backend.category.aside')
             @include('backend.brand.aside')

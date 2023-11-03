@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Sửa vai trò @stop
+@section('title') Sửa quyền @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -16,14 +16,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sửa vai trò</h1>
+                    <h1>Sửa quyền</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                         'breadcrumb'=> [
-                            ['title' => 'Danh sách vai trò', 'url' => route('admin.roles.index')],
-                            ['title' => 'Sửa vai trò', 'url' => '#']
+                            ['title' => 'Danh sách quyền', 'url' => route('admin.permissions.index')],
+                            ['title' => 'Sửa quyền', 'url' => '#']
                         ]
                     ])
                 </div>
@@ -54,9 +54,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.roles.update', ['id' => $role->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.permissions.update', ['id' => $permission->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            @include('backend.role.form')
+                            @include('backend.permission.form')
                         </form>
                     </div>
                 </div>
