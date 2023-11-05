@@ -113,7 +113,7 @@
                                 <select class="form-control select2-common" name="brand_id" aria-hidden="true">
                                     <option value="">Chọn thương hiệu</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}" {{ $product->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
+                                        <option value="{{ $brand->id }}" {{ isset($product) ? ($product->brand_id == $brand->id ? 'selected' : '') : ''}}>{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('brand_id')
@@ -124,7 +124,7 @@
                                 <label>Danh mục</label>
                                 <select class="form-control select2-common-multiple " data-live-search="true" data-placeholder="Chọn danh mục" name="category_id[]" multiple="multiple" aria-hidden="true">
                                     @foreach ($categories as $cate)
-                                        <option value="{{ $cate->id }}" {{ $product->categories->contains($cate->id) ? 'selected' : '' }}>{{ $cate->name_category }}</option>
+                                        <option value="{{ $cate->id }}" {{ isset($product) ? ($product->categories->contains($cate->id) ? 'selected' : '') : '' }}>{{ $cate->name_category }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -132,7 +132,7 @@
                                 <label>Loại vị</label>
                                 <select class="form-control select2-common-multiple" data-live-search="true" data-placeholder="Chọn loại vị" name="flavor_id[]" multiple="multiple" aria-hidden="true">
                                     @foreach ($flavors as $flavor)
-                                        <option value="{{ $flavor->id }}" {{ $product->flavors->contains($flavor->id) ? 'selected' : '' }}>{{ $flavor->name }}</option>
+                                        <option value="{{ $flavor->id }}" {{ isset($product) ? ($product->flavors->contains($flavor->id) ? 'selected' : '') : '' }}>{{ $flavor->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -70,5 +70,5 @@
 @section('addJs')
     <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
     <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
-    @include('backend.category.script')
+    @include('backend.slider.script')
 @endsection

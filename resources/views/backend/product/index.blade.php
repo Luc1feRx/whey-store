@@ -54,14 +54,10 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Tên sản phẩm</th>
-                                        <th>Trọng lượng</th>
                                         <th>Danh mục</th>
                                         <th>Thương hiệu</th>
                                         <th>Ảnh</th>
-                                        <th>Điểm</th>
-                                        <th>Xuất xứ</th>
                                         <th>Giá sản phẩm (VNĐ)</th>
-                                        <th>Giá Giảm (VNĐ)</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -71,7 +67,6 @@
                                     <tr>
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->product_name }}</td>
-                                        <td>{{ $product->weight }}</td>
                                         <td>
                                             @foreach ($product->categories as $cate)
                                                 <span class="badge bg-success" style="font-size: 15px!important">{{ $cate->name_category }}</span>
@@ -82,10 +77,7 @@
                                             <img style="width: 300px;" src="{{ asset('storage/'.$product->thumbnail) }}"
                                             alt="" srcset="">
                                         </td>
-                                        <td><span class="badge bg-success" style="font-size: 15px!important">{{ $product->score }}</span></td>
-                                        <td>{{ $product->origin }}</td>
                                         <td>{{ \App\Helpers\Common::numberFormat($product->price) }}</td>
-                                        <td>{{ \App\Helpers\Common::numberFormat($product->discount_price) }}</td>
                                         <td>{{ $product->status == App\Models\Product::DISPLAY ? 'Hiển thị' : 'Ẩn' }}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ['id'=>$product->id]) }}"

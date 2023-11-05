@@ -15,6 +15,8 @@ class Product extends Model
     CONST HIDDEN = 0;
     CONST DISPLAY = 1;
 
+    CONST ISFEATURED = 1;
+
     /**
      * The attributes that aren't mass assignable.
      *

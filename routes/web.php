@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace' => 'Frontend'], function () {
+    // Route::get('login', [LoginController::class, 'create'])->name('view-login');
+    // Route::post('login', [LoginController::class, 'store'])->name('login');
+
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+    // Route::middleware()->group(function () {
+
+    // });
+
 });

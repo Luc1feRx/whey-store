@@ -76,7 +76,9 @@ class CategoryController extends Controller
             $cate->slug_category = $request->slug_category;
             $cate->parent_id = $request->parent_id;
             if($request->hasFile('thumbnail')){
-                $deletedExist = UploadImage::handleDeleteFileExist($cate->thumbnail);
+                if(!empty($cate->thumbnail)){
+                    $deletedExist = UploadImage::handleDeleteFileExist($cate->thumbnail);
+                }
                 $thumbnail_upload = UploadImage::handleUploadFile('thumbnail', 'img/category/', $request);
             }
             $cate->thumbnail = $thumbnail_upload;

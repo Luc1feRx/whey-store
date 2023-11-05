@@ -70,7 +70,7 @@
 @section('addJs')
 <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
 <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
-@include('backend.sliders.script')
+@include('backend.slider.script')
 @if (session('error'))
     @include('backend.layouts.toastr')
 @endif

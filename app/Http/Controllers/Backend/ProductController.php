@@ -125,6 +125,92 @@ class ProductController extends Controller
         }
     }
 
+    public function update(ProductRequest $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+            $product = Product::findOrFail($id);
+    
+            $product->name = $request->name;
+            $product->slug = $request->slug;
+            $product->weight = $request->weight;
+            $product->short_description = $request->short_description;
+            $product->serving_size = $request->serving_size;
+            $product->score = $request->score;
+            $product->origin = $request->origin;
+            $product->main_ingredient = $request->main_ingredient;
+            $product->brand_id = $request->brand_id;
+            $product->price = $request->price;
+            $product->percent = $request->percent;
+            $product->discount_price = $request->price - (($request->price * $request->percent) / 100);
+    
+            // Handle the product's thumbnail
+            if ($request->hasFile('thumbnail')) {
+                if (!empty($product->thumbnail)) {
+                    // Delete the existing thumbnail from storage
+                    UploadImage::handleDeleteFileExist($product->thumbnail);
+                }
+                // Upload and update the new thumbnail
+                $thumbnail_upload = UploadImage::handleUploadFile('thumbnail', 'img/product/', $request);
+                $product->thumbnail = $thumbnail_upload;
+            }
+    
+            // Update product status, featured flag, and description
+            $product->status = $request->status;
+            $product->is_featured_product = $request->is_featured_product ?? 0;
+            $product->description = $request->description;
+            $product->save();
+    
+            // Update categories
+            if ($request->has('category_id')) {
+                $selectedCategories = $request->input('category_id', []);
+                $product->categories()->sync($selectedCategories);
+            } else {
+                // If no categories are provided in the request, remove all associated categories
+                $product->categories()->detach();
+            }
+    
+            // Update flavors
+            if ($request->has('flavor_id')) {
+                $selectedFlavors = $request->input('flavor_id', []);
+                $product->flavors()->sync($selectedFlavors);
+            } else {
+                // If no flavors are provided in the request, remove all associated flavors
+                $product->flavors()->detach();
+            }
+    
+
+            if ($request->hasFile('image')) {
+                $images = $request->file('image');
+            
+                foreach ($images as $image) {
+                    // Check if the image already exists in storage
+                    if (Storage::disk('public')->exists('img/product_images/' . $image->getClientOriginalName())) {
+                        // The image with the same name already exists in storage
+                        // You can choose to do something here (e.g., overwrite, skip, or display a message)
+                        UploadImage::handleDeleteFileExist($image->image);
+                    } else {
+                        // The image doesn't exist, so you can proceed to store it
+                        $imagePath = $this->storeImage($image, 'img/product_images');
+            
+                        // Create and save a record for each product image
+                        $productImage = new ProductImage;
+                        $productImage->product_id = $product->id;
+                        $productImage->image = $imagePath;
+                        $productImage->save();
+                    }
+                }
+            }
+    
+            DB::commit();
+            return redirect()->route('admin.products.index')->with(['success' => 'Cập nhật sản phẩm thành công']);
+        } catch (Exception $e) {
+            Log::error('[Controllercontroller][update] error ' . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with(['error' => 'Cập nhật sản phẩm thất bại']);
+        }
+    }
+
     public function edit($id) {
         $product = Product::with(['categories', 'flavors'])->where('products.id',$id)->first();
         $flavors = Flavor::orderBy('id','desc')->get();
