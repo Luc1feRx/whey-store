@@ -1140,8 +1140,8 @@ img.desaturate {
     .departments-menu .menu-item-has-children > .dropdown-menu > li.menu-item:not(.menu-item-object-static_block):first-child {
       margin-top: 1.143em; }
 
-.home-v2 .departments-menu > .dropdown > .dropdown-menu {
-  display: block; }
+/* .home-v2 .departments-menu > .dropdown > .dropdown-menu {
+  display: block; } */
 
 /*===================================================================================*/
 /*  VERITCAL-MENU

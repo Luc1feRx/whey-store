@@ -1,12 +1,6 @@
 <div class="top-bar">
     <div class="container">
         <nav>
-            <ul id="menu-top-bar-left" class="nav nav-inline pull-left animate-dropdown flip">
-                <li class="menu-item animate-dropdown"><a title="Welcome to Worldwide Electronics Store" href="#">Welcome to Worldwide Electronics Store</a></li>
-            </ul>
-        </nav>
-        
-        <nav>
             <ul id="menu-top-bar-right" class="nav nav-inline pull-right animate-dropdown flip">
                 <li class="menu-item animate-dropdown"><a title="Store Locator" href="#"><i class="ec ec-map-pointer"></i>Store Locator</a></li>
                 <li class="menu-item animate-dropdown"><a title="Track Your Order" href="track-your-order.html"><i class="ec ec-transport"></i>Track Your Order</a></li>
@@ -22,7 +16,7 @@
 
             <!-- ============================================================= Header Logo ============================================================= -->
             <div class="header-logo">
-                <a href="home.html" class="header-logo-link">
+                <a href="{{ route('home.index') }}" class="header-logo-link">
                     <svg version="1.1" x="0px" y="0px" width="175.748px"
                         height="42.52px" viewBox="0 0 175.748 42.52" enable-background="new 0 0 175.748 42.52">
                         <ellipse class="ellipse-bg" fill-rule="evenodd" clip-rule="evenodd" fill="#FDD700" cx="170.05" cy="36.341" rx="5.32" ry="5.367"/>
@@ -199,10 +193,9 @@
 
             <div class="header-support-info">
                 <div class="media">
-                    <span class="media-left support-icon media-middle"><i class="ec ec-support"></i></span>
                     <div class="media-body">
-                        <span class="support-number"><strong>Support</strong> (+800) 856 800 604</span><br/>
-                        <span class="support-email">Email: info@electro.com</span>
+                        <a href="{{ route('home.lang', ['lang'=>'vi']) }}">Việt</a>
+                        <a href="{{ route('home.lang', ['lang'=>'en']) }}">Anh</a>
                     </div>
                 </div>
             </div>
@@ -216,20 +209,20 @@
         <ul class="nav navbar-nav departments-menu animate-dropdown">
             <li class="nav-item dropdown ">
 
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="departments-menu-toggle" >Shop by Department</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="departments-menu-toggle" >{{ trans('message.categories') }}</a>
                 <ul id="menu-vertical-menu" class="dropdown-menu yamm departments-menu-dropdown">
 
                     @foreach ($rootCategories as $category)
                         @if($category->children && count($category->children) > 0)
                             <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown">
-                                <a title="Computers &amp; Accessories" data-hover="dropdown" href="product-category.html" data-toggle="dropdown" class="custom-dropdown-link dropdown-toggle" aria-haspopup="true">{{ $category->name_category }}</a>
+                                <a title="Computers &amp; Accessories" data-hover="dropdown" href="{{ route('home.category', ['slug'=>$category->slug_category]) }}" data-toggle="dropdown" class="custom-dropdown-link dropdown-toggle" aria-haspopup="true">{{ $category->name_category }}</a>
                                 <ul role="menu" class=" dropdown-menu">
                                     @include('frontend.partials.categories', ['categories' => $category->children, 'category' => $category])
                                 </ul>
                             </li>
                         @else
                             <li class="yamm-tfw menu-item">
-                                <a href="product-category.html" aria-haspopup="true">{{ $category->name_category }}</a>
+                                <a href="{{ route('home.category', ['slug'=>$category->slug_category]) }}" aria-haspopup="true">{{ $category->name_category }}</a>
                             </li>
                         @endif
                     @endforeach

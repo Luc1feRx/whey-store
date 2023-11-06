@@ -1136,9 +1136,9 @@
                 //Text has over-flowed
                 $this.find( '.electro-price' ).css( 'position', 'relative' );
                 if( is_rtl ){
-                    $this.find( 'del' ).attr( 'style', 'position:absolute;right:0;top:-14px;');
+                    $this.find( 'del' ).attr( 'style', 'position:absolute;right:0;top: 29px;');
                 }else {
-                    $this.find( 'del' ).attr( 'style', 'position:absolute;left:0;top:-14px;');
+                    $this.find( 'del' ).attr( 'style', 'position:absolute;left:0;top: 29px;');
                 }
             }
         });

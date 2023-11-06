@@ -24,7 +24,7 @@
                             <div class="wpb_text_column wpb_content_element ">
                                 <div class="wpb_wrapper">
                                     <ul>
-                                        <li><a href="#">{{ $cate->name_category }}</a></li>
+                                        <li><a href="{{ route('home.category', ['slug'=>$cate->slug_category]) }}">{{ $cate->name_category }}</a></li>
                                     </ul>
 
                                 </div>

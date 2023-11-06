@@ -20,6 +20,10 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
+    Route::get('change/lang/{lang}', [HomeController::class, 'ChangeLang'])->name('home.lang');
+
+    Route::get('/product/category/{slug}', [HomeController::class, 'category'])->name('home.category');
+
     // Route::middleware()->group(function () {
 
     // });

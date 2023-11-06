@@ -119,7 +119,7 @@ class ProductController extends Controller
             DB::commit();
             return redirect()->route('admin.products.index')->with(['success' => 'Thêm sản phẩm thành công']);
         } catch (Exception $e) {
-            Log::error('[Controllercontroller][store] error ' . $e->getMessage());
+            Log::error('[Controllercontroller][store] error ' . $e->getMessage() . ' '. $e->getLine());
             DB::rollBack();
             return redirect()->back()->with(['error' => 'Thêm sản phẩm thất bại']);
         }
@@ -205,7 +205,7 @@ class ProductController extends Controller
             DB::commit();
             return redirect()->route('admin.products.index')->with(['success' => 'Cập nhật sản phẩm thành công']);
         } catch (Exception $e) {
-            Log::error('[Controllercontroller][update] error ' . $e->getMessage());
+            Log::error('[Controllercontroller][update] error ' . $e->getMessage() . ' '. $e->getLine());
             DB::rollBack();
             return redirect()->back()->with(['error' => 'Cập nhật sản phẩm thất bại']);
         }
