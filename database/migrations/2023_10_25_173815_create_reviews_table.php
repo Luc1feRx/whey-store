@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('product_id');
             $table->text('content');
-            $table->integer('star');
+            $table->integer('rating');
             $table->integer('status');
             $table->softDeletes();
             $table->timestamps();

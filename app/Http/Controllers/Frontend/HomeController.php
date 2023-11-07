@@ -42,5 +42,34 @@ class HomeController extends Controller
             'category' => $category
         ]);
     }
+
+    public function productDetail($slug){
+        $productDetail = Product::with(['images', 'flavors'])->leftJoin('brands', 'brands.id', 'products.brand_id')
+            ->where('products.slug', $slug)
+            ->select([
+                'products.id',
+                'products.name as product_name',
+                'products.short_description',
+                'products.description',
+                'products.view_counts',
+                'products.is_featured_product',
+                'products.slug',
+                'products.weight',
+                'products.serving_size',
+                'products.score',
+                'products.origin',
+                'products.main_ingredient',
+                'brands.name as brand_name',
+                'products.price',
+                'products.status',
+                'products.discount_price',
+                'brands.thumbnail as brand_thumbnail',
+            ])
+            ->first();
+
+        return view('frontend.product-detail.product-detail', [
+            'productDetail' => $productDetail
+        ]);
+    }
     
 }

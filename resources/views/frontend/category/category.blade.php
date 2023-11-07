@@ -3,7 +3,7 @@
 @section('content')
 <div id="content" class="site-content" tabindex="-1">
     <div class="container">
-        <nav class="woocommerce-breadcrumb"><a href="home.html">{{ trans('message.home') }}</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ $category->name_category }}</nav>
+        <nav class="woocommerce-breadcrumb"><a href="{{ route('home.index') }}">{{ trans('message.home') }}</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ $category->name_category }}</nav>
         <div id="primary" class="content-area">
             <main id="main" class="site-main">
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Frontend'], function () {
-    // Route::get('login', [LoginController::class, 'create'])->name('view-login');
+    Route::get('login', [LoginController::class, 'loginView'])->name('login-view');
     // Route::post('login', [LoginController::class, 'store'])->name('login');
 
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -23,6 +24,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('change/lang/{lang}', [HomeController::class, 'ChangeLang'])->name('home.lang');
 
     Route::get('/product/category/{slug}', [HomeController::class, 'category'])->name('home.category');
+
+    Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('home.product-detail');
 
     // Route::middleware()->group(function () {
 
