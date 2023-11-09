@@ -33,8 +33,8 @@ class LoginController extends Controller
 
     public function postRegister(LoginRequest $request)
     {
-        $data               = $request->except("_token");
-        $data['password']   =  Hash::make($data['password']);
+        $data = $request->except("_token");
+        $data['password'] =  Hash::make($data['password']);
         $data['name'] = $data['last_name'] . ' ' . $data['first_name'];
         $id = User::insertGetId($data);
 

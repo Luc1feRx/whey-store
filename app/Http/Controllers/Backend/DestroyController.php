@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Slider;
 use App\Models\Voucher;
 use Carbon\Carbon;
@@ -68,6 +70,12 @@ class DestroyController extends Controller
             case 'permission':
                 $model = Permission::class;
                 break;
+            case 'review':
+                $model = Review::class;
+                break;
+            case 'admin':
+                $model = Admin::class;
+                break;
             default:
                 # code...
                 break;
@@ -107,6 +115,12 @@ class DestroyController extends Controller
                     }
                     $deleteThumb = UploadImage::handleRemoveFile($imagePath);
                 }
+            } else if($model == Admin::class){
+                $datas = $model::whereIn('id', $arr_id)->first();
+                if($datas){
+                    $datas->roles()->detach();
+                    $datas->delete();
+                }
             } else if($model == Role::class){
                 $roles = $model::whereIn('id', $arr_id)->get();
 
@@ -117,7 +131,7 @@ class DestroyController extends Controller
             
                 // Sau đó xóa các vai trò
                 $datas = $model::whereIn('id', $arr_id)->delete();
-            } else if($model == Permission::class){
+            } else if($model == Permission::class || $model == Review::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
             }else {
                 $datas = $model::whereIn('id', $arr_id)->update([

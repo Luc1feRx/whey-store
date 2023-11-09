@@ -43,6 +43,7 @@
             @if (Auth::guard('admin')->user()->hasPermissionTo('manage decentralized'))
               @include('backend.role.aside')
               @include('backend.permission.aside')
+              @include('backend.account.aside')
             @endif
             @include('backend.product.aside')
             @include('backend.category.aside')

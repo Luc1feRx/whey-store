@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AccountController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -110,18 +111,23 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/update/{id}',[RoleController::class, 'update'])->name('update');
         });
 
-    });
-
-    Route::middleware(['auth:admin', 'permission:manage decentralized'])->group(function () {
-        //role
+        //permission
         Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function () {
-            Route::get('/',[PermissionController::class, 'index'])->name('index');
-            Route::get('/create',[PermissionController::class, 'create'])->name('create');
+            Route::get('/', [PermissionController::class, 'index'])->name('index');
+            Route::get('/create', [PermissionController::class, 'create'])->name('create');
             Route::post('/store', [PermissionController::class, 'store'])->name('store');
-            Route::get('/edit/{id}',[PermissionController::class, 'edit'])->name('edit');
-            Route::post('/update/{id}',[PermissionController::class, 'update'])->name('update');
+            Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [PermissionController::class, 'update'])->name('update');
         });
 
+        //account
+        Route::group(['prefix' => 'accounts', 'as' => 'accounts.'], function () {
+            Route::get('/',[AccountController::class, 'index'])->name('index');
+            Route::get('/create',[AccountController::class, 'create'])->name('create');
+            Route::post('/store', [AccountController::class, 'store'])->name('store');
+            Route::get('/edit/{id}',[AccountController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}',[AccountController::class, 'update'])->name('update');
+        });
     });
 
 });
