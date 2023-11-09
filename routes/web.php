@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LoginController;
+use App\Http\Controllers\Frontend\RatingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Frontend'], function () {
-    Route::get('login', [LoginController::class, 'loginView'])->name('login-view');
-    // Route::post('login', [LoginController::class, 'store'])->name('login');
+    Route::get('login', [LoginController::class, 'loginView'])->name('home.login-view');
+    Route::post('login', [LoginController::class, 'loginPost'])->name('home.login');
+    Route::post('register', [LoginController::class, 'postRegister'])->name('home.register');
+    Route::post('logout', [LoginController::class, 'Logout'])->name('home.logout');
 
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
@@ -27,8 +30,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('home.product-detail');
 
-    // Route::middleware()->group(function () {
-
-    // });
+    Route::middleware(['user'])->group(function () {
+        Route::post('/add-comment', [RatingController::class, 'addCommentRating'])->name('home.addCommentRating');
+    });
 
 });

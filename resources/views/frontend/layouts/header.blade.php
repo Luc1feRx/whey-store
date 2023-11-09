@@ -4,8 +4,16 @@
             <ul id="menu-top-bar-right" class="nav nav-inline pull-right animate-dropdown flip">
                 <li class="menu-item animate-dropdown"><a title="Store Locator" href="#"><i class="ec ec-map-pointer"></i>Store Locator</a></li>
                 <li class="menu-item animate-dropdown"><a title="Track Your Order" href="track-your-order.html"><i class="ec ec-transport"></i>Track Your Order</a></li>
-                <li class="menu-item animate-dropdown"><a title="Shop" href="shop.html"><i class="ec ec-shopping-bag"></i>Shop</a></li>
-                <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('login-view') }}"><i class="ec ec-user"></i>{{ trans('message.login') }}</a></li>
+                @if (!Auth::check())
+                    <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.login-view') }}"><i class="ec ec-user"></i>{{ trans('message.login') }}</a></li>
+                @else
+                <li class="menu-item animate-dropdown"><a title="My Account" href=""><i class="ec ec-user"></i>{{ Auth::user()->name }}</a></li>
+                    <li class="menu-item animate-dropdown" onclick="event.preventDefault();
+                    document.getElementById('logout-user').submit();"><a title="Logout" style="cursor: pointer !important"><i class="ec ec-user"></i>{{ trans('message.logout') }}</a></li>
+                    <form id="logout-user" action="{{ route('home.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endif
             </ul>
         </nav>
     </div>

@@ -4,6 +4,7 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Electro &#8211; Electronics Ecommerce Theme</title>
 
@@ -14,7 +15,10 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets/css/owl-carousel.css') }}" media="all" />
         <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets/css/style.css') }}" media="all" />
         <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets/css/colors/yellow.css') }}" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets/css/toastr.min.css') }}" media="all" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
+        @yield('addCss')
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,700italic,800,800italic,600italic,400italic,300italic' rel='stylesheet' type='text/css'>
 
         <link rel="shortcut icon" href="assets/images/fav-icon.png">
@@ -41,6 +45,11 @@
         <script type="text/javascript" src="{{ asset('frontend/assets/js/jquery.easing.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('frontend/assets/js/jquery.waypoints.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('frontend/assets/js/electro.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontend/assets/js/toastr.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+        @include('frontend.partials.toastr')
+
+        @yield('addJs')
 
         <script>
             // Add a click event listener to all elements with the custom-dropdown-link class

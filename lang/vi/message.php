@@ -19,6 +19,17 @@ return [
     'home' => 'Trang chủ',
     'categories' => 'Danh mục',
     'blog' => 'Tin tức',
-    'noProduct' => 'Không có sản phẩm nào!!'
+    'noProduct' => 'Không có sản phẩm nào!!',
+    'login' => 'Đăng nhập',
+    'inputEmail' => 'Nhập email',
+    'inputPassword' => 'Nhập password',
+    'login-in' => [
+        'failure' => 'Đăng nhập thất bại'
+    ],
+    'lost-password' => 'Mất mật khẩu?',
+    'logout' => 'Đăng xuất',
+    'comment' => [
+        'success' => 'Đánh giá sản phẩm thành công'
+    ]
 
 ];

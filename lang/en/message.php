@@ -19,5 +19,15 @@ return [
     'home' => 'Home',
     'categories' => 'Categories',
     'blog' => 'From to blog',
-    'noProduct' => ''
+    'login' => 'Login',
+    'inputEmail' => 'Enter your email address',
+    'inputPassword' => 'Enter your password',
+    'lost-password' => 'Lost your password?',
+    'login-in' => [
+        'failure' => 'Login failed',
+    ],
+    'logout' => 'Logout',
+    'comment' => [
+        'success' => 'Đánh giá sản phẩm thành công'
+    ]
 ];

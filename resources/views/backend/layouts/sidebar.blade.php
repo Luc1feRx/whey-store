@@ -50,6 +50,7 @@
             @include('backend.slider.aside')
             @include('backend.post.aside')
             @include('backend.voucher.aside')
+            @include('backend.comment.aside')
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

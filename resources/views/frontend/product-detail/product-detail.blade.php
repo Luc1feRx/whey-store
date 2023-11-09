@@ -475,45 +475,47 @@
                                             </div><!-- /.col -->
     
                                             <div class="col-xs-12 col-md-6">
-                                                <div id="review_form_wrapper">
-                                                    <div id="review_form">
-                                                        <div id="respond" class="comment-respond">
-                                                            <h3 id="reply-title" class="comment-reply-title">Add a review
-                                                                <small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Cancel reply</a>
-                                                                </small>
-                                                            </h3>
-    
-                                                            <form action="#" method="post" id="commentform" class="comment-form">
-                                                                <p class="comment-form-rating">
-                                                                    <label>Your Rating</label>
-                                                                </p>
-    
-                                                                <p class="stars">
-                                                                    <span><a class="star-1" href="#">1</a>
-                                                                        <a class="star-2" href="#">2</a>
-                                                                        <a class="star-3" href="#">3</a>
-                                                                        <a class="star-4" href="#">4</a>
-                                                                        <a class="star-5" href="#">5</a>
-                                                                    </span>
-                                                                </p>
-    
-                                                                <p class="comment-form-comment">
-                                                                    <label for="comment">Your Review</label>
-                                                                    <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
-                                                                </p>
-    
-                                                                <p class="form-submit">
-                                                                    <input name="submit" type="submit" id="submit" class="submit" value="Add Review" />
-                                                                    <input type='hidden' name='comment_post_ID' value='2452' id='comment_post_ID' />
-                                                                    <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
-                                                                </p>
-    
-                                                                <input type="hidden" id="_wp_unfiltered_html_comment_disabled" name="_wp_unfiltered_html_comment_disabled" value="c7106f1f46" />
-                                                                <script>(function(){if(window===window.parent){document.getElementById('_wp_unfiltered_html_comment_disabled').name='_wp_unfiltered_html_comment';}})();</script>
-                                                            </form><!-- form -->
-                                                        </div><!-- #respond -->
+                                                @if (Auth::check())
+                                                    <div id="review_form_wrapper">
+                                                        <div id="review_form">
+                                                            <div id="respond" class="comment-respond">
+                                                                <h3 id="reply-title" class="comment-reply-title">Add a review
+                                                                    <small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Cancel reply</a>
+                                                                    </small>
+                                                                </h3>
+        
+                                                                <form action="#" method="post" id="commentform" class="comment-form">
+                                                                    <p class="comment-form-rating">
+                                                                        <label>Your Rating</label>
+                                                                    </p>
+
+                                                                    <div id="rateYo"></div>
+
+                                                                    <input type="hidden" value="" name="rating" id="rating-star">
+                                                                    <input type="hidden" value="{{ $productDetail->id }}" name="product_id" id="product_id">
+        
+                                                                    <p class="comment-form-comment">
+                                                                        <label for="comment">Your Review</label>
+                                                                        <textarea id="comment" name="content" cols="45" rows="8" aria-required="true"></textarea>
+                                                                    </p>
+        
+                                                                    <p class="form-submit">
+                                                                        <input name="submit" type="submit" id="submit" class="submit" value="Add Review" />
+                                                                        <input type='hidden' name='comment_post_ID' value='2452' id='comment_post_ID' />
+                                                                        <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                                                                    </p>
+        
+                                                                    <input type="hidden" id="_wp_unfiltered_html_comment_disabled" name="_wp_unfiltered_html_comment_disabled" value="c7106f1f46" />
+                                                                    <script>(function(){if(window===window.parent){document.getElementById('_wp_unfiltered_html_comment_disabled').name='_wp_unfiltered_html_comment';}})();</script>
+                                                                </form><!-- form -->
+                                                            </div><!-- #respond -->
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @else
+                                                    <div style="display: flex; justify-content: center">
+                                                        {{ trans('message.LoginToComment') }}
+                                                    </div>
+                                                @endif
     
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
@@ -806,4 +808,67 @@
         </div><!-- .col-full -->
     </div><!-- #content -->
 </div>
+@endsection
+
+@section('addJs')
+    <script>
+        toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+        };
+        jQuery("#rateYo").rateYo({
+            rating: 0,
+            fullStar: true,
+            starWidth: "20px"
+        }).on("rateyo.set", function (e, data) {
+            jQuery('#rating-star').val(data.rating);
+        });
+
+        jQuery(document).ready(function() {
+             // Xử lý sự kiện gửi biểu mẫu
+             jQuery("#commentform").submit(function(event) {
+                    event.preventDefault(); // Ngăn chặn biểu mẫu gửi mặc định
+
+                    // Lấy các giá trị từ các trường
+                    var rating = jQuery("#rating-star").val();
+                    var product_id = jQuery("#product_id").val();
+                    var content = jQuery("#comment").val();
+
+                    // Tạo một đối tượng dữ liệu để gửi lên máy chủ
+                    var data = {
+                        rating: rating,
+                        product_id: product_id,
+                        content: content,
+                    };
+
+                    // Sử dụng Ajax để gửi yêu cầu POST đến máy chủ
+                    jQuery.ajax({
+                    type: "POST",
+                    url: "{{ route('home.addCommentRating') }}", // Thay thế bằng URL của API/route của bạn
+                    headers: {
+                        "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr('content'), // Thêm token CSRF vào tiêu đề
+                    },
+                    data: JSON.stringify(data),
+                    contentType: "application/json;charset=UTF-8",
+                    success: function(response) {
+                        // Xử lý phản hồi từ máy chủ (nếu cần)
+                        Command: toastr["success"](response.msg)
+                    },
+                    });
+                });
+            });
+    </script>
 @endsection

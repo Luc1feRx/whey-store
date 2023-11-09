@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
 use App\Http\Controllers\Backend\PermissionController;
@@ -91,6 +92,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::get('/edit/{id}',[ProductController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[ProductController::class, 'update'])->name('update');
             Route::get('/get-product-images/{productId}', [ProductController::class, 'getProductImage'])->name('getProductImage');
+        });
+
+        //comment
+        Route::group(['prefix' => 'comments', 'as' => 'comments.'], function () {
+            Route::get('/',[CommentController::class, 'index'])->name('index');
         });
     });
 
