@@ -74,7 +74,7 @@
                                         </td>
                                         <td><span class="badge bg-success" style="font-size: 15px!important">{{ $product->brand_name }}</span></td>
                                         <td>
-                                            <img style="width: 300px;" src="{{ asset('storage/'.$product->thumbnail) }}"
+                                            <img style="width: 200px;" src="{{ asset('storage/'.$product->thumbnail) }}"
                                             alt="" srcset="">
                                         </td>
                                         <td>{{ \App\Helpers\Common::numberFormat($product->price) }}</td>
