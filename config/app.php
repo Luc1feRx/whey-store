@@ -172,6 +172,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
     ])->toArray(),
 
     /*
