@@ -76,8 +76,11 @@ class UploadImage
 
     public static function handleDeleteFileExist($name)
     {
-        if (Storage::disk()->exists($name)) {
-            Storage::disk()->delete($name);
+        if(!empty($name)){
+            if (Storage::disk()->exists($name)) {
+                Storage::disk()->delete($name);
+            }
+            return $name;
         }
         return $name;
     }
