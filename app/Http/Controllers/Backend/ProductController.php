@@ -191,7 +191,7 @@ class ProductController extends Controller
                         UploadImage::handleDeleteFileExist($image->image);
                     } else {
                         // The image doesn't exist, so you can proceed to store it
-                        $imagePath = $this->storeImage($image, 'img/product_images');
+                        $imagePath = UploadImage::handleUploadFile($image, 'img/product_images');
             
                         // Create and save a record for each product image
                         $productImage = new ProductImage;

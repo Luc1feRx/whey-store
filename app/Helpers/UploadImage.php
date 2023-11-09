@@ -45,13 +45,17 @@ class UploadImage
         return self::uploadFileOrigin($file, $uploadPath, $fileName, $request);
     }
 
-    public static function handleUploadFile($fileName, $uploadPath, $request)
+    public static function handleUploadFile($fileName, $uploadPath, $request=null)
     {
         $fullPath = '';
-        if (!$request->hasFile($fileName)) {
-            return $fullPath;
+        if(!empty($request)){
+            if (!$request->hasFile($fileName)) {
+                return $fullPath;
+            }
+            $file = $request->file($fileName);
+        }else{
+            $file = $fileName;
         }
-        $file = $request->file($fileName);
         $saveName = date('YmdHis') . '_' . sha1(Str::uuid()) . '.' . $file->getClientOriginalExtension();
         $fullPath = $uploadPath . $saveName;
 
