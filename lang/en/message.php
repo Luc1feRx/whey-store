@@ -28,6 +28,12 @@ return [
     ],
     'logout' => 'Logout',
     'comment' => [
-        'success' => 'Đánh giá sản phẩm thành công'
+        'success' => 'Add a comment successfully',
+    ],
+    'brands' => 'Brands',
+    'flavors' => 'Flavors',
+    'priceFilter' => 'Prices',
+    'favourite' => [
+        'success' => 'Add favourite product successfully'
     ]
 ];

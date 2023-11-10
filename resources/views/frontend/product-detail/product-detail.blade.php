@@ -63,7 +63,7 @@
     
                                 <div class="action-buttons">
     
-                                    <a href="#" class="add_to_wishlist" >
+                                    <a href="{{ route('home.addToFavorites', ['productId'=>$productDetail->id]) }}" class="add_to_wishlist" >
                                         {{ trans('message.wishlist') }}
                                     </a>
     
@@ -135,11 +135,11 @@
                                 </li>
     
                                 <li class="nav-item specification_tab">
-                                    <a href="#tab-specification" class="active" data-toggle="tab">Specification</a>
+                                    <a href="#tab-specification" data-toggle="tab">Specification</a>
                                 </li>
     
                                 <li class="nav-item reviews_tab">
-                                    <a href="#tab-reviews" data-toggle="tab">Reviews</a>
+                                    <a href="#tab-reviews" data-toggle="tab" class="active">Reviews</a>
                                 </li>
                             </ul>
     
@@ -330,7 +330,7 @@
                                     </div><!-- /.product_meta -->
                                 </div>
     
-                                <div class="tab-pane active in panel entry-content wc-tab" id="tab-specification">
+                                <div class="tab-pane in panel entry-content wc-tab" id="tab-specification">
                                     <h3>Technical Specifications</h3>
                                     <table class="table">
                                         <tbody>
@@ -410,7 +410,7 @@
                                     </table>
                                 </div><!-- /.panel -->
     
-                                <div class="tab-pane panel entry-content wc-tab" id="tab-reviews">
+                                <div class="tab-pane panel entry-content wc-tab active" id="tab-reviews">
                                     <div id="reviews" class="electro-advanced-reviews">
                                         <div class="advanced-review row">
                                             <div class="col-xs-12 col-md-6">
@@ -523,7 +523,33 @@
                                         <div id="comments">
     
                                             <ol class="commentlist">
-                                                <li itemprop="review" class="comment even thread-even depth-1">
+                                                @foreach ($productDetail->reviews as $review)
+                                                <li class="comment odd alt thread-odd thread-alt depth-1">
+            
+                                                    <div class="comment_container">
+    
+                                                        <img alt='' src="assets/images/blog/avatar.jpg" class='avatar' height='60' width='60' />
+                                                        <div class="comment-text">
+                                                            
+                                                            @for($i = 1 ; $i <= $review->rating ; $i++)
+                                                                <span class="{{  $i <= $review->rating ? 'active' : '' }}" style="color: #fed700 !important"><i class="fa fa-star"></i></span>
+                                                            @endfor
+    
+                                                            <div itemprop="description" class="description">
+                                                                <p>
+                                                                    {{ $review->content }}
+                                                                </p>
+                                                            </div>
+    
+                                                            <p class="meta">
+                                                                <strong itemprop="author">{{ $review->user->name }}</strong> &ndash; <time itemprop="datePublished" datetime="2016-03-03T14:14:47+00:00">{{ date("d/m/Y H:i:s", strtotime($review->created_at)) }}</time>
+                                                            </p>
+    
+                                                        </div>
+                                                    </div>
+                                                </li><!-- #comment-## -->
+                                                @endforeach
+                                                {{-- <li itemprop="review" class="comment even thread-even depth-1">
     
                                                     <div id="comment-390" class="comment_container">
     
@@ -551,67 +577,8 @@
     
                                                         </div>
                                                     </div>
-                                                </li><!-- #comment-## -->
-    
-                                                <li class="comment odd alt thread-odd thread-alt depth-1">
-    
-                                                    <div class="comment_container">
-    
-                                                        <img alt='' src="assets/images/blog/avatar.jpg" class='avatar' height='60' width='60' />
-                                                        <div class="comment-text">
-    
-                                                            <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" title="Rated 5 out of 5">
-                                                                <span style="width:100%"><strong itemprop="ratingValue">5</strong> out of 5</span>
-                                                            </div>
-    
-                                                            <p class="meta">
-                                                                <strong>Anna Kowalsky</strong> &ndash;
-                                                                <time itemprop="datePublished" datetime="2016-03-03T14:14:47+00:00">March 3, 2016</time>:
-                                                            </p>
-    
-    
-                                                            <div itemprop="description" class="description">
-                                                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse eget facilisis odio. Duis sodales augue eu tincidunt faucibus. Etiam justo ligula, placerat ac augue id, volutpat porta dui.
-                                                                </p>
-                                                            </div>
-    
-                                                            <p class="meta">
-                                                                <strong itemprop="author">Anna Kowalsky</strong> &ndash; <time itemprop="datePublished" datetime="2016-03-03T14:14:47+00:00">March 3, 2016</time>
-                                                            </p>
-    
-                                                        </div>
-                                                    </div>
-                                                </li><!-- #comment-## -->
-    
-                                                <li class="comment odd alt thread-odd thread-alt depth-1">
-    
-                                                    <div class="comment_container">
-    
-                                                        <img alt='' src="assets/images/blog/avatar.jpg" class='avatar' height='60' width='60' />
-                                                        <div class="comment-text">
-    
-                                                            <div itemprop="reviewRating" class="star-rating" title="Rated 5 out of 5">
-                                                                <span style="width:100%"><strong itemprop="ratingValue">5</strong> out of 5</span>
-                                                            </div>
-    
-                                                            <p class="meta">
-                                                                <strong>Anna Kowalsky</strong> &ndash;
-                                                                <time itemprop="datePublished" datetime="2016-03-03T14:14:47+00:00">March 3, 2016</time>:
-                                                            </p>
-    
-    
-                                                            <div itemprop="description" class="description">
-                                                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse eget facilisis odio. Duis sodales augue eu tincidunt faucibus. Etiam justo ligula, placerat ac augue id, volutpat porta dui.
-                                                                </p>
-                                                            </div>
-    
-                                                            <p class="meta">
-                                                                <strong itemprop="author">Anna Kowalsky</strong> &ndash; <time itemprop="datePublished" datetime="2016-03-03T14:14:47+00:00">March 3, 2016</time>
-                                                            </p>
-    
-                                                        </div>
-                                                    </div>
-                                                </li><!-- #comment-## -->
+                                                </li><!-- #comment-## --> --}}
+
                                             </ol><!-- /.commentlist -->
     
                                         </div><!-- /#comments -->
@@ -811,6 +778,9 @@
 @endsection
 
 @section('addJs')
+    @if (session('success'))
+        @include('frontend.partials.toastr')
+    @endif
     <script>
         toastr.options = {
         "closeButton": true,
@@ -855,18 +825,23 @@
                     };
 
                     // Sử dụng Ajax để gửi yêu cầu POST đến máy chủ
-                    jQuery.ajax({
-                    type: "POST",
-                    url: "{{ route('home.addCommentRating') }}", // Thay thế bằng URL của API/route của bạn
-                    headers: {
-                        "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr('content'), // Thêm token CSRF vào tiêu đề
-                    },
-                    data: JSON.stringify(data),
-                    contentType: "application/json;charset=UTF-8",
-                    success: function(response) {
-                        // Xử lý phản hồi từ máy chủ (nếu cần)
-                        Command: toastr["success"](response.msg)
-                    },
+                        jQuery.ajax({
+                        type: "POST",
+                        url: "{{ route('home.addCommentRating') }}", // Thay thế bằng URL của API/route của bạn
+                        headers: {
+                            "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr('content'), // Thêm token CSRF vào tiêu đề
+                        },
+                        data: JSON.stringify(data),
+                        contentType: "application/json;charset=UTF-8",
+                        success: function(response) {
+                            // Xử lý phản hồi từ máy chủ (nếu cần)
+                            toastr["success"](response.msg);
+
+                            // Đợi 1 giây trước khi tải lại trang
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 700);
+                        },
                     });
                 });
             });

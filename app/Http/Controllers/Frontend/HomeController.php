@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Flavor;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Slider;
@@ -38,13 +39,21 @@ class HomeController extends Controller
 
     public function category($slug){
         $category = Category::with('products')->where('slug_category', $slug)->first();
+        $brandsWithProductsCount = Brand::whereNull('deleted_at')
+        ->withCount('products') // Tính số lượng sản phẩm cho mỗi thương hiệu
+        ->get();
+
         return view('frontend.category.category',[
-            'category' => $category
+            'category' => $category,
+            'brands' => $brandsWithProductsCount,
         ]);
     }
 
     public function productDetail($slug){
-        $productDetail = Product::with(['images', 'flavors'])->leftJoin('brands', 'brands.id', 'products.brand_id')
+        $productDetail = Product::with(['images', 'flavors', 'reviews' => function ($query) {
+            $query->with('user') // Chỉ lấy cột 'id' và 'name' từ bảng 'users'
+                  ->orderBy('created_at', 'desc'); // Sắp xếp theo created_at giảm dần
+        }])->leftJoin('brands', 'brands.id', 'products.brand_id')
             ->where('products.slug', $slug)
             ->select([
                 'products.id',

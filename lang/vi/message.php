@@ -30,6 +30,11 @@ return [
     'logout' => 'Đăng xuất',
     'comment' => [
         'success' => 'Đánh giá sản phẩm thành công'
+    ],
+    'brands' => 'Hãng sản xuất',
+    'priceFilter' => 'Giá tiền',
+    'favourite' => [
+        'success' => 'Sản phẩm đã được thêm vào danh sách ưa thích.'
     ]
 
 ];
