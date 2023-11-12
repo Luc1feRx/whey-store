@@ -6,7 +6,6 @@
         <nav class="woocommerce-breadcrumb"><a href="{{ route('home.index') }}">{{ trans('message.home') }}</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ $category->name_category }}</nav>
         <div id="primary" class="content-area">
             <main id="main" class="site-main">
-
                 <header class="page-header">
                     <h1 class="page-title">{{ $category->name_category }}</h1>
                 </header>
@@ -27,78 +26,15 @@
                         </select>
                     </form>
                     <form class="form-electro-wc-ppp"><select name="page" onchange="this.form.submit()" class="electro-wc-wppp-select c-select"><option value="15"  selected='selected'>Show 15</option><option value="-1" >Show All</option></select></form>
-                    <nav class="electro-advanced-pagination">
-                        <form method="post" class="form-adv-pagination"><input id="goto-page" size="2" min="1" max="2" step="1" type="number" class="form-control" value="1" /></form> of 2<a class="next page-numbers" href="#">&rarr;</a>			<script>
-                        jQuery(document).ready(function($){
-                            $( '.form-adv-pagination' ).on( 'submit', function() {
-                                var link 		= '#',
-                                goto_page 	= $( '#goto-page' ).val(),
-                                new_link 	= link.replace( '%#%', goto_page );
-
-                                window.location.href = new_link;
-                                return false;
-                            });
-                        });
-                        </script>
-                    </nav>
                 </div>
 
                 <div class="tab-content">
 
                     <div role="tabpanel" class="tab-pane active" id="grid" aria-expanded="true">
-
-                        <ul class="products columns-3">
-                            @foreach ($category->products as $key => $product)
-                                @php
-                                    $class = 'product'; // Default class for products in the middle
-                        
-                                    if ($key === 0) {
-                                        $class = 'product first'; // Add 'first' class to the first product
-                                    } elseif ($key === count($category->products) - 1) {
-                                        $class = 'product last'; // Add 'last' class to the last product
-                                    }else{
-                                        $class = 'product';
-                                    }
-                                @endphp
-
-                                <li class="{{ $class }}">
-                                    <div class="product-outer">
-                                        <div class="product-inner">
-                                            <span class="loop-product-categories"><a href="product-category.html" rel="tag">{{ $category->name_category }}</a></span>
-                                            <a href="single-product.html">
-                                                <h3>{{ $product->name }}</h3>
-                                                <div class="product-thumbnail">
-
-                                                    <img data-echo="{{ !empty($product->thumbnail) ? asset('storage/' .$product->thumbnail) : asset('backend\dist\img\placeholder.png') }}" 
-                                                    src="{{ !empty($product->thumbnail) ? asset('storage/' .$product->thumbnail) : asset('backend\dist\img\placeholder.png') }}" alt="">
-
-                                                </div>
-                                            </a>
-
-                                            <div class="price-add-to-cart">
-                                                <span class="price">
-                                                    <span class="electro-price">
-                                                        <ins><span class="amount">{{ \App\Helpers\Common::numberFormat($product->discount_price) }} đ</span></ins>
-                                                        <del><span class="amount"> {{ \App\Helpers\Common::numberFormat($product->price) }} đ</span></del>
-                                                    </span>
-                                                </span>
-                                                <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                            </div><!-- /.price-add-to-cart -->
-
-                                            <div class="hover-area">
-                                                <div class="action-buttons">
-                                                    <a href="#" rel="nofollow" class="add_to_wishlist">{{ trans('message.wishlist') }}</a>
-                                                    <a href="#" class="add-to-compare-link">Compare</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-inner -->
-                                    </div><!-- /.product-outer -->
-                                </li>
-                            @endforeach
-                        </ul>
+                
+                        @include('frontend.category.productList')
                     </div>
-
+                
                     <div role="tabpanel" class="tab-pane" id="list-view" aria-expanded="true">
                         <ul class="products columns-3">
                             <li class="product list-view">
@@ -126,29 +62,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -184,29 +120,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -242,29 +178,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -300,29 +236,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -358,29 +294,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -416,29 +352,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -474,29 +410,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -532,29 +468,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -590,29 +526,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -648,29 +584,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -706,29 +642,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -764,29 +700,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -822,29 +758,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -880,29 +816,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -938,29 +874,29 @@
                                                 </a>
                                             </div>
                                             <div class="col-xs-12">
-
+                
                                                 <div class="availability in-stock">Availablity: <span>In stock</span></div>
-
+                
                                                 <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
                                                 <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
                                                 <div class="hover-area">
                                                     <div class="action-buttons">
                                                         <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
                                                             <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-
+                
                                                             <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
                                                                 <span class="feedback">Product added!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
                                                                 <span class="feedback">The product is already in the wishlist!</span>
                                                                 <a rel="nofollow" href="#">Wishlist</a>
                                                             </div>
-
+                
                                                             <div style="clear:both"></div>
                                                             <div class="yith-wcwl-wishlistaddresponse"></div>
-
+                
                                                         </div>
                                                         <div class="clear"></div>
                                                         <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
@@ -974,19 +910,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="shop-control-bar-bottom">
-                    <form class="form-electro-wc-ppp">
-                        <select class="electro-wc-wppp-select c-select" onchange="this.form.submit()" name="ppp"><option selected="selected" value="15">Show 15</option><option value="-1">Show All</option></select>
-                    </form>
-                    <p class="woocommerce-result-count">Showing 1&ndash;15 of 20 results</p>
-                    <nav class="woocommerce-pagination">
-                        <ul class="page-numbers">
-                            <li><span class="page-numbers current">1</span></li>
-                            <li><a href="#" class="page-numbers">2</a></li>
-                            <li><a href="#" class="next page-numbers">→</a></li>
-                        </ul>
-                    </nav>
-                </div>
 
             </main><!-- #main -->
         </div><!-- #primary -->
@@ -995,4 +918,46 @@
 
     </div><!-- .container -->
 </div><!-- #content -->
+@endsection
+
+@section('addJs')
+    <script>
+        jQuery(document).ready(function() {
+            // Your jQuery code here
+            jQuery('.brand-filter').change(function(e){
+                var dataSlug = jQuery(this).data('getslug');
+                applyFilters(dataSlug, 1);
+            });
+
+
+        function applyFilters(dataSlug, page) {
+            // Get selected brand IDs
+            var selectedBrands = [];
+            jQuery('input[name="brand-filter"]:checked').each(function() {
+                selectedBrands.push(jQuery(this).val());
+            });
+
+            // Make AJAX request to update the content
+            jQuery.ajax({
+                    type: 'GET',
+                    url: '{{ route("home.category", ["slug" => '+ dataSlug +']) }}',
+                    headers: {
+                        "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr('content'), // Thêm token CSRF vào tiêu đề
+                    },
+                    data: { 
+                        brands: selectedBrands,
+                        slug: dataSlug,
+                        page: page
+                    },
+                    success: function(data) {
+                        // Update the content with the received data
+                        jQuery('#grid').html(data.html);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

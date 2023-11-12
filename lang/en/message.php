@@ -14,13 +14,14 @@ return [
     */
 
     'wishlist' => 'Wishlist',
+    'RemoveWishlist' => 'Remove from Wishlist',
     'featured' => 'Featured',
     'top_rated' => 'Top Rated',
     'home' => 'Home',
     'categories' => 'Categories',
     'blog' => 'From to blog',
     'login' => 'Login',
-    'inputEmail' => 'Enter your email address',
+    'inputEmail' => 'Enter your email address', 
     'inputPassword' => 'Enter your password',
     'lost-password' => 'Lost your password?',
     'login-in' => [
@@ -34,6 +35,9 @@ return [
     'flavors' => 'Flavors',
     'priceFilter' => 'Prices',
     'favourite' => [
-        'success' => 'Add favourite product successfully'
+        'success' => 'Add favourite product successfully',
+        'remove' => [
+            'success' => 'Remove favourite product successfully'
+        ]
     ]
 ];

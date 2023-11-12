@@ -14,6 +14,7 @@ return [
     */
 
     'wishlist' => 'Yêu thích',
+    'RemoveWishlist' => 'Xóa yêu thích',
     'featured' => 'Sản phẩm bán chạy',
     'top_rated' => 'Đánh giá tốt nhất',
     'home' => 'Trang chủ',
@@ -34,7 +35,10 @@ return [
     'brands' => 'Hãng sản xuất',
     'priceFilter' => 'Giá tiền',
     'favourite' => [
-        'success' => 'Sản phẩm đã được thêm vào danh sách ưa thích.'
+        'success' => 'Sản phẩm đã được thêm vào danh sách ưa thích.',
+        'remove' => [
+            'success' => 'Sản phẩm đã được xóa khỏi danh sách ưa thích.'
+        ]
     ]
 
 ];

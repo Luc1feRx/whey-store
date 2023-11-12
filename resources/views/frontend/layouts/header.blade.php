@@ -7,7 +7,7 @@
                 @if (!Auth::check())
                     <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.login-view') }}"><i class="ec ec-user"></i>{{ trans('message.login') }}</a></li>
                 @else
-                <li class="menu-item animate-dropdown"><a title="My Account" href=""><i class="ec ec-user"></i>{{ Auth::user()->name }}</a></li>
+                <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.profile') }}"><i class="ec ec-user"></i>{{ Auth::user()->name }}</a></li>
                     <li class="menu-item animate-dropdown" onclick="event.preventDefault();
                     document.getElementById('logout-user').submit();"><a title="Logout" style="cursor: pointer !important"><i class="ec ec-user"></i>{{ trans('message.logout') }}</a></li>
                     <form id="logout-user" action="{{ route('home.logout') }}" method="POST" style="display: none;">
@@ -342,7 +342,7 @@
 
         <ul class="navbar-wishlist nav navbar-nav pull-right flip">
             <li class="nav-item">
-                <a href="wishlist.html" class="nav-link"><i class="ec ec-favorites"></i></a>
+                <a href="{{ route('home.favouriteList') }}" class="nav-link"><i class="ec ec-favorites"></i></a>
             </li>
         </ul>
         <ul class="navbar-compare nav navbar-nav pull-right flip">
