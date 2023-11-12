@@ -7,7 +7,7 @@
                 <ul>
                     @foreach ($brands as $brand)
                         <li style="">
-                            <input name="brand[]" type="checkbox" value="{{ $brand->id }}">
+                            <input name="brand-filter" data-filters="brand" data-getslug="{{ $slug }}" type="checkbox" class="brand-filter" value="{{ $brand->id }}">
                             <label class="item">{{ $brand->name }}</label>
                             <span class="count">({{ $brand->products_count }})</span>
                         </li>

@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\FavoriteProduct;
 use App\Models\Flavor;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -37,15 +40,29 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function category($slug){
-        $category = Category::with('products')->where('slug_category', $slug)->first();
+    public function category($slug, Request $request){
+        $category = Category::where('slug_category', $slug)->first();
+        $products = $category->products()->paginate(2); // Đổi 15 thành số lượng sản phẩm bạn muốn hiển thị trên mỗi trang
         $brandsWithProductsCount = Brand::whereNull('deleted_at')
         ->withCount('products') // Tính số lượng sản phẩm cho mỗi thương hiệu
         ->get();
 
+        if($request->brands){
+            $selectedBrands = $request->input('brands');
+            $category = Category::where('slug_category', $request->slug)->first();
+            $products = $category->products()->paginate(2);
+            if(count($selectedBrands) > 0){
+                $filteredProducts = Product::whereIn('brand_id', $selectedBrands)->paginate(2);
+                $filteredProductsView = view('frontend.category.productList')->with(['products' => $filteredProducts, 'category' => $category])->render();
+                return response()->json(['html' => $filteredProductsView]);
+            }
+        }
+        
         return view('frontend.category.category',[
             'category' => $category,
             'brands' => $brandsWithProductsCount,
+            'slug' => $slug,
+            'products' => $products
         ]);
     }
 
@@ -76,9 +93,29 @@ class HomeController extends Controller
             ])
             ->first();
 
+            $isFavorite = FavoriteProduct::where('user_id', Auth::user()->id)
+            ->where('product_id', $productDetail->id)
+            ->exists();
+
         return view('frontend.product-detail.product-detail', [
-            'productDetail' => $productDetail
+            'productDetail' => $productDetail,
+            'isFavorite' => $isFavorite
         ]);
     }
+
+    // public function ajaxFilterBrand(Request $request) {
+    //     // Retrieve selected brand IDs from the request
+    //     $selectedBrands = $request->input('brands');
+
+    //     $filteredProducts = Product::whereIn('brand_id', $selectedBrands)->paginate(2);
+
+    //     $category = Category::with('products')->where('slug_category', $request->input('slug'))->first();
+    
+    //     // Perform filtering logic based on selected brands
+    //     // Fetch and return the filtered data
+    //     $filteredProductsView = View::make('frontend.category.test')->with(['filteredProducts' => $filteredProducts, 'category' => $category])->render();
+    
+    //     return response()->json(['html' => $filteredProductsView]);
+    // }
     
 }

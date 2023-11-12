@@ -63,9 +63,15 @@
     
                                 <div class="action-buttons">
     
-                                    <a href="{{ route('home.addToFavorites', ['productId'=>$productDetail->id]) }}" class="add_to_wishlist" >
-                                        {{ trans('message.wishlist') }}
-                                    </a>
+                                    @if (!$isFavorite)
+                                        <a href="{{ route('home.addToFavorites', ['productId'=>$productDetail->id]) }}" class="add_to_wishlist" >
+                                            {{ trans('message.wishlist') }}
+                                        </a>
+                                    @else
+                                        <a href="{{ route('home.removeFromFavorites', ['productId'=>$productDetail->id]) }}" style="color: red" class="add_to_wishlist" >
+                                            {{ trans('message.RemoveWishlist') }}
+                                        </a>
+                                    @endif
     
     
                                     <a href="#" class="add-to-compare-link" data-product_id="2452">Compare</a>

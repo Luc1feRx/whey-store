@@ -74,11 +74,11 @@ class SliderController extends Controller
             $slider->thumbnail = $thumbnail_upload;
             $slider->save();
             DB::commit();
-            return redirect()->route('admin.brands.index')->with(['success' => 'Sửa thương hiệu thành công']);
+            return redirect()->route('admin.sliders.index')->with(['success' => 'Sửa slider thành công']);
         } catch (Exception $e) {
-            Log::error('[brandController][store] error ' . $e->getMessage());
+            Log::error('[SliderController][store] error ' . $e->getMessage());
             DB::rollBack();
-            return redirect()->back()->with(['error' => 'Sửa thương hiệu thất bại']);
+            return redirect()->back()->with(['error' => 'Sửa slider thất bại']);
         }
     }
 }

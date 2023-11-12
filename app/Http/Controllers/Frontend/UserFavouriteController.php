@@ -18,10 +18,30 @@ class UserFavouriteController extends Controller
             'product_id' => $productId,
         ]);
     
-        return redirect()->back()->with('success', __('message.favourite.success'));
+        return redirect()->route('home.favouriteList')->with('success', __('message.favourite.success'));
     }
 
     public function index() {
-        return view('frontend.favourite.user-favourite');
+        $productFavourite = FavoriteProduct::join('products', 'user_favourite.product_id', 'products.id')
+            ->select([
+                'products.id',
+                'user_favourite.user_id',
+                'products.name',
+                'products.discount_price',
+                'products.thumbnail',
+                'products.slug'
+            ])->get();
+        return view('frontend.favourite.user-favourite', [
+            'productFavourite' => $productFavourite
+        ]);
+    }
+    public function removeFromFavorites($productId)
+    {
+        $userId = auth()->user()->id;
+
+            // Xóa khỏi danh sách ưa thích
+            FavoriteProduct::where('user_id', $userId)->where('product_id', $productId)->delete();
+
+            return redirect()->back()->with('success', __('message.favourite.remove.success'));
     }
 }

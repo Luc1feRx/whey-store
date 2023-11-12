@@ -128,6 +128,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::get('/edit/{id}',[AccountController::class, 'edit'])->name('edit');
             Route::post('/update/{id}',[AccountController::class, 'update'])->name('update');
         });
+
+        //import product
+        Route::group(['prefix' => 'import-product', 'as' => 'import-product.'], function () {
+            Route::get('/', [AccountController::class, 'index'])->name('index');
+            Route::get('/create', [AccountController::class, 'create'])->name('create');
+            Route::post('/store', [AccountController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [AccountController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [AccountController::class, 'update'])->name('update');
+        });
     });
 
 });
