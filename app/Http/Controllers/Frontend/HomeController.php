@@ -42,23 +42,27 @@ class HomeController extends Controller
 
     public function category($slug, Request $request){
         $category = Category::where('slug_category', $slug)->first();
-        $products = $category->products()->paginate(2); // Đổi 15 thành số lượng sản phẩm bạn muốn hiển thị trên mỗi trang
+    
         $brandsWithProductsCount = Brand::whereNull('deleted_at')
-        ->withCount('products') // Tính số lượng sản phẩm cho mỗi thương hiệu
-        ->get();
-
-        if($request->brands){
-            $selectedBrands = $request->input('brands');
-            $category = Category::where('slug_category', $request->slug)->first();
-            $products = $category->products()->paginate(2);
-            if(count($selectedBrands) > 0){
-                $filteredProducts = Product::whereIn('brand_id', $selectedBrands)->paginate(2);
-                $filteredProductsView = view('frontend.category.productList')->with(['products' => $filteredProducts, 'category' => $category])->render();
-                return response()->json(['html' => $filteredProductsView]);
+        ->withCount([
+            'products' => function ($query) use ($category) {
+                $query->whereHas('categories', function ($q) use ($category) {
+                    $q->where('categories.id', $category->id);
+                });
             }
+        ])
+        ->get();
+    
+        $productsQuery = $category->products();
+    
+        if ($request->has('brand')) {
+            $brand_ids = explode(',', $request->brand);
+            $productsQuery->whereIn('brand_id', $brand_ids);
         }
-        
-        return view('frontend.category.category',[
+    
+        $products = $productsQuery->paginate(10);
+    
+        return view('frontend.category.category', [
             'category' => $category,
             'brands' => $brandsWithProductsCount,
             'slug' => $slug,

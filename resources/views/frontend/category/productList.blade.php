@@ -12,7 +12,7 @@
             }
         @endphp
 
-        <li class="{{ $class }}">
+        <li class="product">
             <div class="product-outer">
                 <div class="product-inner">
                     <span class="loop-product-categories"><a href="product-category.html" rel="tag">{{ $category->name_category }}</a></span>

@@ -16,16 +16,13 @@
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" title="Grid View" href="#grid"><i class="fa fa-th"></i></a></li>
                     </ul>
                     <form class="woocommerce-ordering" method="get">
-                        <select name="orderby" class="orderby">
-                            <option value="menu_order"  selected='selected'>Default sorting</option>
-                            <option value="popularity" >Sort by popularity</option>
-                            <option value="rating" >Sort by average rating</option>
-                            <option value="date" >Sort by newness</option>
-                            <option value="price" >Sort by price: low to high</option>
-                            <option value="price-desc" >Sort by price: high to low</option>
+                        <select name="orderby" class="select-order orderby">
+                            <option value="?sort=asc"  selected='selected'>{{ trans('message.categories.sortA-Z') }}</option>
+                            <option value="?sort=desc" >{{ trans('message.categories.sortZ-A') }}</option>
+                            <option value="?price=asc" >{{ trans('message.categories.sortPriceRaise') }}</option>
+                            <option value="?price=desc" >{{ trans('message.categories.sortPriceLow') }}</option>
                         </select>
                     </form>
-                    <form class="form-electro-wc-ppp"><select name="page" onchange="this.form.submit()" class="electro-wc-wppp-select c-select"><option value="15"  selected='selected'>Show 15</option><option value="-1" >Show All</option></select></form>
                 </div>
 
                 <div class="tab-content">
@@ -924,40 +921,46 @@
     <script>
         jQuery(document).ready(function() {
             // Your jQuery code here
-            jQuery('.brand-filter').change(function(e){
-                var dataSlug = jQuery(this).data('getslug');
-                applyFilters(dataSlug, 1);
-            });
+            jQuery(document).on('click', '.brand-filter', function(e) {
+                var brand = [],
+                    tempArray = [];
 
+                jQuery.each(jQuery("[data-filters='brand']:checked"), function() {
+                    tempArray.push(jQuery(this).val());
+                });
 
-        function applyFilters(dataSlug, page) {
-            // Get selected brand IDs
-            var selectedBrands = [];
-            jQuery('input[name="brand-filter"]:checked').each(function() {
-                selectedBrands.push(jQuery(this).val());
-            });
+                
+                // Kiểm tra xem có checkbox nào được chọn không
+                if (tempArray.length === 0) {
+                    // Nếu không có checkbox nào được chọn, lấy tất cả sản phẩm
+                    var url = window.location.href;
+                    var newUrl = url.split('?')[0]; // Lấy phần URL trước dấu '?' (nếu có)
+                    window.history.replaceState({}, document.title, newUrl);
+                    window.location.href = newUrl;
+                }
 
-            // Make AJAX request to update the content
-            jQuery.ajax({
-                    type: 'GET',
-                    url: '{{ route("home.category", ["slug" => '+ dataSlug +']) }}',
-                    headers: {
-                        "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr('content'), // Thêm token CSRF vào tiêu đề
-                    },
-                    data: { 
-                        brands: selectedBrands,
-                        slug: dataSlug,
-                        page: page
-                    },
-                    success: function(data) {
-                        // Update the content with the received data
-                        jQuery('#grid').html(data.html);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
+                jQuery.each(jQuery("[data-filters='brand']:not(:checked)"), function() {
+                    var index = tempArray.indexOf(jQuery(this).val());
+                    if (index !== -1) {
+                        tempArray.splice(index, 1);
                     }
                 });
-            }
+
+                tempArray.reverse();
+                if (tempArray.length !== 0) {
+                    brand += '?brand=' + tempArray.toString();
+                }
+                window.location.href = brand;
+            });
+
+            // jQuery('.select-order').change(function(){
+            //     var value = jQuery(this).find(':selected').val();
+
+            //     if(value!=0){
+            //         var url = value;
+            //         window.location.replace(url);
+            //     }
+            // });
         });
     </script>
 @endsection
