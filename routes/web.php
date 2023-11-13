@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LoginController;
 use App\Http\Controllers\Frontend\ProfileController;
@@ -31,6 +32,13 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/product/category/{slug}', [HomeController::class, 'category'])->name('home.category');
 
     Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('home.product-detail');
+
+    //cart
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('home.addToCart');
+    Route::get('/cart', [CartController::class, 'listCart'])->name('home.cart');
+    Route::post('/cart-update/{id}', [CartController::class, 'updateCart'])->name('home.cart.update');
+    Route::post('/apply-discount', [CartController::class, 'cartDiscount'])->name('home.applyDiscount');
+    Route::delete('/cart-delete/{id}', [CartController::class, 'deleteCart'])->name('home.cart.delete');
 
     Route::middleware(['user'])->group(function () {
         Route::post('/add-comment', [RatingController::class, 'addCommentRating'])->name('home.addCommentRating');

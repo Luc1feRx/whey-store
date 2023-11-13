@@ -80,7 +80,7 @@ class HomeController extends Controller
                 'products.view_counts',
                 'products.is_featured_product',
                 'products.slug',
-                'products.weight',
+                'products.weight as product_weight',
                 'products.serving_size',
                 'products.score',
                 'products.origin',
@@ -90,16 +90,19 @@ class HomeController extends Controller
                 'products.status',
                 'products.discount_price',
                 'brands.thumbnail as brand_thumbnail',
+                'products.thumbnail as product_thumbnail'
             ])
             ->first();
 
-            $isFavorite = FavoriteProduct::where('user_id', Auth::user()->id)
-            ->where('product_id', $productDetail->id)
-            ->exists();
+            if(Auth::check()){
+                $isFavorite = FavoriteProduct::where('user_id', Auth::user()->id)
+                ->where('product_id', $productDetail->id)
+                ->exists();
+            }
 
         return view('frontend.product-detail.product-detail', [
             'productDetail' => $productDetail,
-            'isFavorite' => $isFavorite
+            'isFavorite' => isset($isFavorite) ? $isFavorite : null
         ]);
     }
 

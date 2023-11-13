@@ -3913,10 +3913,6 @@ table.cart input[name="update_cart"]:disabled:hover {
   border-top-width: 0;
 }
 
-.cart-collaterals .cart_totals .wc-proceed-to-checkout {
-  display: none;
-}
-
 /*===================================================================================*/
 /*  JPlayer Skin
 /*===================================================================================*/

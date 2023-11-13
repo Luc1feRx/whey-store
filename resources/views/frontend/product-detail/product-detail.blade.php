@@ -98,8 +98,7 @@
                                             <tr>
                                                 <td class="label"><label>{{ trans('message.flavor') }}</label></td>
                                                 <td class="value">
-                                                    <select class="" name="attribute_pa_color">
-                                                        <option value="">{{ trans('message.chooseOption') }}</option>
+                                                    <select class="flavor-select" name="product_flavor">
                                                         @foreach ($productDetail->flavors as $flavor)
                                                             <option value="{{ $flavor->id }}">{{ $flavor->name }}</option>
                                                         @endforeach
@@ -116,12 +115,14 @@
                                         <div class="woocommerce-variation-add-to-cart variations_button">
                                             <div class="quantity">
                                                 <label>{{ trans('message.quantity') }}</label>
-                                                <input type="number" name="quantity" value="1" title="Qty" class="input-text qty text"/>
+                                                <input type="number" name="quantity" value="1" title="Qty" class="input-text qty text cart_product_quantity_{{ $productDetail->id }}"/>
                                             </div>
+                                            <input type="hidden" class="cart_product_id_{{ $productDetail->id }}" name="product_id" value="{{ $productDetail->id }}" />
+                                            <input type="hidden" class="cart_product_name_{{ $productDetail->id }}" name="product_name" value="{{ $productDetail->product_name }}" />
+                                            <input type="hidden" class="cart_product_name_{{ $productDetail->id }}" name="product_thumbnail" value="{{ $productDetail->product_thumbnail }}" />
+                                            <input type="hidden" class="cart_product_name_{{ $productDetail->id }}" name="product_price" value="{{ !empty($productDetail->discount_price) ? $productDetail->discount_price : $productDetail->price }}" />
+                                            <input type="hidden" class="cart_product_name_{{ $productDetail->id }}" name="product_weight" value="{{ $productDetail->product_weight }}" />
                                             <button type="submit" class="single_add_to_cart_button button">{{ trans('message.addToCart') }}</button>
-                                            <input type="hidden" name="add-to-cart" value="2452" />
-                                            <input type="hidden" name="product_id" value="2452" />
-                                            <input type="hidden" name="variation_id" class="variation_id" value="0" />
                                         </div>
                                     </div>
                                 </form>
@@ -848,6 +849,46 @@
                                 window.location.reload();
                             }, 700);
                         },
+                    });
+                });
+                // add to cart
+                jQuery(".variations_form").submit(function(e) {
+                    // Lấy dữ liệu từ form
+                    e.preventDefault();
+                    var product_id = jQuery('input[name=product_id]').val();
+                    var product_name = jQuery('input[name=product_name]').val();
+                    var product_thumbnail = jQuery('input[name=product_thumbnail]').val();
+                    var product_price = jQuery('input[name=product_price]').val();
+                    var product_quantity = jQuery('input[name=quantity]').val();
+                    var product_flavor = jQuery('.flavor-select').find(":selected").text();
+                    var product_flavor_id = jQuery('.flavor-select').find(":selected").val();
+                    // Gửi dữ liệu lên server
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "{{ route('home.addToCart') }}", // Đặt đúng đường dẫn của endpoint xử lý form trên server
+                        headers: {
+                            "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr('content'), // Thêm token CSRF vào tiêu đề
+                        },
+                        data: {
+                            product_id: product_id,
+                            product_name: product_name,
+                            product_thumbnail: product_thumbnail,
+                            product_price: product_price,
+                            product_quantity: product_quantity,
+                            product_flavor: product_flavor,
+                            product_flavor_id: product_flavor_id
+                        },
+                        success: function(response) {
+                            // Xử lý kết quả thành công
+                            if(response.code){
+                                toastr["success"](response.msg);
+                                jQuery('.cart-items-count').html(response.html);
+                            }
+                        },
+                        error: function(error) {
+                            // Xử lý lỗi
+                            console.log(error);
+                        }
                     });
                 });
             });

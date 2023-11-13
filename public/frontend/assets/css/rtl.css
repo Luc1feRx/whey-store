@@ -2693,8 +2693,6 @@ table.cart {
         text-align: left; }
       .cart-collaterals .cart_totals table.shop_table tbody tr:first-child td, .cart-collaterals .cart_totals table.shop_table tbody tr:first-child th {
         border-top-width: 0; }
-    .cart-collaterals .cart_totals .wc-proceed-to-checkout {
-      display: none; }
 
 /*===================================================================================*/
 /*  JPlayer Skin

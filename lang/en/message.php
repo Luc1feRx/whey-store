@@ -38,6 +38,26 @@ return [
         'success' => 'Add favourite product successfully',
         'remove' => [
             'success' => 'Remove favourite product successfully'
-        ]
+        ],
+    ],
+    'cart' => [
+        'success' => 'Add product successfully',
+        'remove' => [
+            'success' => 'Remove product successfully'
+        ],
+        'title' => 'Cart',
+        'flavor' => 'Flavor',
+        'Price' => 'Price',
+        'Quantity' => 'Quantity',
+        'Total' => 'Total',
+        'Product' => 'Product',
+        'cartTotal' => 'Cart total',
+        'subTotal' => 'Sub total',
+        'proceedToCheckout' => 'Checkout'
+    ],
+    'discount' => [
+        'sku' => 'Discount code',
+        'applyDiscount' => 'Apply discount code',
+        'placeholderApplyDiscount' => 'Enter discount code'
     ]
 ];
