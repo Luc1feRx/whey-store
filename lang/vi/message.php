@@ -59,6 +59,17 @@ return [
         'sku' => 'Mã giảm giá',
         'applyDiscount' => 'Áp mã giảm giá',
         'placeholderApplyDiscount' => 'Nhập mã giảm giá'
+    ],
+    'checkout' => [
+        'title' => 'Đặt hàng',
+        'detail' => 'Chi tiết đơn đặt hàng',
+        'first_name' => 'Tên',
+        'last_name' => 'Họ',
+        'address' => 'Địa chỉ',
+        'phone' => 'Số điện thoại', 
+        'product' => 'Sản phẩm',
+        'total' => 'Tổng tiền',
+        'place_order' => 'Đặt hàng'
     ]
 
 ];

@@ -59,5 +59,11 @@ return [
         'sku' => 'Discount code',
         'applyDiscount' => 'Apply discount code',
         'placeholderApplyDiscount' => 'Enter discount code'
+    ],
+    'checkout' => [
+        'title' => 'Checkout',
+        'detail' => 'Billing detail',
+        'first_name' => 'First Name',
+        'last_name' => 'Last Name',
     ]
 ];

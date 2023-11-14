@@ -50,7 +50,9 @@
         @include('frontend.partials.toastr')
 
         @yield('addJs')
-
+        @if (session('error'))
+            @include('frontend.partials.toastr')
+        @endif
         <script>
             // Add a click event listener to all elements with the custom-dropdown-link class
             var dropdownLinks = document.querySelectorAll('.custom-dropdown-link');

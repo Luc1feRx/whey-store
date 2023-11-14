@@ -110,10 +110,12 @@
                                 </tbody>
                             </table>
 
-                            <div class="wc-proceed-to-checkout">
-                                {{-- Proceed to Checkout --}}
-                                <a class="checkout-button button alt wc-forward" href="checkout.html" style="margin-bottom: 25px;">{{ trans('message.cart.proceedToCheckout') }}</a>
-                            </div>
+                            @if (\Cart::count() > 0)
+                                <div class="wc-proceed-to-checkout">
+                                    {{-- Proceed to Checkout --}}
+                                    <a class="checkout-button button alt wc-forward" href="{{ route('home.checkout') }}" style="margin-bottom: 25px;">{{ trans('message.cart.proceedToCheckout') }}</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </article>

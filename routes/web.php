@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LoginController;
 use App\Http\Controllers\Frontend\ProfileController;
@@ -39,6 +40,14 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/cart-update/{id}', [CartController::class, 'updateCart'])->name('home.cart.update');
     Route::post('/apply-discount', [CartController::class, 'cartDiscount'])->name('home.applyDiscount');
     Route::delete('/cart-delete/{id}', [CartController::class, 'deleteCart'])->name('home.cart.delete');
+
+    //checkout
+    Route::group(['prefix' => 'checkout'], function () {
+        Route::get('/', [CheckoutController::class, 'checkout'])->name('home.checkout');
+        Route::post('/payment', [CheckoutController::class, 'payment'])->name('home.payment');
+        Route::post('/payment-vnpay', [CheckoutController::class, 'createPaymentVnpay'])->name('home.payment.vnpay');
+        Route::get('/payment-vnpay/return', [CheckoutController::class, 'returnPaymentVnpay'])->name('home.vnpay.return');
+    });
 
     Route::middleware(['user'])->group(function () {
         Route::post('/add-comment', [RatingController::class, 'addCommentRating'])->name('home.addCommentRating');
