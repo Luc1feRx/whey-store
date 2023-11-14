@@ -63,7 +63,7 @@
         &nbsp;
     </p>
     <footer class="footer">
-        <p>&copy; Quản lý Tiếng Anh 2020</p>
+        <p>&copy; VNPAY 2023</p>
     </footer>
 
     @if (session('success'))
