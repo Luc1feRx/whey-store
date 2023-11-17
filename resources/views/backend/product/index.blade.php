@@ -77,7 +77,7 @@
                                             <img style="width: 200px;" src="{{ asset('storage/'.$product->thumbnail) }}"
                                             alt="" srcset="">
                                         </td>
-                                        <td>{{ \App\Helpers\Common::numberFormat($product->price) }}</td>
+                                        <td>{{ \App\Helpers\Common::numberFormat($product->price) }} VNĐ</td>
                                         <td>{{ $product->status == App\Models\Product::DISPLAY ? 'Hiển thị' : 'Ẩn' }}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ['id'=>$product->id]) }}"

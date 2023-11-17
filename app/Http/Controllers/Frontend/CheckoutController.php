@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Voucher;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,14 +17,17 @@ use Illuminate\Support\Str;
 class CheckoutController extends Controller
 {
     public function checkout(){
-        return view('frontend.checkout.checkout');
+        $discount_code = Session::get('discount_name');
+        return view('frontend.checkout.checkout',[
+            'discount_code' => $discount_code
+        ]);
     }
 
     public function payment(Request $request){
         $data = $request->except("_token");
         $data['user_id'] = isset(Auth::user()->id) ? Auth::user()->id : null;
         $data['user_name'] = $request->last_name . ' ' . $request->first_name;
-        $data['order_total'] = str_replace(',', '', \Cart::subtotal(0));
+        $data['order_total'] = str_replace(',', '', Cart::subtotal(0));
         if($request->payment_method == 1){
             Session::put('user_infor', $data);
             $totalMoney = str_replace(',', '', Cart::subtotal(0));
@@ -100,6 +104,11 @@ class CheckoutController extends Controller
                 $order->transaction_code = $vnpayData['vnp_TxnRef'];
                 $order->code_bank = $vnpayData['vnp_BankCode'];
                 $order->order_total = (int)$data['order_total'];
+                $order->email = $data['email'];
+                if(!empty($data['discount_code'])){
+                    $voucher = Voucher::where('voucher_sku', $data['discount_code'])->first();
+                    $order->discount_id = $voucher->id;
+                }
                 $order->save();
 
                 if ($order) {

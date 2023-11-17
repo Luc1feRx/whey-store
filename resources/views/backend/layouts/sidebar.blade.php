@@ -48,6 +48,7 @@
             @include('backend.product.aside')
             @include('backend.category.aside')
             @include('backend.brand.aside')
+            @include('backend.order.aside')
             @include('backend.slider.aside')
             @include('backend.post.aside')
             @include('backend.voucher.aside')

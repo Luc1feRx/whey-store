@@ -67,6 +67,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <input type="hidden" name="discount_code" value="{{ !empty($discount_code) ? $discount_code : '' }}">
                                     @foreach (\Cart::content() as $cart)
                                         <tr class="cart_item">
                                             <td class="product-thumbnail">

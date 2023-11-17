@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\ProductController;
@@ -98,6 +99,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         //comment
         Route::group(['prefix' => 'comments', 'as' => 'comments.'], function () {
             Route::get('/',[CommentController::class, 'index'])->name('index');
+        });
+
+        //order
+        Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
+            Route::get('/',[OrderController::class, 'index'])->name('index');
+            Route::get('/ajax-change-status',[OrderController::class, 'ajaxChangeStatus'])->name('ajaxChangeStatus');
+        });
+        Route::group(['prefix' => 'order-detail', 'as' => 'orderdetails.'], function () {
+            Route::get('/{id}',[OrderController::class, 'getOrderDetail'])->name('index');
         });
     });
 
