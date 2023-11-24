@@ -44,6 +44,7 @@
               @include('backend.role.aside')
               @include('backend.permission.aside')
               @include('backend.account.aside')
+              @include('backend.import-export-good.aside')
             @endif
             @include('backend.product.aside')
             @include('backend.category.aside')

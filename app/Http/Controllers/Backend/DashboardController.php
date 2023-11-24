@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Review;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +20,17 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('backend.dashboard.dashboard');
+        $totalTransactions = Order::select('id')->count();
+        $users = User::select('id')->count();
+        $totalProducts = Product::select('id')->count();
+        $totalRatings = Review::select('id')->count();
+
+        return view('backend.dashboard.dashboard', [
+            'totalTransactions' => $totalTransactions,
+            'users' => $users,
+            'totalProducts' => $totalProducts,
+            'totalRatings' => $totalRatings
+        ]);
     }
 
     public function profile()

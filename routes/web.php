@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LoginController;
+use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\RatingController;
 use App\Http\Controllers\Frontend\UserFavouriteController;
@@ -27,12 +28,17 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('logout', [LoginController::class, 'Logout'])->name('home.logout');
 
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    
+    Route::get('/product/search', [HomeController::class, 'searchProduct'])->name('home.search');
 
     Route::get('change/lang/{lang}', [HomeController::class, 'ChangeLang'])->name('home.lang');
 
     Route::get('/product/category/{slug}', [HomeController::class, 'category'])->name('home.category');
 
     Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('home.product-detail');
+
+    Route::get('track-order', [HomeController::class, 'trackOrder'])->name('home.trackOrder');
+    Route::post('track-order', [HomeController::class, 'trackOrderPost'])->name('home.trackOrder.post');
 
     //cart
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('home.addToCart');
@@ -47,6 +53,14 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::post('/payment', [CheckoutController::class, 'payment'])->name('home.payment');
         Route::post('/payment-vnpay', [CheckoutController::class, 'createPaymentVnpay'])->name('home.payment.vnpay');
         Route::get('/payment-vnpay/return', [CheckoutController::class, 'returnPaymentVnpay'])->name('home.vnpay.return');
+    });
+
+    Route::group(['prefix' => 'post'], function () {
+        Route::get('/', [PostController::class, 'index'])->name('home.post.index');
+        Route::get('/post/{slug}', [PostController::class, 'getDetailPost'])->name('home.post.detail');
+        // Route::post('/payment', [CheckoutController::class, 'payment'])->name('home.payment');
+        // Route::post('/payment-vnpay', [CheckoutController::class, 'createPaymentVnpay'])->name('home.payment.vnpay');
+        // Route::get('/payment-vnpay/return', [CheckoutController::class, 'returnPaymentVnpay'])->name('home.vnpay.return');
     });
 
     Route::middleware(['user'])->group(function () {

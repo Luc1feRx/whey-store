@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class OrderController extends Controller
 {
@@ -83,5 +84,12 @@ class OrderController extends Controller
             'order_details' => $order_details,
             'getOrder' => $getOrder
         ]);
-    } 
+    }
+    
+    public function printOrder($id){
+        // $pdf = \PDF::loadView('backend.order.print', compact('id'));
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML('<h1>31weq</h1>');
+        return $pdf->stream();
+    }
 }
