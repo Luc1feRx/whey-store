@@ -23,4 +23,9 @@ class Flavor extends Model
     {
         return $this->belongsToMany(Product::class, 'product_flavors');
     }
+
+    public function goodIssues()
+    {
+        return $this->hasMany(GoodIssue::class, );
+    }
 }

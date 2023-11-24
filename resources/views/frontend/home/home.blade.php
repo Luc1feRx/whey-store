@@ -107,213 +107,58 @@
 
 
                                         <div class="products owl-carousel home-v2-carousel-tabs products-carousel columns-3">
+                                            @foreach ($getProductReview as $review_product)
+                                                @php
+                                                    $class = 'product'; // Default class for products in the middle
+                                        
+                                                    if ($key === 0) {
+                                                        $class = 'product first'; // Add 'first' class to the first product
+                                                    } elseif ($key === count($getProductReview) - 1) {
+                                                        $class = 'product last'; // Add 'last' class to the last product
+                                                    }else{
+                                                        $class = 'product';
+                                                    }
+                                                @endphp
 
+                                                <div class="{{ $class }}">
+                                                    <div class="product-outer">
+                                                        <div class="product-inner">
+                                                            <a href="{{ route('home.product-detail', ['slug'=>$review_product->slug]) }}">
+                                                                <h3>{{ $review_product->name }}</h3>
+                                                                <div class="product-thumbnail">
+                                                                    <img src="{{ !empty($review_product->thumbnail) ? asset('storage/' .$review_product->thumbnail) : asset('backend\dist\img\placeholder.png') }}" 
+                                                                    data-echo="{{ !empty($review_product->thumbnail) ? asset('storage/' .$review_product->thumbnail) : asset('backend\dist\img\placeholder.png') }}" class="img-responsive" alt="">
+                                                                </div>
+                                                            </a>
 
-                                            <div class="product first">
-                                                <div class="product-outer">
-                                                    <div class="product-inner">
-                                                        <span class="loop-product-categories"><a href="product-category.html" rel="tag">Audio Speakers</a></span>
-                                                        <a href="single-product.html">
-                                                            <h3>Wireless Audio System Multiroom 360</h3>
-                                                            <div class="product-thumbnail">
-                                                                <img src="assets/images/blank.gif" data-echo="assets/images/products/3.jpg" class="img-responsive" alt="">
-                                                            </div>
-                                                        </a>
-
-                                                        <div class="price-add-to-cart">
-                                                            <span class="price">
-                                                                <span class="electro-price">
-                                                                    <ins><span class="amount"> $1,999.00</span></ins>
-                                                                    <del><span class="amount">$2,299.00</span></del>
-                                                                    <span class="amount"> </span>
+                                                            <div class="price-add-to-cart">
+                                                                <span class="price">
+                                                                    <span class="electro-price">
+                                                                        @if (!empty($review_product->discount_price))
+                                                                            <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($review_product->discount_price) }} đ</span></ins>
+                                                                            <del><span class="amount"> {{ \App\Helpers\Common::numberFormat($review_product->price) }} đ</span></del>
+                                                                            <span class="amount"> </span>
+                                                                        @else
+                                                                            <ins><span class="amount"> </span></ins>
+                                                                            <span class="amount"> {{ \App\Helpers\Common::numberFormat($review_product->price) }} đ</span>
+                                                                        @endif
+                                                                    </span>
                                                                 </span>
-                                                            </span>
-                                                            <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                        </div><!-- /.price-add-to-cart -->
+                                                                <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">{{ trans('message.addToCart') }}</a>
+                                                            </div><!-- /.price-add-to-cart -->
 
-                                                        <div class="hover-area">
-                                                            <div class="action-buttons">
+                                                            <div class="hover-area">
+                                                                <div class="action-buttons">
 
-                                                                <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
+                                                                    <a href="#" rel="nofollow" class="add_to_wishlist"> {{ trans('message.wishlist') }}</a>
 
-                                                                <a href="compare.html" class="add-to-compare-link"> Compare</a>
+                                                                    <a href="compare.html" class="add-to-compare-link"> Compare</a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div><!-- /.product-inner -->
-                                                </div><!-- /.product-outer -->
-                                            </div><!-- /.product -->
-
-
-                                            <div class="product ">
-                                                <div class="product-outer">
-                                                    <div class="product-inner">
-                                                        <span class="loop-product-categories"><a href="product-category.html" rel="tag">Laptops</a></span>
-                                                        <a href="single-product.html">
-                                                            <h3>Tablet Thin EliteBook  Revolve 810 G6</h3>
-                                                            <div class="product-thumbnail">
-                                                                <img src="assets/images/blank.gif" data-echo="assets/images/products/1.jpg" class="img-responsive" alt="">
-                                                            </div>
-                                                        </a>
-
-                                                        <div class="price-add-to-cart">
-                                                            <span class="price">
-                                                                <span class="electro-price">
-                                                                    <ins><span class="amount"> </span></ins>
-                                                                    <span class="amount"> $1,999.00</span>
-                                                                </span>
-                                                            </span>
-                                                            <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                        </div><!-- /.price-add-to-cart -->
-
-                                                        <div class="hover-area">
-                                                            <div class="action-buttons">
-
-                                                                <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-
-                                                                <a href="compare.html" class="add-to-compare-link"> Compare</a>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /.product-inner -->
-                                                </div><!-- /.product-outer -->
-                                            </div><!-- /.product -->
-
-
-                                            <div class="product last">
-                                                <div class="product-outer">
-                                                    <div class="product-inner">
-                                                        <span class="loop-product-categories"><a href="product-category.html" rel="tag">Headphones</a></span>
-                                                        <a href="single-product.html">
-                                                            <h3>Purple Solo 2 Wireless</h3>
-                                                            <div class="product-thumbnail">
-                                                                <img src="assets/images/blank.gif" data-echo="assets/images/products/5.jpg" class="img-responsive" alt="">
-                                                            </div>
-                                                        </a>
-
-                                                        <div class="price-add-to-cart">
-                                                            <span class="price">
-                                                                <span class="electro-price">
-                                                                    <ins><span class="amount"> $1,999.00</span></ins>
-                                                                    <del><span class="amount">$2,299.00</span></del>
-                                                                    <span class="amount"> </span>
-                                                                </span>
-                                                            </span>
-                                                            <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                        </div><!-- /.price-add-to-cart -->
-
-                                                        <div class="hover-area">
-                                                            <div class="action-buttons">
-
-                                                                <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-
-                                                                <a href="compare.html" class="add-to-compare-link"> Compare</a>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /.product-inner -->
-                                                </div><!-- /.product-outer -->
-                                            </div><!-- /.product -->
-
-
-                                            <div class="product first">
-                                                <div class="product-outer">
-                                                    <div class="product-inner">
-                                                        <span class="loop-product-categories"><a href="product-category.html" rel="tag">Laptops</a></span>
-                                                        <a href="single-product.html">
-                                                            <h3>Tablet Red EliteBook  Revolve 810 G2</h3>
-                                                            <div class="product-thumbnail">
-                                                                <img src="assets/images/blank.gif" data-echo="assets/images/products/2.jpg" class="img-responsive" alt="">
-                                                            </div>
-                                                        </a>
-
-                                                        <div class="price-add-to-cart">
-                                                            <span class="price">
-                                                                <span class="electro-price">
-                                                                    <ins><span class="amount"> </span></ins>
-                                                                    <span class="amount"> $1,999.00</span>
-                                                                </span>
-                                                            </span>
-                                                            <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                        </div><!-- /.price-add-to-cart -->
-
-                                                        <div class="hover-area">
-                                                            <div class="action-buttons">
-
-                                                                <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-
-                                                                <a href="compare.html" class="add-to-compare-link"> Compare</a>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /.product-inner -->
-                                                </div><!-- /.product-outer -->
-                                            </div><!-- /.product -->
-
-
-                                            <div class="product ">
-                                                <div class="product-outer">
-                                                    <div class="product-inner">
-                                                        <span class="loop-product-categories"><a href="product-category.html" rel="tag">Headphones</a></span>
-                                                        <a href="single-product.html">
-                                                            <h3>White Solo 2 Wireless</h3>
-                                                            <div class="product-thumbnail">
-                                                                <img src="assets/images/blank.gif" data-echo="assets/images/products/6.jpg" class="img-responsive" alt="">
-                                                            </div>
-                                                        </a>
-
-                                                        <div class="price-add-to-cart">
-                                                            <span class="price">
-                                                                <span class="electro-price">
-                                                                    <ins><span class="amount"> $1,999.00</span></ins>
-                                                                    <del><span class="amount">$2,299.00</span></del>
-                                                                    <span class="amount"> </span>
-                                                                </span>
-                                                            </span>
-                                                            <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                        </div><!-- /.price-add-to-cart -->
-
-                                                        <div class="hover-area">
-                                                            <div class="action-buttons">
-
-                                                                <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-
-                                                                <a href="compare.html" class="add-to-compare-link"> Compare</a>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /.product-inner -->
-                                                </div><!-- /.product-outer -->
-                                            </div><!-- /.product -->
-
-
-                                            <div class="product last">
-                                                <div class="product-outer">
-                                                    <div class="product-inner">
-                                                        <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                                        <a href="single-product.html">
-                                                            <h3>Smartphone 6S 32GB LTE</h3>
-                                                            <div class="product-thumbnail">
-                                                                <img src="assets/images/blank.gif" data-echo="assets/images/products/4.jpg" class="img-responsive" alt="">
-                                                            </div>
-                                                        </a>
-
-                                                        <div class="price-add-to-cart">
-                                                            <span class="price">
-                                                                <span class="electro-price">
-                                                                    <ins><span class="amount"> </span></ins>
-                                                                    <span class="amount"> $1,999.00</span>
-                                                                </span>
-                                                            </span>
-                                                            <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                        </div><!-- /.price-add-to-cart -->
-
-                                                        <div class="hover-area">
-                                                            <div class="action-buttons">
-
-                                                                <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-
-                                                                <a href="compare.html" class="add-to-compare-link"> Compare</a>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /.product-inner -->
-                                                </div><!-- /.product-outer -->
-                                            </div><!-- /.product -->
+                                                        </div><!-- /.product-inner -->
+                                                    </div><!-- /.product-outer -->
+                                                </div><!-- /.product -->
+                                            @endforeach
                                         </div><!-- /.products -->
                                     </div>
                                 </div>
@@ -333,114 +178,84 @@
                     </div>
                     <div id="onsale-products-carousel-57176fb23fad9">
                         <div class="onsale-product-carousel owl-carousel">
-                            <div class="onsale-product">
-                                <div class="onsale-product-thumbnails">
+                            @foreach ($getProductFeatured as $dealOfWeek)
+                                <div class="onsale-product">
+                                    <div class="onsale-product-thumbnails">
 
 
-                                    <div class="savings">
-                                        <span class="savings-text">
-                                            Save <span class="amount">&#36;20.00</span>
-                                        </span>
+                                        <div class="images"><a href="single-product.html" itemprop="image" class="woocommerce-main-image" title=""><img width="600" height="600" src="{{ asset('storage/' .$dealOfWeek->thumbnail) }}" class="wp-post-image" alt="GamePad" title="GamePad"/></a>
+                                            <div class="thumbnails columns-3">
+                                                @foreach ($dealOfWeek->images as $dealOfWeekImage)
+                                                    @php
+                                                        $class = ''; // Default class for products in the middle
+                                            
+                                                        if ($key === 0) {
+                                                            $class = 'first'; // Add 'first' class to the first product
+                                                        } elseif ($key === count($dealOfWeek->images) - 1) {
+                                                            $class = 'last'; // Add 'last' class to the last product
+                                                        }
+                                                    @endphp
+                                                    
+                                                    <a href="single-product.html" class="{{ $class }}" title=""><img width="180" height="180" src="assets/images/deals/1-1.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad" title="GamePad"/></a>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="onsale-product-content">
 
+                                        <a href="single-product.html"><h3>Game Console Controller <br/>+ USB 3.0 Cable</h3></a>
+                                        <span class="price"><span class="electro-price"><ins><span class="amount">&#36;79.00</span></ins> <del><span class="amount">&#36;99.00</span></del></span></span>
+                                        <div class="deal-progress">
+                                            <div class="deal-stock">
+                                                <span class="stock-sold">Already Sold: <strong>2</strong></span>
+                                                <span class="stock-available">Available: <strong>26</strong></span>
+                                            </div>
+                                            <div class="progress">
+                                                <span class="progress-bar" style="width:8%">8</span>
+                                            </div>
+                                        </div>
+                                        <div class="deal-countdown-timer">
+                                            <div class="marketing-text text-xs-center">Hurry Up! Offer ends in:</div>
+                                            <span class="deal-end-date" style="display:none;">2016-12-31</span>
+                                            <div id="deal-countdown" class="countdown"></div>
+                                            <script>
+                                                // set the date we're counting down to
+                                                var deal_end_date = document.querySelector(".deal-end-date").textContent;
+                                                var target_date = new Date( deal_end_date ).getTime();
 
-                                    <div class="images"><a href="single-product.html" itemprop="image" class="woocommerce-main-image" title=""><img width="600" height="600" src="{{ asset('frontend/assets/images/deals/1.jpg') }}" class="wp-post-image" alt="GamePad" title="GamePad"/></a>
-                                        <div class="thumbnails columns-3">
-                                            <a href="single-product.html" class="first" title=""><img width="180" height="180" src="assets/images/deals/1-1.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad" title="GamePad"/></a>
-                                            <a href="single-product.html" class="" title=""><img width="180" height="180" src="assets/images/deals/1-2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad2" title="GamePad2" /></a>
-                                            <a href="single-product.html" class="last" title=""><img width="180" height="180" src="assets/images/deals/1-3.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad3" title="GamePad3" /></a>
+                                                // variables for time units
+                                                var days, hours, minutes, seconds;
+
+                                                // get tag element
+                                                var countdown = document.getElementById( 'deal-countdown' );
+
+                                                // update the tag with id "countdown" every 1 second
+                                                setInterval( function () {
+
+                                                    // find the amount of "seconds" between now and target
+                                                    var current_date = new Date().getTime();
+                                                    var seconds_left = (target_date - current_date) / 1000;
+
+                                                    // do some time calculations
+                                                    days = parseInt(seconds_left / 86400);
+                                                    seconds_left = seconds_left % 86400;
+
+                                                    hours = parseInt(seconds_left / 3600);
+                                                    seconds_left = seconds_left % 3600;
+
+                                                    minutes = parseInt(seconds_left / 60);
+                                                    seconds = parseInt(seconds_left % 60);
+
+                                                    // format countdown string + set tag value
+                                                    countdown.innerHTML = '<span data-value="' + days + '" class="days"><span class="value">' + days +  '</span><b>Days</b></span><span class="hours"><span class="value">' + hours + '</span><b>Hours</b></span><span class="minutes"><span class="value">'
+                                                    + minutes + '</span><b>Mins</b></span><span class="seconds"><span class="value">' + seconds + '</span><b>Secs</b></span>';
+
+                                                }, 1000 );
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="onsale-product-content">
-
-                                    <a href="single-product.html"><h3>Game Console Controller <br/>+ USB 3.0 Cable</h3></a>
-                                    <span class="price"><span class="electro-price"><ins><span class="amount">&#36;79.00</span></ins> <del><span class="amount">&#36;99.00</span></del></span></span>
-                                    <div class="deal-progress">
-                                        <div class="deal-stock">
-                                            <span class="stock-sold">Already Sold: <strong>2</strong></span>
-                                            <span class="stock-available">Available: <strong>26</strong></span>
-                                        </div>
-                                        <div class="progress">
-                                            <span class="progress-bar" style="width:8%">8</span>
-                                        </div>
-                                    </div>
-                                    <div class="deal-countdown-timer">
-                                        <div class="marketing-text text-xs-center">Hurry Up! Offer ends in:</div>
-                                        <span class="deal-end-date" style="display:none;">2016-12-31</span>
-                                        <div id="deal-countdown" class="countdown"></div>
-                                        <script>
-                                            // set the date we're counting down to
-                                            var deal_end_date = document.querySelector(".deal-end-date").textContent;
-                                            var target_date = new Date( deal_end_date ).getTime();
-
-                                            // variables for time units
-                                            var days, hours, minutes, seconds;
-
-                                            // get tag element
-                                            var countdown = document.getElementById( 'deal-countdown' );
-
-                                            // update the tag with id "countdown" every 1 second
-                                            setInterval( function () {
-
-                                                // find the amount of "seconds" between now and target
-                                                var current_date = new Date().getTime();
-                                                var seconds_left = (target_date - current_date) / 1000;
-
-                                                // do some time calculations
-                                                days = parseInt(seconds_left / 86400);
-                                                seconds_left = seconds_left % 86400;
-
-                                                hours = parseInt(seconds_left / 3600);
-                                                seconds_left = seconds_left % 3600;
-
-                                                minutes = parseInt(seconds_left / 60);
-                                                seconds = parseInt(seconds_left % 60);
-
-                                                // format countdown string + set tag value
-                                                countdown.innerHTML = '<span data-value="' + days + '" class="days"><span class="value">' + days +  '</span><b>Days</b></span><span class="hours"><span class="value">' + hours + '</span><b>Hours</b></span><span class="minutes"><span class="value">'
-                                                + minutes + '</span><b>Mins</b></span><span class="seconds"><span class="value">' + seconds + '</span><b>Secs</b></span>';
-
-                                            }, 1000 );
-                                        </script>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="onsale-product">
-                                <div class="onsale-product-thumbnails">
-
-
-                                    <div class="savings">
-                                        <span class="savings-text">
-                                            Save <span class="amount">&#36;0.00</span>
-                                        </span>
-                                    </div>
-
-
-                                    <div class="images"><a href="single-product.html" itemprop="image" class="woocommerce-main-image" title=""><img width="600" height="600" src="assets/images/deals/2.jpg" class="wp-post-image" alt="GamePad" title="GamePad"/></a>
-                                        <div class="thumbnails columns-3">
-                                            <a href="single-product.html" class="first" title=""><img width="180" height="180" src="assets/images/deals/2-1.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad" title="GamePad"/></a>
-                                            <a href="single-product.html" class="" title=""><img width="180" height="180" src="assets/images/deals/2-2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad2" title="GamePad2" /></a>
-                                            <a href="single-product.html" class="last" title=""><img width="180" height="180" src="assets/images/deals/2-3.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad3" title="GamePad3" /></a>
-                                            <a href="single-product.html" class="last" title=""><img width="180" height="180" src="assets/images/deals/2-4.jpg" class="attachment-shop_thumbnail size-shop_thumbnail" alt="GamePad3" title="GamePad3" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="onsale-product-content">
-
-                                    <a href="single-product.html"><h3>Ultra Wireless S50 Headphones S50 with Bluetooth</h3></a>
-                                    <span class="price"><span class="electro-price"><ins><span class="amount">&#36;1,215.00</span></ins> <del><span class="amount">&#36;2,299.00</span></del></span></span>
-                                    <div class="deal-progress">
-                                        <div class="deal-stock">
-                                            <span class="stock-sold">Already Sold: <strong>0</strong></span>
-                                            <span class="stock-available">Available: <strong>30</strong></span>
-                                        </div>
-                                        <div class="progress">
-                                            <span class="progress-bar" style="width:0%">0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </section>
@@ -571,30 +386,17 @@
             <div class="col-lg-4 col-md-4 col-xs-12">
                 <aside class="widget clearfix">
                     <div class="body">
-                        <h4 class="widget-title">Featured Products</h4>
+                        <h4 class="widget-title">{{ trans('message.featured') }}</h4>
                         <ul class="product_list_widget">
-                            <li>
-                                <a href="single-product.html" title="Tablet Thin EliteBook  Revolve 810 G6">
-                                    <img class="wp-post-image" data-echo="assets/images/footer/1.jpg" src="assets/images/blank.gif" alt="">
-                                    <span class="product-title">Tablet Thin EliteBook  Revolve 810 G6</span>
-                                </a>
-                                <span class="electro-price"><span class="amount">&#36;1,300.00</span></span>
-                            </li>
-
-                            <li>
-                                <a href="single-product.html" title="Smartphone 6S 128GB LTE">
-                                    <img class="wp-post-image" data-echo="assets/images/footer/2.jpg" src="assets/images/blank.gif" alt=""><span class="product-title">Smartphone 6S 128GB LTE</span>
-                                </a>
-                                <span class="electro-price"><span class="amount">&#36;780.00</span></span>
-                            </li>
-
-                            <li>
-                                <a href="single-product.html" title="Smartphone 6S 64GB LTE">
-                                    <img class="wp-post-image" data-echo="assets/images/footer/3.jpg" src="assets/images/blank.gif" alt="">
-                                    <span class="product-title">Smartphone 6S 64GB LTE</span>
-                                </a>
-                                <span class="electro-price"><span class="amount">&#36;1,215.00</span></span>
-                            </li>
+                            @foreach ($getProductFeatured as $feature_item)
+                                <li>
+                                    <a href="{{ route('home.product-detail', ['slug'=>$feature_item->slug]) }}" title="Tablet Thin EliteBook  Revolve 810 G6">
+                                        <img class="wp-post-image" data-echo="{{ asset('storage/' .$feature_item->thumbnail) }}" src="{{ asset('storage/' .$feature_item->thumbnail) }}" alt="">
+                                        <span class="product-title">{{ $feature_item->name }}</span>
+                                    </a>
+                                    <span class="electro-price"><span class="amount">{{ !empty($feature_item->discount_price) ? \App\Helpers\Common::numberFormat($feature_item->discount_price) : \App\Helpers\Common::numberFormat($feature_item->price) }} đ</span></span>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </aside>
