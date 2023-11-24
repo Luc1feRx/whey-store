@@ -44,4 +44,15 @@ class Product extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function goodIssues()
+    {
+        return $this->hasMany(GoodIssue::class, 'product_id');
+    }
+
+    public function flavors_products()
+    {
+        return $this->belongsToMany(Flavor::class, 'product_flavors', 'product_id', 'flavor_id')
+            ->withPivot('quantity'); // Lấy cột quantity trong bảng trung gian
+    }
 }

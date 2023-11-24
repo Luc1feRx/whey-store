@@ -39,7 +39,7 @@ class ProfileController extends Controller
             $user->avatar = $avatar_upload;
     
             // Kiểm tra xem có thay đổi mật khẩu không
-            if ($request->has('password')) {
+            if (!empty($request->password)) {
                 $user->password = Hash::make($request->password);
             }
     

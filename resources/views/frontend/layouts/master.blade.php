@@ -47,10 +47,13 @@
         <script type="text/javascript" src="{{ asset('frontend/assets/js/electro.js') }}"></script>
         <script type="text/javascript" src="{{ asset('frontend/assets/js/toastr.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         @include('frontend.partials.toastr')
 
         @yield('addJs')
-
+        @if (session('error'))
+            @include('frontend.partials.toastr')
+        @endif
         <script>
             // Add a click event listener to all elements with the custom-dropdown-link class
             var dropdownLinks = document.querySelectorAll('.custom-dropdown-link');

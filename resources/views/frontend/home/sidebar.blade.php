@@ -124,12 +124,12 @@
                 <div class="owl-carousel post-carousel blog-carousel-widget">
                     @foreach ($posts as $post)
                         <div class="post-item">
-                            <a class="post-thumbnail" href="blog-single.html">
+                            <a class="post-thumbnail" href="{{ route('home.post.index') }}">
                                 <img width="270" height="180" src="{{ !empty($post->thumbnail) ? asset('storage/' .$post->thumbnail) : asset('backend\dist\img\placeholder.png') }}" class="wp-post-image" alt="1"/>
                             </a>
                                 <div class="post-content">
                                     <span class="post-date">{{ date("d/m/Y H:i:s", strtotime($post->created_at)) }}</span>
-                                    <a class ="post-name" href="blog-single.html">{{ $post->name }}</a>
+                                    <a class ="post-name" href="{{ route('home.post.index') }}">{{ $post->name }}</a>
                                     <span class="comments-link"><a href="blog-single.html#comments">Leave a comment</a></span>
                                 </div>
                         </div>

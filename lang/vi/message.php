@@ -39,6 +39,37 @@ return [
         'remove' => [
             'success' => 'Sản phẩm đã được xóa khỏi danh sách ưa thích.'
         ]
+    ],
+    'cart' => [
+        'success' => 'Sản phẩm đã được thêm vào giỏ hàng.',
+        'remove' => [
+            'success' => 'Sản phẩm đã được xóa khỏi giỏ hàng.'
+        ],
+        'title' => 'Giỏ hàng',
+        'flavor' => 'Hương vị',
+        'Price' => 'Đơn giá',
+        'Quantity' => 'Số lượng',
+        'Total' => 'Thành tiền',
+        'Product' => 'Sản phẩm',
+        'cartTotal' => 'Thanh toán',
+        'subTotal' => 'Tổng tiền',
+        'proceedToCheckout' => 'Đặt hàng'
+    ],
+    'discount' => [
+        'sku' => 'Mã giảm giá',
+        'applyDiscount' => 'Áp mã giảm giá',
+        'placeholderApplyDiscount' => 'Nhập mã giảm giá'
+    ],
+    'checkout' => [
+        'title' => 'Đặt hàng',
+        'detail' => 'Chi tiết đơn đặt hàng',
+        'first_name' => 'Tên',
+        'last_name' => 'Họ',
+        'address' => 'Địa chỉ',
+        'phone' => 'Số điện thoại', 
+        'product' => 'Sản phẩm',
+        'total' => 'Tổng tiền',
+        'place_order' => 'Đặt hàng'
     ]
 
 ];
