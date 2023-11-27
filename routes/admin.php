@@ -43,6 +43,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
+        Route::get('/filter_order', [DashboardController::class, 'GetOrderFilter'])->name('GetOrderFilter');
+
         Route::get('profile', [DashboardController::class, 'profile'])->name('profile.index');
         Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
 
