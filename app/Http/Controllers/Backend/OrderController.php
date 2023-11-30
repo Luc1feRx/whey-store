@@ -6,8 +6,9 @@ use App\Helpers\Common;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 
 class OrderController extends Controller
 {
@@ -87,9 +88,35 @@ class OrderController extends Controller
     }
     
     public function printOrder($id){
-        // $pdf = \PDF::loadView('backend.order.print', compact('id'));
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML('<h1>31weq</h1>');
-        return $pdf->stream();
+        $order_details = OrderDetail::join('products', 'products.id', '=', 'order_details.product_id')
+        ->join('flavors', 'flavors.id', '=', 'order_details.flavor_id')
+        ->join('orders', 'orders.id', '=', 'order_details.order_id')
+        ->leftJoin('vouchers', 'vouchers.id', '=', 'orders.discount_id')
+        ->where('order_details.order_id', $id)
+        ->select([
+            'order_details.price as order_detail_price',
+            'order_details.quantity as order_detail_quantity',
+            'flavors.name as flavor_name',
+            'products.name as product_name',
+        ])
+        ->orderBy('order_details.id', 'desc')
+        ->get();
+
+        $getOrder = Order::where('orders.id', $id)
+        ->select([
+            'orders.order_total',
+            'orders.user_name',
+        ])
+        ->first();
+        $data = [
+            'title' => 'Order details',
+            'date' => date('m/d/Y'),
+            'order_details' => $order_details,
+            'getOrder' => $getOrder
+        ]; 
+            
+        $pdf = Pdf::loadView('backend.order.print', $data);
+     
+        return $pdf->download('aduuuu.pdf');
     }
 }

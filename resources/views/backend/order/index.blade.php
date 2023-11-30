@@ -81,7 +81,7 @@
                                                     \App\Models\Order::CANCEL => 'Hủy đơn hàng'
                                                 ]
                                             @endphp
-                                            <select class="form-control select2-common" id="orderStatus" data-order-id="{{ $order->id }}" data-url="{{ route('admin.orders.ajaxChangeStatus') }}" aria-hidden="true">
+                                            <select class="form-control select2-common orderStatus" data-order-id="{{ $order->id }}" data-url="{{ route('admin.orders.ajaxChangeStatus') }}" aria-hidden="true">
                                                 @foreach ($arrStatus as $key => $status)
                                                 <option value="{{ $key }}" {{ $key == $order->status ? 'selected' : ''}}>{{
                                                     $status }}</option>
@@ -124,7 +124,7 @@
                 destroy(data_id, data_model, '{{ route('admin.ajax.destroy') }}', 'Bạn đã chắc chắn chưa?', null, false, null);
             });
 
-            $('#orderStatus').change(function() {
+            $('.orderStatus').change(function() {
                 var orderId = $(this).data('order-id');
                 var url = $(this).data('url');
                 var newStatus = $(this).val();
