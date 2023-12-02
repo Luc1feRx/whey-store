@@ -6,6 +6,7 @@
                 <li class="menu-item animate-dropdown"><a title="Track Your Order" href="{{ route('home.trackOrder') }}"><i class="ec ec-transport"></i>Track Your Order</a></li>
                 @if (!Auth::check())
                     <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.login-view') }}"><i class="ec ec-user"></i>{{ trans('message.login') }}</a></li>
+                    <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.register-view') }}"><i class="ec ec-user"></i>{{ trans('message.register') }}</a></li>
                 @else
                 <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.profile') }}"><i class="ec ec-user"></i>{{ Auth::user()->name }}</a></li>
                     <li class="menu-item animate-dropdown" onclick="event.preventDefault();

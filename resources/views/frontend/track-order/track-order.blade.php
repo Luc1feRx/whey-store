@@ -20,76 +20,101 @@
                 </header><!-- .entry-header -->
 
                 <div class="entry-content" itemprop="mainContentOfPage">
-                    <div class="woocommerce">
-                        <form action="#" method="post" class="track_order">
+                    @if (!auth()->check())
+                        <div class="woocommerce">
+                            <form action="{{ route('home.trackOrder') }}" method="GET" class="track_order">
+                                <p>{{ trans('message.trackOrder.info') }}</p>
 
-                            <p>To track your order please enter your Order ID in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
+                                <p class="form-row form-row-first">
+                                    <label for="orderid">{{ trans('message.checkout.phone') }}</label>
+                                    <input class="input-text" type="text" name="phone" id="orderid" placeholder="{{ trans('message.trackOrder.phone') }}">
+                                    @error('phone')
+                                        <span class="error" style="color: red">{{ $message }}</span>
+                                    @enderror
+                                </p>
 
-                            <p class="form-row form-row-first">
-                                <label for="orderid">{{ trans('message.checkout.phone') }}</label>
-                                <input class="input-text" type="text" name="phone" id="orderid" placeholder="{{ trans('message.trackOrder.placeholder-phone') }}">
-                            </p>
+                                <p class="form-row form-row-last">
+                                    <label for="order_email">Email</label>
+                                    <input class="input-text" type="text" name="email" id="order_email" placeholder="Email">
+                                    @error('email')
+                                        <span class="error" style="color: red">{{ $message }}</span>
+                                    @enderror
+                                </p>
 
-                            <p class="form-row form-row-last">
-                                <label for="order_email">Email</label>
-                                <input class="input-text" type="text" name="email" id="order_email" placeholder="Email you used during checkout.">
-                            </p>
+                                <div class="clear"></div>
 
-                            <div class="clear"></div>
-
-                            <p class="form-row">
-                                <input type="submit" class="button" name="track" value="Track">
-                            </p>
-                        </form>
-                    </div>
-                    <table class="shop_table shop_table_responsive cart">
-                        <thead>
-                            <tr>
-                                <th class="product-remove">&nbsp;</th>
-                                <th class="product-thumbnail">&nbsp;</th>
-                                <th class="product-name">{{ trans('message.trackOrder.user_name') }}</th>
-                                <th class="product-name">{{ trans('message.') }}</th>
-                                <th class="product-price">{{ trans('message.cart.Price') }}</th>
-                                <th class="product-quantity">{{ trans('message.cart.Quantity') }}</th>
-                                <th class="product-subtotal">{{ trans('message.cart.Total') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($order as $item)
-                                <tr class="cart_item">
-
-                                    <td class="product-thumbnail">
-                                        <a href=""><img width="180" height="180" src="" alt=""></a>
-                                    </td>
-
-                                    <td data-title="Product" class="product-name">
-                                        <a href=""></a>
-                                    </td>
-
-                                    <td data-title="Product" class="product-name">
-                                        <span></span>
-                                    </td>
-
-                                    <td data-title="Price" class="product-price">
-                                        <span class="amount"></span>
-                                    </td>
-
-                                    <td data-title="Quantity" class="product-quantity">
-                                        {{-- <div class="quantity buttons_added">
-                                            <input type="button" class="minus" data-price="{{ $item->price }}" data-url="{{  route('home.cart.update', ['id' => $key]) }}" data-product-id="{{  $item->id }}" value="-">
-                                            <label>{{ __('message.quantity') }}</label>
-                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="{{ $item->qty }}" name="quantity" max="29" min="0" step="1">
-                                            <input type="button" data-price="{{ $item->price }}" data-url="{{  route('home.cart.update', ['id' => $key]) }}" data-product-id="{{  $item->id }}" class="plus" value="+">
-                                        </div>
-                                    </td> --}}
-
-                                    <td data-title="Total" class="product-subtotal">
-                                        <span class="amount productTotalAmount_"></span>
-                                    </td>
+                                <p class="form-row">
+                                    <input type="submit" class="button" value="Track">
+                                </p>
+                            </form>
+                        </div>
+                    @endif
+                    @if (count($orders) > 0)
+                        <table class="shop_table shop_table_responsive cart">
+                            <thead>
+                                <tr>
+                                    <th class="product-name">{{ trans('message.trackOrder.user_name') }}</th>
+                                    <th class="product-price">{{ trans('message.trackOrder.Address') }}</th>
+                                    <th class="product-quantity">{{ trans('message.trackOrder.phone') }}</th>
+                                    <th class="product-subtotal">{{ trans('message.trackOrder.payment_method') }}</th>
+                                    <th class="product-subtotal">{{ trans('message.trackOrder.transaction_code') }}</th>
+                                    <th class="product-subtotal">{{ trans('message.trackOrder.total') }}</th>
+                                    <th class="product-subtotal">{{ trans('message.trackOrder.status') }}</th>
+                                    <th class="product-subtotal">{{ trans('message.trackOrder.action') }}</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($orders as $item)
+                                    <tr class="cart_item">
+
+                                        <td data-title="Product" class="product-name">
+                                            <span>{{ $item->user_name }}</span>
+                                        </td>
+
+                                        <td data-title="Product" class="product-name">
+                                            <span>{{ $item->address }}</span>
+                                        </td>
+
+                                        <td data-title="Price" class="product-price">
+                                            <span class="amount">{{ $item->phone }}</span>
+                                        </td>
+
+                                        <td data-title="Price" class="product-price">
+                                            <span class="amount">{!! $item->payment_method == 1 ? '<img style="width: 150px; width: 70px;" src="\backend\dist\img\vnpay-logo-inkythuatso-01-13-16-26-42.jpg" alt="" srcset="">' : '' !!}</span>
+                                        </td>
+
+                                        <td data-title="Price" class="product-price">
+                                            <span class="amount">{{ $item->transaction_code }}</span>
+                                        </td>
+                                        <td data-title="Price" class="product-price">
+                                            <span class="amount">{{ \App\Helpers\Common::numberFormat($item->order_total) }} đ</span>
+                                        </td>
+
+                                        @php
+                                            $arrStatus = [
+                                                \App\Models\Order::RECEIVE => 'Tiếp nhận',
+                                                \App\Models\Order::SUCCESS => 'Thành công',
+                                                \App\Models\Order::PENDING => 'Đang vận chuyển',
+                                                \App\Models\Order::CANCEL => 'Hủy đơn hàng'
+                                            ]
+                                        @endphp
+                                        <td data-title="Price" class="product-price">
+                                            <span class="amount">{{ $arrStatus[$item->status] }}</span>
+                                        </td>
+
+                                        <td data-title="Price" class="product-price">
+                                            <a href="{{ route('home.getOrderDetail', ['id' => $item->id]) }}" class="btn btn-icon btn-sm tip" data-toggle="tooltip" title="Xem chi tiết đơn hàng"><i
+                                                class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        @if (request()->has('phone') || request()->has('email'))
+                            <p>Không có đơn hàng nào</p>
+                        @endif
+                    @endif
                 </div><!-- .entry-content -->
 
             </article><!-- #post-## -->

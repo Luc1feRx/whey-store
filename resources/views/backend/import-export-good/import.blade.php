@@ -22,7 +22,7 @@
             <div class="form-group">
               <label>Ngày sản xuất:</label>
                 <div class="input-group">
-                    <input type="text" name="manufacturing_date" class="form-control datetimepicker">
+                    <input type="text" name="manufacturing_date" autocomplete="off" class="form-control datetimepicker">
                     <div class="input-group-append">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
               <label>Ngày hết hạn:</label>
                 <div class="input-group">
-                    <input type="text" name="expiration_date" class="form-control datetimepicker">
+                    <input type="text" name="expiration_date" autocomplete="off" class="form-control datetimepicker">
                     <div class="input-group-append">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>

@@ -267,29 +267,32 @@
     </style>
 </head>
 <body>
-	<div class="wrapper">
-		<div class="content">
-			<div class="billing-details">
-				<div class="billing-details-content">
-					<div class="bil-title" style="font-family: DejaVu Sans;">Chi tiết đơn hàng</div>
-                    <div class="bil-title" style="font-family: DejaVu Sans;">Customer: {{ $getOrder->user_name }}</div>
-					 <table>
-                        @foreach ($order_details as $detail)
-                            <tr>
-                                <td>{{ $detail->product_name }}</td>
-                                
-                                <td class="right-t">{{ \App\Helpers\Common::numberFormat($detail->order_detail_price)}} VND</td>
-                            </tr>
-                        @endforeach
-                        <tr class="br-top">
-                            <td style="font-family: DejaVu Sans;">Tổng tiền</td>
-                            <td class="right-t">{{ \App\Helpers\Common::numberFormat($getOrder->order_total) }} VND</td>
-                        </tr>
-					 </table>
-				</div>
-			</div>
-		</div>
-	</div>
-
+    <div style="width: 100%;max-width: 600px;margin:0 auto">
+        <div style="height: 55px;background: #da7777;padding: 10px">
+            <div style="width: 50%">
+                <a href="">
+                    <img style="height: 55px" src="http://tranining.previewcode.net/images/icon/Logo.png">
+                </a>
+            </div>
+            <div style="width: 50%"></div>
+        </div>
+        <div style="background: white;padding: 15px;border:1px solid #dedede;">
+            <h2 style="margin:10px 0;border-bottom: 1px solid #dedede;padding-bottom: 10px;">Chi tiết đơn hàng</h2>
+            <div>
+                @foreach($order_details as $key => $detail)
+                    <div style="border-bottom: 1px solid #dedede;padding-bottom: 10px;padding-top: 10px;">
+                        <div style="width: 80%;float: right;">
+                            <h4 style="margin:10px 0">{{ $detail->product_name }}</h4>
+                            <p style="margin: 4px 0;font-size: 14px;">Loại sản phẩm: <span>{{ $detail->flavor_name }}</span></p>
+                            <p style="margin: 4px 0;font-size: 14px;">Giá <span>{{ \App\Helpers\Common::numberFormat($detail->order_detail_price)}} VND</span></p>
+                            <p style="margin: 4px 0;font-size: 14px;">Sô lượng <span>{{  $detail->order_detail_quantity }}</span></p>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                @endforeach
+                <h2>Tổng tiền : <b>{{ \App\Helpers\Common::numberFormat($getOrder->order_total) }} VND</b></h2>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

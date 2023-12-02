@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Quản lý Nhập hàng @stop
+@section('title') Quản lý xuất nhập hàng @stop
 
 @section('addCss')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [
-                            'breadcrumb' => [['title' => 'Danh sách nhập hàng', 'url' => '#']],
+                            'breadcrumb' => [['title' => 'Danh sách xuất nhập hàng', 'url' => '#']],
                         ])
                     </div>
                 </div>
@@ -92,9 +92,11 @@
                                                     <button type="button" data-product-id="{{ $product->id }}" data-flavor-id="{{ $flavor->id }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                                                         Nhập hàng
                                                     </button>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenterExport">
-                                                        Xuất hàng
-                                                    </button>
+                                                    @if ($flavor->quantity > 0)
+                                                        <button type="button" data-product-id="{{ $product->id }}" data-flavor-id="{{ $flavor->id }}" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenterExport">
+                                                            Xuất hàng
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -120,6 +122,9 @@
 @section('addJs')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @if (session('success'))
+@include('backend.layouts.toastr')
+@endif
+@if (session('error'))
 @include('backend.layouts.toastr')
 @endif
 <script type="text/javascript">
@@ -151,6 +156,19 @@
                 $('.dataIdProduct').val(dataId);
                 $('.dataIdFlavor').val(dataIdFlavor);
             });
+
+            $('#exampleModalCenterExport').on('show.bs.modal', function (event) {
+                // Lấy data-id từ button và gán vào trường input hidden
+                var button = $(event.relatedTarget);
+                var dataId = button.data('product-id');
+                var dataIdFlavor = button.data('flavor-id');
+                $('.dataIdProduct').val(dataId);
+                $('.dataIdFlavor').val(dataIdFlavor);
+            });
+
+        @if($errors->first('quantity'))
+            toastr.error('{{$errors->first('quantity')}}', {timeOut: 5000})
+        @endif
         });
 </script>
 @include('backend.product.script')

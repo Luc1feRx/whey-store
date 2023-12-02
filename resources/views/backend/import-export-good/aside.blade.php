@@ -24,11 +24,11 @@ $active = 'active';
         <p>Nhập xuất hàng</p>
       </a>
     </li>
-    {{-- <li class="nav-item">
-      <a href="{{ route('admin.sliders.create') }}" class="nav-link {{ Request::routeIs('admin.sliders.create') ? 'active' : '' }}">
+    <li class="nav-item">
+      <a href="{{ route('admin.good-issues.list') }}" class="nav-link {{ Request::routeIs('admin.good-issues.list') ? 'active' : '' }}">
         <i class="far fa-circle nav-icon"></i>
-        <p>Thêm mới Slider</p>
+        <p>Danh sách tồn hàng</p>
       </a>
-    </li> --}}
+    </li>
   </ul>
 </li>

@@ -1,6 +1,10 @@
 @extends('backend.layouts.master')
 
-@section('title') Quản lý Sản phẩm @stop
+@section('title') Danh sách tồn hàng @stop
+
+@section('addCss')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
 
 @section('content')
 <div class="content-wrapper">
@@ -9,7 +13,7 @@
             <div class="container-fluid">
                 {{-- search --}}
                 <section class="dataTables_wrapper">
-                    @include('backend.product.search')
+                    @include('backend.import-export-good.search')
                 </section>
 
                 <div class="row mb-2">
@@ -18,10 +22,11 @@
                             aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa fa-filter"></i> Lọc
                         </button>
+                        <a href="{{ route('admin.good-issues.export') }}" class="btn btn-info">Xuất file Excel</a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [
-                        'breadcrumb' => [['title' => 'Danh sách sản phẩm', 'url' => '#']],
+                            'breadcrumb' => [['title' => 'Danh sách nhập hàng', 'url' => '#']],
                         ])
                     </div>
                 </div>
@@ -52,38 +57,42 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Danh mục</th>
-                                        <th>Thương hiệu</th>
                                         <th>Ảnh</th>
-                                        <th>Giá sản phẩm (VNĐ)</th>
-                                        <th>Trạng thái</th>
-                                        <th>Hành động</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Hương vị</th>
+                                        <th>Số lượng nhập</th>
+                                        <th>Số lượng xuất</th>
+                                        <th>Số lượng tồn kho</th>
+                                        <th>Loại xuất nhập</th>
+                                        <th>Ngày tạo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($products as $product)
                                     <tr>
                                         <td>{{ $product->id }}</td>
-                                        <td>{{ $product->product_name }}</td>
-                                        <td>
-                                            @foreach ($product->categories as $cate)
-                                                <span class="badge bg-success" style="font-size: 15px!important">{{ $cate->name_category }}</span>
-                                            @endforeach
-                                        </td>
-                                        <td><span class="badge bg-success" style="font-size: 15px!important">{{ $product->brand_name }}</span></td>
                                         <td>
                                             <img style="width: 200px;" src="{{ asset('storage/'.$product->thumbnail) }}"
                                             alt="" srcset="">
                                         </td>
-                                        <td>{{ \App\Helpers\Common::numberFormat($product->price) }} VNĐ</td>
-                                        <td>{{ $product->status == App\Models\Product::DISPLAY ? 'Hiển thị' : 'Ẩn' }}</td>
+                                        <td>{{ $product->product_name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.products.edit', ['id'=>$product->id]) }}"
-                                                class="btn btn-icon btn-sm tip"><i class="fas fa-pencil-alt"></i></a>
-                                            <a data-id="{{ $product->id }}" data-image="{{ $product->thumbnail }}"
-                                                class="btn btn-icon btn-sm deleteDialog tip " data-toggle="tooltip"
-                                                title=""><i class="fa fa-trash"></i></a>
+                                            <span class="badge bg-success" style="font-size: 15px!important">{{ $product->flavor_name }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success" style="font-size: 15px!important">{{ $product->import_good_quantity }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success" style="font-size: 15px!important">{{ $product->export_good_quantity }}</span>
+                                        </td>
+                                        <td> 
+                                            <span class="badge bg-success" style="font-size: 15px!important">{{ $product->stock_good_quantity }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success" style="font-size: 15px!important">{{ $product->good_issues_type }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success" style="font-size: 15px!important">{{ date("d/m/Y", strtotime($product->created_at)) }}</span>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -104,7 +113,11 @@
 @endsection
 
 @section('addJs')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @if (session('success'))
+@include('backend.layouts.toastr')
+@endif
+@if (session('error'))
 @include('backend.layouts.toastr')
 @endif
 <script type="text/javascript">
@@ -117,5 +130,4 @@
             });
         });
 </script>
-@include('backend.product.script')
 @endsection

@@ -17,6 +17,10 @@ class LoginController extends Controller
         return view('frontend.auth.login');
     }
 
+    public function registerView(){
+        return view('frontend.auth.register');
+    }
+
     public function loginPost(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');

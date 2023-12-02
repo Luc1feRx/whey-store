@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderTransaction;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Voucher;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -113,6 +115,7 @@ class CheckoutController extends Controller
 
                 if ($order) {
                     $cart = Cart::content();
+                    Mail::to($data['email'])->send(new OrderTransaction($cart));
 
                     foreach ($cart as $key => $item) {
                         // Lưu chi tiết đơn hàng

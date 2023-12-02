@@ -10472,14 +10472,6 @@ article.post .entry-content .gallery figure.gallery-item {
   clear: both;
 }
 
-#customer_login::before {
-  border-right: 1px solid #ddd;
-  height: 100%;
-  position: absolute;
-  content: ' ';
-  right: 50%;
-  top: 0;
-}
 
 #customer_login .col-1 {
   padding-right: 6.071em;

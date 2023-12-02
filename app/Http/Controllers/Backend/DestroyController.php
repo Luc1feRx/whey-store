@@ -14,6 +14,7 @@ use App\Models\Slider;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -86,6 +87,27 @@ class DestroyController extends Controller
         return $this->destroyModel($id, $model, false, $thumbnail);
     }
 
+    /**
+     * Return Response Data Api
+     * @param $msg
+     * @param $errors
+     * @param $status
+     * @return json response
+     */
+    public function renderJsonResponse($data = [], $msg = '', $status = Response::HTTP_OK)
+    {
+        $response = [];
+        $this->setStatusCode($status);
+        $response['code'] = $status;
+        if (!$msg) {
+            $response['msg'] = __('api::messages.common.success');
+        } else {
+            $response['msg'] = $msg;
+        }
+        $response['data'] = $data;
+        return $this->respond($response);
+    }
+
     /*
     *--------------------------------------------------------------------------
     * Function Excuse Destroy Model
@@ -104,7 +126,14 @@ class DestroyController extends Controller
             }
 
             if ($model == Voucher::class) {
-                $datas = $model::whereIn('id', $arr_id)->delete();
+                $datas = $model::whereIn('id', $arr_id)->get();
+                if(count($datas) <= 0){
+                    $msg = 'Xóa thất bại';
+                    return response()->json(array('status' => false, 'msg' => $msg));
+                }
+                $datas = $datas->update([
+                    'deleted_at' => Carbon::now()
+                ]);
             } else if($model == Product::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
                 if($datas){
@@ -114,12 +143,18 @@ class DestroyController extends Controller
                         Storage::delete($productImage->image);
                     }
                     $deleteThumb = UploadImage::handleRemoveFile($imagePath);
+                }else{
+                    $msg = 'Xóa thất bại';
+                    return response()->json(array('status' => false, 'msg' => $msg));
                 }
             } else if($model == Admin::class){
                 $datas = $model::whereIn('id', $arr_id)->first();
                 if($datas){
                     $datas->roles()->detach();
                     $datas->delete();
+                }else{
+                    $msg = 'Xóa thất bại';
+                    return response()->json(array('status' => false, 'msg' => $msg));
                 }
             } else if($model == Role::class){
                 $roles = $model::whereIn('id', $arr_id)->get();
@@ -130,11 +165,23 @@ class DestroyController extends Controller
                 }
             
                 // Sau đó xóa các vai trò
-                $datas = $model::whereIn('id', $arr_id)->delete();
+                $datas = $model::whereIn('id', $arr_id)->get();
+                if(count($datas) <= 0){
+                    $msg = 'Xóa thất bại';
+                    return response()->json(array('status' => false, 'msg' => $msg));
+                }
+                $datas = $datas->update([
+                    'deleted_at' => Carbon::now()
+                ]);
             } else if($model == Permission::class || $model == Review::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
             }else {
-                $datas = $model::whereIn('id', $arr_id)->update([
+                $datas = $model::whereIn('id', $arr_id)->get();
+                if(count($datas)<=0){
+                    $msg = 'Xóa thất bại';
+                    return response()->json(array('status' => false, 'msg' => $msg));
+                }
+                $datas = $datas->update([
                     'deleted_at' => Carbon::now()
                 ]);
                 $deleteThumb = UploadImage::handleRemoveFile($imagePath);

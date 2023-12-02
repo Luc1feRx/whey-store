@@ -65,5 +65,17 @@ return [
         'detail' => 'Billing detail',
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
+    ],
+    'trackOrder' => [
+        'title' => 'Tracking order',
+        'user_name' => 'Username',
+        'Address' => 'Address',
+        'phone' => 'Phone number',
+        'payment_method' => 'Payment method',
+        'total' => 'Total',
+        'status' => 'Status',
+        'info' => 'To track your order please enter your Email and your phone number in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.',
+        'action' => 'Action',
+        'transaction_code' => 'Transaction Code',
     ]
 ];

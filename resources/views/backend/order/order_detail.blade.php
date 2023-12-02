@@ -74,7 +74,7 @@
                                             <th>Số lượng</th>
                                             <th>Hình ảnh</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Hương vị</th>
+                                            <th>Loại sản phẩm</th>
                                             <th>Tổng tiền</th>
                                         </tr>
                                     </thead>
