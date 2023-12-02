@@ -18,12 +18,11 @@
                             <div class="entry-content">
                                 <div class="woocommerce">
                                     <div class="customer-login-form">
-                                        <span class="or-text">or</span>
 
-                                        <div class="col2-set" id="customer_login">
+                                        <div class="col2-set" style="display: flex;
+                                        justify-content: center;" id="customer_login">
 
-                                            <div class="col-1">
-
+                                            <div class="col-2">
 
                                                 <h2>{{ trans('message.login') }}</h2>
 
@@ -51,12 +50,12 @@
 
                                                     <p class="lost_password"><a href="login-and-register.html">{{ trans('message.lost-password') }}</a></p>
 
+                                                    <p class="lost_password"><a href="{{ route('home.register-view') }}">{{ trans('message.register') }}</a></p>
+
                                                 </form>
 
 
                                             </div><!-- .col-1 -->
-
-                                            @include('frontend.auth.register')
 
                                         </div><!-- .col2-set -->
 

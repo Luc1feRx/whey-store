@@ -113,6 +113,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::get('/{id}',[OrderController::class, 'getOrderDetail'])->name('index');
             Route::get('/print-order-detail/{id}',[OrderController::class, 'printOrder'])->name('print');
         });
+        //import product
+        Route::group(['prefix' => 'good-issues', 'as' => 'good-issues.'], function () {
+            Route::get('/', [GoodIssueController::class, 'index'])->name('index');
+            Route::get('/get-import', [GoodIssueController::class, 'create'])->name('create');
+            Route::post('/store', [GoodIssueController::class, 'store'])->name('store');
+            Route::post('/export', [GoodIssueController::class, 'export'])->name('export');
+            Route::get('/list-export-import', [GoodIssueController::class, 'listImportExportGood'])->name('list');
+            Route::get('/export', [GoodIssueController::class, 'ExportGood'])->name('export');
+        });
     });
 
     Route::middleware(['auth:admin', 'permission:manage decentralized'])->group(function () {
@@ -144,16 +153,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         });
 
     });
-
-    Route::middleware(['auth:admin', 'permission:manage storage'])->group(function () {
-        //import product
-        Route::group(['prefix' => 'good-issues', 'as' => 'good-issues.'], function () {
-            Route::get('/', [GoodIssueController::class, 'index'])->name('index');
-            Route::get('/get-import', [GoodIssueController::class, 'create'])->name('create');
-            Route::post('/store', [GoodIssueController::class, 'store'])->name('store');
-        });
-    });
-
 });
 
 Route::get('/file', [UploadController::class, 'getFile'])->name('getFileImage');

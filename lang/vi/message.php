@@ -70,6 +70,18 @@ return [
         'product' => 'Sản phẩm',
         'total' => 'Tổng tiền',
         'place_order' => 'Đặt hàng'
+    ],
+    'trackOrder' => [
+        'title' => 'Tra cứu đơn hàng',
+        'user_name' => 'Tên người đặt hàng',
+        'Address' => 'Địa chỉ',
+        'phone' => 'Số điện thoại',
+        'payment_method' => 'Phương thức thanh toán',
+        'total' => 'Tổng tiền',
+        'status' => 'Trạng thái',
+        'info' => 'Nời bạn nhập tên email và số điện thoại để tra cứu thông tin đơn hàng của bạn',
+        'action' => 'Hành động',
+        'transaction_code' => 'Mã giao dịch'
     ]
 
 ];

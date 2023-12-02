@@ -173,6 +173,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -190,6 +191,7 @@ return [
         // 'Example' => App\Facades\Example::class,
     'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     'Image' => Intervention\Image\Facades\Image::class,
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

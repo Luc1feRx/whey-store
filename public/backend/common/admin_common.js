@@ -29,6 +29,9 @@ function destroy(id, model, url, title = 'Bạn chắc chắn không?', text, cu
                             if (data.status) {
                                 Swal.fire(data.msg, '', 'success');
                                 location.reload();
+                            }else{
+                                Swal.fire(data.msg, '', 'error');
+                                location.reload();
                             }
                         }
                     });

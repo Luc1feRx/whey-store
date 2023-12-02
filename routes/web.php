@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\LoginController;
 use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\RatingController;
+use App\Http\Controllers\Frontend\TrackOrderController;
 use App\Http\Controllers\Frontend\UserFavouriteController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('login', [LoginController::class, 'loginView'])->name('home.login-view');
     Route::post('login', [LoginController::class, 'loginPost'])->name('home.login');
+    Route::get('register', [LoginController::class, 'registerView'])->name('home.register-view');
     Route::post('register', [LoginController::class, 'postRegister'])->name('home.register');
     Route::post('logout', [LoginController::class, 'Logout'])->name('home.logout');
 
@@ -37,8 +39,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('home.product-detail');
 
-    Route::get('track-order', [HomeController::class, 'trackOrder'])->name('home.trackOrder');
-    Route::post('track-order', [HomeController::class, 'trackOrderPost'])->name('home.trackOrder.post');
+    Route::get('track-order', [TrackOrderController::class, 'getOrder'])->name('home.trackOrder');
+    Route::get('track-order/detail/{id}', [TrackOrderController::class, 'getOrderDetail'])->name('home.getOrderDetail');
 
     //cart
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('home.addToCart');

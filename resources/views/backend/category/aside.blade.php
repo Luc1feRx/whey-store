@@ -4,11 +4,13 @@ $arg_aside= array(
 'admin.categories.create',
 );
 $active = '';
+$is_open = '';
 if ( in_array($name, $arg_aside) ) {
 $active = 'active';
+$is_open = 'menu-open';
 }
 @endphp
-<li class="nav-item menu-open">
+<li class="nav-item {{ $is_open }}">
   <a href="#" class="nav-link {{ $active }}">
     <i class="nav-icon fas fa-tachometer-alt"></i>
     <p>
