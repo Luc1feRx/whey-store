@@ -1,6 +1,8 @@
 @php
 $arg_aside= array(
 'admin.products.index',
+'admin.products.create',
+'admin.products.edit',
 );
 $active = '';
 $is_open = '';

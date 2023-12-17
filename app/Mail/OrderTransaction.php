@@ -14,6 +14,7 @@ class OrderTransaction extends Mailable
     use Queueable, SerializesModels;
 
     private $transactions;
+
     /**
      * Create a new message instance.
      */
@@ -40,7 +41,7 @@ class OrderTransaction extends Mailable
         return new Content(
             view: 'frontend.email.emailPayment',
             with: [
-                'shopping' => $this->transactions
+                'shopping' => $this->transactions,
             ]
         );
     }

@@ -7,13 +7,13 @@
 
         <div id="primary" class="content-area">
             <main id="main" class="site-main">
-                <div class="home-v2-slider" style="height: 660px !important;">
+                <div class="home-v2-slider" style="height: 500px !important;">
                     <!-- ========================================== SECTION – HERO : END========================================= -->
 
                     <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
 
                         @foreach ($sliders as $slider)
-                            <div class="item" style="background-image: url(storage/{{ $slider->thumbnail }}); height: 660px !important;"></div><!-- /.item -->
+                            <div class="item" style="background-image: url(storage/{{ $slider->thumbnail }}); height: 500px !important;"></div><!-- /.item -->
                         @endforeach
                     </div><!-- /.owl-carousel -->
 

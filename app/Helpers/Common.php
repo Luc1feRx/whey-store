@@ -24,6 +24,18 @@ class Common
         return false;
     }
 
+        /**
+     * check phone
+     *
+     * @param $phone
+     * @return string
+     */
+
+    public static function checkPhone($phone)
+    {
+        return preg_match("/^(0|84|\+84|\+\(84\)|\(\+84\)|\(84\))((\d{9})|(\d{3} \d{3} \d{3})|(\d{3}\-\d{3}\-\d{3})|(\d{3}\.\d{3}\.\d{3}))$/", $phone);
+    }
+
 
     public static function truncate($string, $length = 40, $char = '...')
     {

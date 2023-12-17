@@ -726,47 +726,17 @@
     
             <div id="sidebar" class="sidebar" role="complementary">
                 <aside id="woocommerce_products-2" class="widget woocommerce widget_products">
-                    <h3 class="widget-title">Latest Products</h3>
+                    <h3 class="widget-title">{{ trans('message.detail.product_view_lastest') }}</h3>
                     <ul class="product_list_widget">
-                        <li>
-                            <a href="single-product.html" title="Notebook Black Spire V Nitro  VN7-591G">
-                                <img class="wp-post-image" src="assets/images/products/2.jpg" alt="">
-                                <span class="product-title">Notebook Black Spire V Nitro  VN7-591G</span>
-                            </a>
-                            <span class="electro-price"><ins><span class="amount">&#36;1,999.00</span></ins> <del><span class="amount">&#36;2,299.00</span></del></span>
-                        </li>
-    
-                        <li>
-                            <a href="single-product.html" title="Tablet Thin EliteBook  Revolve 810 G6">
-                                <img class="wp-post-image" src="assets/images/products/5.jpg" alt="">
-                                <span class="product-title">Tablet Thin EliteBook  Revolve 810 G6</span>
-                            </a>
-                            <span class="electro-price"><span class="amount">&#36;1,300.00</span></span>
-                        </li>
-    
-                        <li>
-                            <a href="single-product.html" title="Notebook Widescreen Z51-70  40K6013UPB">
-                                <img class="wp-post-image" src="assets/images/products/6.jpg" alt="">
-                                <span class="product-title">Notebook Widescreen Z51-70  40K6013UPB</span>
-                            </a>
-                            <span class="electro-price"><span class="amount">&#36;1,100.00</span></span>
-                        </li>
-    
-                        <li>
-                            <a href="single-product.html" title="Notebook Purple G952VX-T7008T">
-                                <img class="wp-post-image" src="assets/images/products/1.jpg" alt="">
-                                <span class="product-title">Notebook Purple G952VX-T7008T</span>
-                            </a>
-                            <span class="electro-price"><span class="amount">&#36;2,780.00</span></span>
-                        </li>
-    
-                        <li>
-                            <a href="single-product.html" title="Laptop Yoga 21 80JH0035GE  W8.1 (Copy)">
-                                <img class="wp-post-image" src="assets/images/products/4.jpg" alt="">
-                                <span class="product-title">Laptop Yoga 21 80JH0035GE  W8.1 (Copy)</span>
-                            </a>
-                            <span class="electro-price"><span class="amount">&#36;3,485.00</span></span>
-                        </li>
+                        @foreach ($getProductByViewCount as $product_by_view)
+                            <li>
+                                <a href="{{ route('home.product-detail', ['slug'=>$product_by_view->slug]) }}" title="Notebook Black Spire V Nitro  VN7-591G">
+                                    <img class="wp-post-image" src="{{ !empty($product_by_view->thumbnail) ? asset('storage/' .$product_by_view->thumbnail) : asset('backend\dist\img\placeholder.png') }}" alt="">
+                                    <span class="product-title">{{ $product_by_view->name }}</span>
+                                </a>
+                                <span class="electro-price"><ins><span class="amount">{{ \App\Helpers\Common::numberFormat($product_by_view->discount_price) }} đ</span></ins> <del><span class="amount">{{ \App\Helpers\Common::numberFormat($product_by_view->price) }} đ</span></del></span>
+                            </li>
+                        @endforeach
                     </ul><!-- .product_list_widget -->
                 </aside><!-- .widget -->
                 <aside id="electro_product_categories_widget-2" class="widget woocommerce widget_product_categories electro_widget_product_categories">
@@ -862,6 +832,7 @@
                     var product_quantity = jQuery('input[name=quantity]').val();
                     var product_flavor = jQuery('.flavor-select').find(":selected").text();
                     var product_flavor_id = jQuery('.flavor-select').find(":selected").val();
+                    console.log(product_flavor_id);
                     // Gửi dữ liệu lên server
                     jQuery.ajax({
                         type: "POST",

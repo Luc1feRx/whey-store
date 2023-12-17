@@ -5,27 +5,20 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input type="text" name="keyword" class="form-control" id="keyword" placeholder="{{ __('admin::messages.doctor.search_reviewScheduleDoctor') }}">
+                            <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Tìm kiếm tên sản phẩm">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <div class='input-group date' id='time-from'>
-                                <input type='text' name="from" class="form-control" placeholder="{{ __('admin::messages.doctor.search_time-from') }}" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <div class='input-group date' id='time-to'>
-                                <input type='text' name="to" class="form-control" placeholder="{{ __('admin::messages.doctor.search_time-to') }}" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                            <select name="deleted_at" class="form-control" id="deleted_at">
+                                <option value="">Chọn trạng thái</option>
+                                @foreach($checkStatus as $k => $item)
+                                <option value={{$k}}
+                                        @if($request->has('deleted_at') && $request->deleted_at!=null && $request->deleted_at == $k) selected @endif>
+                                    {{ $item }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-2">

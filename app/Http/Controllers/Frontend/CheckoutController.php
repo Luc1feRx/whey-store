@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendOrderEmail;
 use App\Mail\OrderTransaction;
 use App\Models\Order;
 use App\Models\OrderDetail;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Common;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,8 +15,15 @@ use Spatie\Permission\Models\Role;
 class RoleController extends Controller
 {
     const PAGE = 20;
-    public function index(){
-        $roles = Role::whereNotIn('name', ['admin'])->paginate(self::PAGE);
+    public function index(Request $request){
+        $roles = Role::whereNotIn('name', ['admin']);
+        if($request->keyword){
+            $searchKeyword = Common::escapeLike($request->keyword);
+            $roles->where(function ($q) use ($searchKeyword) {
+                $q->where('roles.name', 'LIKE', "%" . $searchKeyword . "%");
+            });
+        }
+        $roles = $roles->paginate(self::PAGE);
         return view('backend.role.index', [
             'roles' => $roles
         ]);

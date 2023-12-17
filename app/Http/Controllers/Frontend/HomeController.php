@@ -13,6 +13,7 @@ use App\Models\OrderDetail;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ class HomeController extends Controller
         $brands = Brand::whereNull('deleted_at')->get();
         $posts = Post::whereNull('deleted_at')->where('status', 1)->take(10)->get();
         $getCategoryProduct = Category::with(['products'])->whereNull('deleted_at')->whereNull('parent_id')->get();
+        $randomVouchers = Voucher::inRandomOrder()->where('status', 1)->limit(5)->get();
         $getProductReview = Product::with(['reviews'])
         ->withCount('reviews') // Đếm số lượng đánh giá
         ->where('is_featured_product', Product::ISFEATURED)
@@ -41,7 +43,8 @@ class HomeController extends Controller
             'posts' => $posts,
             'getLastestProduct' => $getLastestProduct,
             'getCategoryProduct' => $getCategoryProduct,
-            'getProductReview' => $getProductReview
+            'getProductReview' => $getProductReview,
+            'randomVouchers' => $randomVouchers
         ]);
     }
 
@@ -70,9 +73,20 @@ class HomeController extends Controller
             $brand_ids = explode(',', $request->brand);
             $productsQuery->whereIn('brand_id', $brand_ids);
         }
+
+        // Lọc theo giá từ 'from'
+        if ($request->has('from')) {
+            $minPrice = $request->input('from');
+            $productsQuery->where('price', '>=', $minPrice);
+        }
+
+        // Lọc theo giá đến 'to'
+        if ($request->has('to')) {
+            $maxPrice = $request->input('to');
+            $productsQuery->where('price', '<=', $maxPrice);
+        }
     
         $products = $productsQuery->paginate(10);
-    
         return view('frontend.category.category', [
             'category' => $category,
             'brands' => $brandsWithProductsCount,
@@ -109,6 +123,13 @@ class HomeController extends Controller
             ])
             ->first();
 
+            $getProductByViewCount = Product::orderBy('view_counts', 'desc')->take(6)->get();
+
+            $productDetail->view_counts = $productDetail->view_counts + 1;
+            $productDetail->save();
+
+            $randomVouchers = Voucher::inRandomOrder()->where('status', 1)->limit(5)->get();
+
             if(Auth::check()){
                 $isFavorite = FavoriteProduct::where('user_id', Auth::user()->id)
                 ->where('product_id', $productDetail->id)
@@ -117,7 +138,9 @@ class HomeController extends Controller
 
         return view('frontend.product-detail.product-detail', [
             'productDetail' => $productDetail,
-            'isFavorite' => isset($isFavorite) ? $isFavorite : null
+            'isFavorite' => isset($isFavorite) ? $isFavorite : null,
+            'getProductByViewCount' => $getProductByViewCount,
+            'randomVouchers' => $randomVouchers
         ]);
     }
 
@@ -164,5 +187,4 @@ class HomeController extends Controller
             'order' => isset($order) ? $order : [],
         ]);
     }
-    
 }

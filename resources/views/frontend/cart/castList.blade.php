@@ -2,9 +2,29 @@
 
 @section('content')
 <div class="container">
-
     <nav class="woocommerce-breadcrumb"><a href="{{ route('home.index') }}">{{ trans('message.home') }}</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ trans('message.cart.title') }}</nav>
-
+    {{-- <aside id="electro_features_block_widget-2" class="widget widget_electro_features_block_widget">
+        <div class="features-list columns-1">
+            @foreach ($randomVouchers as $voucher)
+                <div class="feature">
+                    <div class="media">
+                        <div class="media-left media-middle feature-icon">
+                            <i class="ec ec-transport"></i>
+                        </div>
+                        <div class="media-body media-middle feature-text">
+                            <input type="hidden" name="" class="copy_voucher_{{ $voucher->voucher_sku }}" value="{{ $voucher->voucher_sku }}">
+                            <strong>{{ trans('message.voucher') }} {{ $voucher->name }}</strong> {{ $voucher->voucher_sku }}
+                        </div>
+                        <div style="display: flex;
+                        justify-content: flex-end;
+                        margin-top: 10px;">
+                            <button class="btn-sm" onclick="copyToClipboard('copy_voucher_{{ $voucher->voucher_sku }}')">{{ trans('message.btn_copy_voucher') }}</button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </aside> --}}
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
             @if (!empty($carts))
