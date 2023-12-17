@@ -24,6 +24,9 @@ return [
     'inputEmail' => 'Enter your email address', 
     'inputPassword' => 'Enter your password',
     'lost-password' => 'Lost your password?',
+    'btn_copy_voucher' => 'Copy',
+    'register' => 'Register',
+    'voucher' => 'Discount: ',
     'login-in' => [
         'failure' => 'Login failed',
     ],
@@ -77,5 +80,11 @@ return [
         'info' => 'To track your order please enter your Email and your phone number in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.',
         'action' => 'Action',
         'transaction_code' => 'Transaction Code',
+        'status_order' => [
+            'order' => 'Recieved Order',
+            'shipping' => 'Shipping Order',
+            'done' => 'Successful',
+            'cancel' => 'Cancel Order'
+        ]
     ]
 ];

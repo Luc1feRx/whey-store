@@ -24,6 +24,9 @@ return [
     'login' => 'Đăng nhập',
     'inputEmail' => 'Nhập email',
     'inputPassword' => 'Nhập password',
+    'voucher' => 'Mã giảm giá: ',
+    'btn_copy_voucher' => 'Sao chép',
+    'register' => 'Đăng ký',
     'login-in' => [
         'failure' => 'Đăng nhập thất bại'
     ],
@@ -81,7 +84,13 @@ return [
         'status' => 'Trạng thái',
         'info' => 'Nời bạn nhập tên email và số điện thoại để tra cứu thông tin đơn hàng của bạn',
         'action' => 'Hành động',
-        'transaction_code' => 'Mã giao dịch'
+        'transaction_code' => 'Mã giao dịch',
+        'status_order' => [
+            'order' => 'Tiếp nhận',
+            'shipping' => 'Đang vận chuyển',
+            'done' => 'Thành công',
+            'cancel' => 'Đơn hàng đã hủy'
+        ]
     ]
 
 ];

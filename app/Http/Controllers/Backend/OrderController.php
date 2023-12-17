@@ -8,7 +8,9 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -32,6 +34,12 @@ class OrderController extends Controller
 
     public function ajaxChangeStatus(Request $request){
         $order = Order::findorFail($request->order_id);
+        $order_time = DB::table('order_times')->updateOrInsert(
+            ['order_id' => $request->order_id], // Kiểm tra xem bản ghi có tồn tại không
+            ['status' =>  $request->newStatus,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()] // Cập nhật hoặc thêm giá trị mới
+        );
         $order->status = $request->newStatus;
         $order->save();
         if($order){

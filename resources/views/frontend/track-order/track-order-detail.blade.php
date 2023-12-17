@@ -1,15 +1,84 @@
 @extends('frontend.layouts.master')
 
+@section('addCss')
+<style>
+    .tracker {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .tracker-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .tracker-step .icon {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #4CAF50;
+      border-radius: 50%;
+      color: #4CAF50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .tracker-step.active .icon {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .tracker-line {
+      height: 2px;
+      background: #4CAF50;
+      flex-grow: 1;
+    }
+    .tracker-text {
+      font-size: 14px;
+      color: #333;
+    }
+    .tracker-time {
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+@endsection
 
 @section('content')
 <div class="container">
 
     <nav class="woocommerce-breadcrumb">
-        <a href="home.html">Home</a>
+        <a href="{{ route('home.index') }}">{{ trans('message.home') }}</a>
         <span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ trans('message.trackOrder.title') }}
     </nav><!-- .woocommerce-breadcrumb -->
 
     <div id="primary" class="content-area">
+        <div class="tracker">
+            @if ($order->order_status !== 0)
+                <div class="tracker-step {{ $order->order_status == 1 ? 'active' : '' }}">
+                    <div class="icon">✓</div>
+                    <div class="tracker-text">{{ trans('message.trackOrder.status_order.order') }}</div>
+                    <div class="tracker-time">{{ $order->order_status == 1 ? date("H:i:s d/m/Y", strtotime($order->order_times_updated_at ?? $order->order_updated_at)) : '' }}</div>
+                    </div>
+                    <div class="tracker-line"></div>
+                    <div class="tracker-step {{ $order->order_status == 3 ? 'active' : '' }}">
+                    <div class="icon">✓</div>
+                    <div class="tracker-text">{{ trans('message.trackOrder.status_order.shipping') }}</div>
+                    <div class="tracker-time">{{ $order->order_status == 3 ? date("H:i:s d/m/Y", strtotime($order->order_times_updated_at ?? $order->order_updated_at)) : '' }}</div>
+                    </div>
+                    <div class="tracker-line"></div>
+                    <div class="tracker-step {{ $order->order_status == 2 ? 'active' : '' }}">
+                    <div class="icon">✓</div>
+                    <div class="tracker-text">{{ trans('message.trackOrder.status_order.done') }}</div>
+                    <div class="tracker-time">{{ $order->order_status == 2 ? date("H:i:s d/m/Y", strtotime($order->order_times_updated_at ?? $order->order_updated_at)) : '' }}</div>
+                </div>
+                @else
+                <div class="tracker-text" style="color: red; font-size: 25px; font-weight: 700">{{ trans('message.trackOrder.status_order.cancel') }}</div>
+            @endif
+        </div>
         <main id="main" class="site-main">
 
             <article id="post-2181" class="post-2181 page type-page status-publish hentry">
@@ -19,11 +88,11 @@
                         <table class="shop_table shop_table_responsive cart">
                             <thead>
                                 <tr>
-                                    <th class="product-price">Hình ảnh</th>
-                                    <th class="product-name">Tên sản phẩm</th>
-                                    <th class="product-quantity">Số lượng</th>
-                                    <th class="product-subtotal">Loại sản phẩm</th>
-                                    <th class="product-subtotal">Tổng tiền</th>
+                                    <th class="product-price"></th>
+                                    <th class="product-name">{{ trans('message.cart.Product') }}</th>
+                                    <th class="product-quantity">{{ trans('message.cart.Quantity') }}</th>
+                                    <th class="product-subtotal">{{ trans('message.cart.flavor') }}</th>
+                                    <th class="product-subtotal">{{ trans('message.cart.subTotal') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

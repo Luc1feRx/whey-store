@@ -18,15 +18,10 @@ class CartController extends Controller
         //1. Kiểm tra tồn tại sản phẩm
         if (!$product) return redirect()->to('/');
 
-        // // 2. Kiểm tra số lượng sản phẩm
+        // 2. Kiểm tra số lượng sản phẩm
         // if ($product->pro_number < 1) {
         //     //4. Thông báo
-        //     \Session::flash('toastr', [
-        //         'type'    => 'error',
-        //         'message' => 'Số lượng sản phẩm không đủ'
-        //     ]);
-
-        //     return redirect()->back();
+        //     return response()->json(['code' => 400, 'msg' => 'Số lượng sản phẩm không đủ']);
         // }
 
         // 3. Thêm sản phẩm vào giỏ hàng

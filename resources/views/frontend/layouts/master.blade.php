@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets/css/style.css') }}" media="all" />
         <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets/css/colors/yellow.css') }}" media="all" />
         <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets/css/toastr.min.css') }}" media="all" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
         @yield('addCss')
@@ -36,6 +37,7 @@
         </div><!-- #page -->
 
         <script type="text/javascript" src="{{ asset('frontend/assets/js/jquery.min.js') }}"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script type="text/javascript" src="{{ asset('frontend/assets/js/tether.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('frontend/assets/js/bootstrap-hover-dropdown.min.js') }}"></script>
@@ -70,6 +72,50 @@
                     }
                 });
             });
+
+
+            function copyToClipboard(sku) {
+                var text = jQuery('.'+sku).val();
+                console.log(text);
+                if (window.clipboardData && window.clipboardData.setData) {
+                    // IE specific code path to prevent textarea being shown while dialog is visible.
+                    return clipboardData.setData("Text", text); 
+
+                } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+                    var textarea = document.createElement("textarea");
+                    textarea.textContent = text;
+                    textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "3000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
+                    try {
+                        Command: toastr["success"]("Thành công")
+                        return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+                    } catch (ex) {
+                        Command: toastr["error"]("Thất bại")
+                        console.warn("Copy to clipboard failed.", ex);
+                        return false;
+                    } finally {
+                        document.body.removeChild(textarea);
+                    }
+                }
+            }
         </script>
     </body>
 </html>

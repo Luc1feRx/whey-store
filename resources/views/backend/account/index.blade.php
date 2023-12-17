@@ -19,6 +19,11 @@
                             <i class="fa fa-filter"></i> Lọc
                         </button>
                         <a href="{{ route('admin.accounts.create') }}" class="btn btn-info">Tạo tài khoản</a>
+                        <a href="{{ route('admin.accounts.index') }}" class="btn btn-success"
+                        title="Refresh">
+                        <i class="fa fa-refresh"></i><span
+                                class="hidden-xs"> Làm mới</span>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [

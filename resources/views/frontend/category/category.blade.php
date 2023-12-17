@@ -1,5 +1,55 @@
 @extends('frontend.layouts.master')
 
+@section('addCss')
+    <style>
+        .price-range-slider {
+        width:100%;
+        float:left;
+        padding:10px 20px;
+        }
+
+        .range-value {
+                margin:0;
+            }
+
+            .range-value input {
+                    width:100%;
+                    background:none;
+                    color: #000;
+                    font-size: 16px;
+                    font-weight: initial;
+                    box-shadow: none;
+                    border: none;
+                    margin: 20px 0 20px 0;
+                }
+.range-bar {
+		border: none;
+		background: #000;
+		height: 3px;	
+		width: 96%;
+		margin-left: 8px;
+	}
+
+    .ui-slider-range {
+			background:#06b9c0;
+	}
+		
+		.ui-slider-handle {
+			border:none;
+			border-radius:25px;
+			background:#fff;
+			border:2px solid #06b9c0;
+			height:17px;
+			width:17px;
+			top: -0.52em;
+			cursor:pointer;
+		}
+		.ui-slider-handle + span {
+			background:#06b9c0;
+		}
+    </style>
+@endsection
+
 @section('content')
 <div id="content" class="site-content" tabindex="-1">
     <div class="container">
@@ -961,6 +1011,28 @@
             //         window.location.replace(url);
             //     }
             // });
+        });
+        jQuery(function() {
+            jQuery(".price_slider").slider({
+            range: true,
+            min: 500000, // Giá tiền tối thiểu
+            max: 2000000, // Giá tiền tối đa
+            values: [500000, 1000000], // Giá trị khởi tạo ban đầu cho slider
+            slide: function(event, ui) {
+                jQuery(".price_label .from").text(ui.values[0] + "VNĐ");
+                jQuery(".price_label .to").text(ui.values[1] + "VNĐ");
+
+                // Cập nhật giá trị vào các thẻ input hidden
+                console.log(jQuery('.price_label .input-from').val(ui.values[0]));
+                jQuery('input[name="from"]').val(ui.values[0]);
+                jQuery('input[name="to"]').val(ui.values[1]);
+            }
+        });
+            // Cập nhật hiển thị giá khi trang được tải
+            jQuery(".price_label .from").text(jQuery(".price_slider").slider("values", 0) + "VNĐ");
+            jQuery(".price_label .to").text(jQuery(".price_slider").slider("values", 1) + "VNĐ");
+            jQuery('input[name="from"]').val(jQuery(".price_slider").slider("values", 0));
+            jQuery('input[name="to"]').val(jQuery(".price_slider").slider("values", 1));
         });
     </script>
 @endsection

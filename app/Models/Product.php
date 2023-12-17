@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Filterable;
 
     protected $guard = 'products';
 
@@ -54,5 +55,17 @@ class Product extends Model
     {
         return $this->belongsToMany(Flavor::class, 'product_flavors', 'product_id', 'flavor_id')
             ->withPivot('quantity'); // Lấy cột quantity trong bảng trung gian
+    }
+
+    /**
+     * check status
+     * @return array
+     */
+
+     public static function checkStatus() {
+        return [
+            self::HIDDEN => 'Ẩn',
+            self::DISPLAY => 'Hiển thị'
+        ];
     }
 }

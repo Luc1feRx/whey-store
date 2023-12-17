@@ -22,7 +22,11 @@
                             aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa fa-filter"></i> Lọc
                         </button>
-                        {{-- <a href="{{ route('admin.products.create') }}" class="btn btn-info">Tạo sản phẩm</a> --}}
+                        <a href="{{ route('admin.good-issues.index') }}" class="btn btn-success"
+                        title="Refresh">
+                        <i class="fa fa-refresh"></i><span
+                                class="hidden-xs"> Làm mới</span>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [

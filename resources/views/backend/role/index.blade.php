@@ -19,6 +19,11 @@
                             <i class="fa fa-filter"></i> Lọc
                         </button>
                         <a href="{{ route('admin.roles.create') }}" class="btn btn-info">Tạo vai trò</a>
+                        <a href="{{ route('admin.roles.index') }}" class="btn btn-success"
+                            title="Refresh">
+                        <i class="fa fa-refresh"></i><span
+                                class="hidden-xs"> Làm mới</span>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [

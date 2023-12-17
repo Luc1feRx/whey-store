@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Common;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,8 +13,15 @@ use Spatie\Permission\Models\Permission;
 class PermissionController extends Controller
 {
     const PAGE = 20;
-    public function index(){
-        $permissions = Permission::paginate(self::PAGE);
+    public function index(Request $request){
+        $permissions = Permission::query();
+        if($request->keyword){
+            $searchKeyword = Common::escapeLike($request->keyword);
+            $permissions->where(function ($q) use ($searchKeyword) {
+                $q->where('permissions.name', 'LIKE', "%" . $searchKeyword . "%");
+            });
+        }
+        $permissions = $permissions->paginate(self::PAGE);
         return view('backend.permission.index', [
             'permissions' => $permissions
         ]);

@@ -21,61 +21,28 @@
     </aside>
     <aside id="electro_features_block_widget-2" class="widget widget_electro_features_block_widget">
         <div class="features-list columns-1">
-            <div class="feature">
-                <div class="media">
-                    <div class="media-left media-middle feature-icon">
-                        <i class="ec ec-transport"></i>
-                    </div>
-                    <div class="media-body media-middle feature-text">
-                        <strong>Free Delivery</strong> from $50
-                    </div>
-                </div>
-            </div>
-            <div class="feature">
-                <div class="media">
-                    <div class="media-left media-middle feature-icon">
-                        <i class="ec ec-customers"></i>
-                    </div>
-                    <div class="media-body media-middle feature-text">
-                        <strong>99% Positive</strong> Feedbacks
+            @foreach ($randomVouchers as $voucher)
+                <div class="feature">
+                    <div class="media">
+                        <div class="media-left media-middle feature-icon">
+                            <i class="ec ec-transport"></i>
+                        </div>
+                        <div class="media-body media-middle feature-text">
+                            <input type="hidden" name="" class="copy_voucher_{{ $voucher->voucher_sku }}" value="{{ $voucher->voucher_sku }}">
+                            <strong>{{ trans('message.voucher') }} {{ $voucher->name }}</strong> {{ $voucher->voucher_sku }}
+                        </div>
+                        <div style="display: flex;
+                        justify-content: flex-end;
+                        margin-top: 10px;">
+                            <button class="btn-sm" onclick="copyToClipboard('copy_voucher_{{ $voucher->voucher_sku }}')">{{ trans('message.btn_copy_voucher') }}</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="feature">
-                <div class="media">
-                    <div class="media-left media-middle feature-icon">
-                        <i class="ec ec-returning"></i>
-                    </div>
-                    <div class="media-body media-middle feature-text">
-                        <strong>365 days</strong> for free return
-                    </div>
-                </div>
-            </div>
-            <div class="feature">
-                <div class="media">
-                    <div class="media-left media-middle feature-icon">
-                        <i class="ec ec-payment"></i>
-                    </div>
-                    <div class="media-body media-middle feature-text">
-                        <strong>Payment</strong> Secure System
-                    </div>
-                </div>
-            </div>
-            <div class="feature">
-                <div class="media">
-                    <div class="media-left media-middle feature-icon">
-                        <i class="ec ec-tag"></i>
-                    </div>
-                    <div class="media-body media-middle feature-text">
-                        <strong>Only Best</strong> Brands
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </aside>
     <aside class="widget widget_electro_products_carousel_widget">
         <section class="section-products-carousel" >
-
 
             <header>
 
@@ -94,11 +61,11 @@
 
                     @foreach ($getProductFeatured as $getProductSideBar)
                         <div class="product-carousel-alt">
-                            <a href="single-product.html">
+                            <a href="{{ route('home.product-detail', ['slug'=>$getProductSideBar->slug]) }}">
                                 <div class="product-thumbnail"><img width="250" height="232" src="{{ !empty($getProductSideBar->thumbnail) ? asset('storage/' .$getProductSideBar->thumbnail) : asset('backend\dist\img\placeholder.png') }}" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="Smartwatch2" /></div>
                             </a>
 
-                            <a href="single-product.html"><h3>{{ $getProductSideBar->name }}</h3></a>
+                            <a href="{{ route('home.product-detail', ['slug'=>$getProductSideBar->slug]) }}"><h3>{{ $getProductSideBar->name }}</h3></a>
                             <span class="price"><span class="electro-price"><span class="amount">{{ \App\Helpers\Common::numberFormat($productFeatured->discount_price) }} đ</span></span></span>
                             <del><span class="amount">{{ \App\Helpers\Common::numberFormat($productFeatured->price) }} đ</span></del>
                         </div>

@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 {{-- search --}}
                 <section class="dataTables_wrapper">
-                    @include('backend.role.search')
+                    @include('backend.permission.search')
                 </section>
 
                 <div class="row mb-2">
@@ -19,6 +19,11 @@
                             <i class="fa fa-filter"></i> Lọc
                         </button>
                         <a href="{{ route('admin.permissions.create') }}" class="btn btn-info">Tạo quyền</a>
+                        <a href="{{ route('admin.permissions.index') }}" class="btn btn-success"
+                        title="Refresh">
+                        <i class="fa fa-refresh"></i><span
+                                class="hidden-xs"> Làm mới</span>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [

@@ -49,6 +49,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/apply-discount', [CartController::class, 'cartDiscount'])->name('home.applyDiscount');
     Route::delete('/cart-delete/{id}', [CartController::class, 'deleteCart'])->name('home.cart.delete');
 
+    Route::get('/products/filter', [HomeController::class, 'ajaxFilter'])->name('products.ajaxFilter');
+
     //checkout
     Route::group(['prefix' => 'checkout'], function () {
         Route::get('/', [CheckoutController::class, 'checkout'])->name('home.checkout');

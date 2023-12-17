@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Flavor;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Traits\Filterable;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    use Filterable;
     const PAGE = 20;
     public function index(Request $request){
         $products = Product::with(['categories', 'flavors'])
@@ -29,6 +31,12 @@ class ProductController extends Controller
                 $q->where('products.name', 'LIKE', "%" . $searchKeyword . "%")
                     ->orWhere('products.slug', 'LIKE', "%" . $searchKeyword . "%");
             });
+        }
+        //search by deleted at
+        $valSearch = $request->only('deleted_at');
+        $products->filter($valSearch);
+        if (isset($request->deleted_at)) {
+            $products->filterDelete($request->deleted_at);
         }
         $products = $products->orderBy('id', 'desc')
             ->select([
@@ -47,9 +55,12 @@ class ProductController extends Controller
                 'products.is_featured_product'
             ])
             ->paginate(self::PAGE);
+
+            $status = Product::checkStatus();
         
         return view('backend.product.index', [
-            'products' => $products
+            'products' => $products,
+            'checkStatus' => $status
         ]);
     }
 

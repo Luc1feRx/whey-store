@@ -202,9 +202,9 @@
 
             <div class="header-support-info">
                 <div class="media">
-                    <div class="media-body">
-                        <a href="{{ route('home.lang', ['lang'=>'vi']) }}">Việt</a>
-                        <a href="{{ route('home.lang', ['lang'=>'en']) }}">Anh</a>
+                    <div class="media-body" style="display: flex;">
+                        <a href="{{ route('home.lang', ['lang'=>'vi']) }}"><img style="width: 50px; margin-right: 20px" src="{{ asset('frontend/assets/images/icons/vietnam.png') }}" alt=""></a>
+                        <a href="{{ route('home.lang', ['lang'=>'en']) }}"><img style="width: 50px" src="{{ asset('frontend/assets/images/icons/united-states.png') }}" alt=""></a>
                     </div>
                 </div>
             </div>
