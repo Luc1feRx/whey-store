@@ -10,7 +10,9 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+           <div style="display: flex; justify-content: center">
+            <img style="width: 150px" src="{{ asset('frontend\assets\images\love-fitness-gym-logo-design-template-design-gym-fitness-club-vector-illustration_722324-99.avif') }}" alt="">
+           </div>
 
             <form action="{{ route('admin.login') }}" method="POST">
                 {{ csrf_field() }}
@@ -47,7 +49,7 @@
                 </div>
             </form>
 
-            <div class="social-auth-links text-center mb-3">
+            {{-- <div class="social-auth-links text-center mb-3">
                 <p>- OR -</p>
                 <a href="#" class="btn btn-block btn-primary">
                     <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
@@ -55,15 +57,8 @@
                 <a href="#" class="btn btn-block btn-danger">
                     <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                 </a>
-            </div>
+            </div> --}}
             <!-- /.social-auth-links -->
-
-            <p class="mb-1">
-                <a href="forgot-password.html">I forgot my password</a>
-            </p>
-            <p class="mb-0">
-                <a href="register.html" class="text-center">Register a new membership</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>

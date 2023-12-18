@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 {{-- search --}}
                 <section class="dataTables_wrapper">
-                    @include('backend.role.search')
+                    @include('backend.comment.search')
                 </section>
 
                 <div class="row mb-2">
@@ -18,10 +18,15 @@
                             aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa fa-filter"></i> Lọc
                         </button>
+                        <a href="{{ route('admin.comments.index') }}" class="btn btn-success"
+                        title="Refresh">
+                        <i class="fa fa-refresh"></i><span
+                                class="hidden-xs"> Làm mới</span>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [
-                        'breadcrumb' => [['title' => 'Danh sách bình luận sản phẩm', 'url' => '#']],
+                            'breadcrumb' => [['title' => 'Danh sách bình luận sản phẩm', 'url' => '#']],
                         ])
                     </div>
                 </div>
@@ -61,9 +66,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($reviews as $review)
+                                    @foreach ($reviews as $k => $review)
                                     <tr>
-                                        <td>{{ $review->id }}</td>
+                                        <td>{{ ($reviews->currentPage() - 1) * $reviews->perPage() + $k + 1 }}</td>
                                         <td>{{ $review->user->name }}</td>
                                         <td>{{ $review->product->name }}</td>
                                         <td>
@@ -74,8 +79,6 @@
                                         <td>{{ $review->content }}</td>
                                         <td>{{ $review->status == 1 ? 'Hiển thị' : 'Ẩn' }}</td>
                                         <td>
-                                            <a data-id="{{ $review->id }}"
-                                                class="btn btn-icon btn-sm tip"><i class="fas fa-pencil-alt"></i></a>
                                             <a data-id="{{ $review->id }}" data-image=""
                                                 class="btn btn-icon btn-sm deleteDialog tip " data-toggle="tooltip"
                                                 title=""><i class="fa fa-trash"></i></a>

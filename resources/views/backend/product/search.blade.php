@@ -24,7 +24,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <button type="submit" class="btn btn-info btn-search">
-                                <i class="fa fa-search"></i> {{ __('admin::messages.common.search') }}
+                                <i class="fa fa-search"></i> Tìm kiếm
                             </button>
                         </div>
                     </div>

@@ -17,11 +17,21 @@ class CommentController extends Controller
             $searchKeyword = Common::escapeLike($request->keyword);
             $reviews->where(function ($q) use ($searchKeyword) {
                 $q->where('content', 'LIKE', "%" . $searchKeyword . "%")
-                    ->orWhere('rating', 'LIKE', "%" . $searchKeyword . "%");
+                    ->orWhereHas('product', function ($query) use ($searchKeyword) {
+                        $query->where('name', 'LIKE', "%" . $searchKeyword . "%");
+                    })
+                    // Tìm kiếm trong bảng users
+                    ->orWhereHas('user', function ($query) use ($searchKeyword) {
+                        $query->where('name', 'LIKE', "%" . $searchKeyword . "%");
+                    });
             });
         }
         
         $reviews = $reviews->orderBy('id', 'desc')->paginate(10);
+
+        if (!empty($request->keyword)) {
+            $reviews->appends(['keyword' => $request->keyword]);
+        }
 
         return view('backend.comment.index', [
             'reviews' => $reviews

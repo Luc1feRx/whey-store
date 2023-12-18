@@ -7,87 +7,19 @@
     <section class="content">
         <section class="content-header">
             <div class="container-fluid">
-
-                <div class="col-xs-12">
-                    <div class="table-configuration-wrap" style="display: block">
-                        <span class="configuration-close-btn btn-show-table-options"><i class="fa fa-times"></i></span>
-                        <div class="wrapper-filter">
-                            <form action="" method="GET">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <input type="text" name="keyword" class="form-control" id="keyword"
-                                                placeholder="{{ __('admin::messages.doctor.search_reviewScheduleDoctor') }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <select name="doctor_id" class="form-control" id="doctor_id">
-
-                                            </select>
-                                            <input id="input-avatar" type="hidden" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <select name="specialty_id" id="specialty_id" class="form-control">
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <select name="deleted_at" class="form-control">
-                                                <option value="">{{ __('admin::messages.doctor.select_deleted_at') }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <select name="approval" class="form-control">
-                                                <option value="">{{ __('admin::messages.doctor.select_approval') }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='time-from'>
-                                                <input type='text' name="from" class="form-control"
-                                                    placeholder="{{ __('admin::messages.doctor.search_time-from') }}" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='time-to'>
-                                                <input type='text' name="to" class="form-control"
-                                                    placeholder="{{ __('admin::messages.doctor.search_time-to') }}" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-info btn-search">
-                                                <i class="fa fa-search"></i> {{ __('admin::messages.common.search') }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
+                <section class="dataTables_wrapper">
+                    @include('backend.brand.search')
+                </section>
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Simple Tables</h1>
+                        <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa fa-filter"></i> Lọc
+                        </button>
+                        <a href="{{ route('admin.brands.index') }}" class="btn btn-success"
+                        title="Refresh">
+                        <i class="fa fa-refresh"></i><span
+                                class="hidden-xs"> Làm mới</span>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [

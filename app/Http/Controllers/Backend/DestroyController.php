@@ -15,6 +15,7 @@ use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -159,20 +160,20 @@ class DestroyController extends Controller
             } else if($model == Role::class){
                 $roles = $model::whereIn('id', $arr_id)->get();
 
+                // Kiểm tra xem có vai trò nào không
+                if (count($roles) <= 0) {
+                    $msg = 'Xóa thất bại';
+                    return response()->json(['status' => false, 'msg' => $msg]);
+                }
+            
                 // Xóa quyền của từng vai trò
                 foreach ($roles as $role) {
                     $role->permissions()->detach();
+                    $role->delete(); // Xóa vai trò, tự động cập nhật 'deleted_at' nếu sử dụng Soft Deletes
                 }
             
-                // Sau đó xóa các vai trò
-                $datas = $model::whereIn('id', $arr_id)->get();
-                if(count($datas) <= 0){
-                    $msg = 'Xóa thất bại';
-                    return response()->json(array('status' => false, 'msg' => $msg));
-                }
-                $datas = $datas->update([
-                    'deleted_at' => Carbon::now()
-                ]);
+                $msg = 'Xóa thành công';
+                return response()->json(['status' => true, 'msg' => $msg]);
             } else if($model == Permission::class || $model == Review::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
             }else {
@@ -189,7 +190,7 @@ class DestroyController extends Controller
             $msg = 'Xóa thành công';
             return response()->json(array('status' => true, 'msg' => $msg));
         } catch (\Exception $e) {
-            return $this->renderJsonResponse($e->getMessage());
+            Log::error($e->getMessage());
         }
     }
 }

@@ -29,6 +29,10 @@ class CategoryController extends Controller
         }
         
         $categories = $categories->orderBy('id', 'desc')->paginate(10);
+
+        if (!empty($request->keyword)) {
+            $categories->appends(['keyword' => $request->keyword]);
+        }
         return view('backend.category.index', [
             'categories' => $categories
         ]);

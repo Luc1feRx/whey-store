@@ -29,6 +29,10 @@ class VoucherController extends Controller
         }
         
         $vouchers = $vouchers->orderBy('id', 'desc')->paginate(10);
+
+        if (!empty($request->keyword)) {
+            $vouchers->appends(['keyword' => $request->keyword]);
+        }
         return view('backend.voucher.index', [
             'vouchers' => $vouchers
         ]);

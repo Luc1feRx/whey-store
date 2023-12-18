@@ -11,7 +11,7 @@ $active = 'active';
 @endphp
 <li class="nav-item">
   <a href="{{ route('admin.roles.index') }}" class="nav-link {{ $active }}">
-    <i class="nav-icon fas fa-tachometer-alt"></i>
+    <i class="nav-icon fas fa-user-tag"></i>
     <p>
       Quản lý vai trò
     </p>

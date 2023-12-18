@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Nhập tên hoặc mã của voucher">
+                            <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Nhập tên sản phẩm hoặc tên người dùng">
                         </div>
                     </div>
                     <div class="col-md-2">

@@ -11,7 +11,7 @@ $active = 'active';
 @endphp
 <li class="nav-item">
   <a href="{{ route('admin.permissions.index') }}" class="nav-link {{ $active }}">
-    <i class="nav-icon fas fa-tachometer-alt"></i>
+    <i class="nav-icon fas fa-pen-square"></i>
     <p>
       Quản lý quyền
     </p>

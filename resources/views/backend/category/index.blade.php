@@ -17,6 +17,12 @@
                                 <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     <i class="fa fa-filter"></i> Lọc
                                 </button>
+                                <a href="{{ route('admin.categories.create') }}" class="btn btn-info">Tạo danh mục</a>
+                                <a href="{{ route('admin.categories.index') }}" class="btn btn-success"
+                                title="Refresh">
+                                <i class="fa fa-refresh"></i><span
+                                        class="hidden-xs"> Làm mới</span>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 @include('backend.partials.breadcrumb', [
@@ -29,9 +35,10 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
+                            @if (count($categories) <= 0) @include('backend.partials.noData')
+                            @else
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('admin.categories.create') }}" class="btn btn-info">Tạo danh mục</a>
 
                                     <form class="card-tools" action="" method="GET">
                                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -47,8 +54,6 @@
                                     </form>
                                 </div>
                                 <!-- /.card-header -->
-                                @if (count($categories) <= 0) @include('backend.partials.noData')
-                                @else
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover table-bordered text-nowrap">
                                         <thead>
@@ -62,9 +67,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($categories as $cate)
+                                            @foreach ($categories as $k => $cate)
                                                 <tr>
-                                                    <td>{{ $cate->id }}</td>
+                                                    <td>{{ ($categories->currentPage() - 1) * $categories->perPage() + $k + 1 }}</td>
                                                     <td>{{ $cate->name_category }}</td>
                                                     <td>{{ $cate->slug_category }}</td>
                                                     <td>
