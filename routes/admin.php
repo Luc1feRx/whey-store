@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CommentController;
+use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DestroyController;
 use App\Http\Controllers\Backend\GoodIssueController;
@@ -121,6 +122,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::post('/export', [GoodIssueController::class, 'export'])->name('export');
             Route::get('/list-export-import', [GoodIssueController::class, 'listImportExportGood'])->name('list');
             Route::get('/export', [GoodIssueController::class, 'ExportGood'])->name('export');
+        });
+
+        //product
+        Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
+            Route::get('/', [CustomerController::class, 'index'])->name('index');
+            Route::get('/create', [CustomerController::class, 'create'])->name('create');
+            Route::post('/store', [CustomerController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
         });
     });
 

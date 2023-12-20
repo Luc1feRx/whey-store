@@ -105,7 +105,6 @@
                                 <div class="home-v2-owl-carousel-tabs">
                                     <div class="woocommerce columns-3">
 
-
                                         <div class="products owl-carousel home-v2-carousel-tabs products-carousel columns-3">
                                             @foreach ($getProductReview as $review_product)
                                                 @php
@@ -134,13 +133,12 @@
                                                             <div class="price-add-to-cart">
                                                                 <span class="price">
                                                                     <span class="electro-price">
-                                                                        @if (!empty($review_product->discount_price))
+                                                                        @if (!empty($review_product->percent))
                                                                             <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($review_product->discount_price) }} đ</span></ins>
                                                                             <del><span class="amount"> {{ \App\Helpers\Common::numberFormat($review_product->price) }} đ</span></del>
                                                                             <span class="amount"> </span>
                                                                         @else
-                                                                            <ins><span class="amount"> </span></ins>
-                                                                            <span class="amount"> {{ \App\Helpers\Common::numberFormat($review_product->price) }} đ</span>
+                                                                            <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($review_product->price) }} đ</span></ins>
                                                                         @endif
                                                                     </span>
                                                                 </span>
@@ -152,7 +150,6 @@
 
                                                                     <a href="#" rel="nofollow" class="add_to_wishlist"> {{ trans('message.wishlist') }}</a>
 
-                                                                    <a href="compare.html" class="add-to-compare-link"> Compare</a>
                                                                 </div>
                                                             </div>
                                                         </div><!-- /.product-inner -->

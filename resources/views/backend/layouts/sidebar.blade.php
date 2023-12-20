@@ -21,18 +21,6 @@
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -40,6 +28,7 @@
                with font-awesome or any other icon font library -->
             @include('backend.dashboard.aside')
             @include('backend.profile.aside')
+            @include('backend.customer.aside')
             @if (Auth::guard('admin')->user()->hasPermissionTo('manage decentralized'))
               @include('backend.role.aside')
               @include('backend.permission.aside')

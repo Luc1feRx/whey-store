@@ -203,6 +203,8 @@
                         // Cập nhật giao diện hoặc thông báo thành công
                         console.log(response);
 
+                        
+
                         // Ví dụ: Reload trang sau khi xóa sản phẩm
                         location.reload();
                     },

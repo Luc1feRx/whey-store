@@ -20,8 +20,8 @@
                     </div>
                     <div style="clear: both;"></div>
                 </div>
-                <h2>Tổng tiền : <b>{{ number_format($item->price,0,',','.') }} đ</b></h2>
-            @endforeach
+                @endforeach
+            <h2>Tổng tiền : <b>{{ number_format(\Cart::subtotal(0),0,',','.') }} đ</b></h2>
         </div>
         <div>
             <p>Đây là email tự động xin vui không không trả lời vào email này</p>

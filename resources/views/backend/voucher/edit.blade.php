@@ -75,7 +75,7 @@
     <script src="{{ asset('backend\plugins\summernote\summernote.min.js') }}"></script>
     <script src="{{ asset('backend\plugins\summernote\summernote-bs4.js') }}"></script>
     <script src="{{ asset('backend\common\summernote_common.js') }}"></script>
-    @include('backend.post.script')
+    @include('backend.voucher.script')
     @if (session('error'))
     @include('backend.layouts.toastr')
 @endif

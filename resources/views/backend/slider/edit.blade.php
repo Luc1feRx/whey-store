@@ -54,7 +54,7 @@
                         <!-- form start -->
                         <form action="{{ route('admin.sliders.update', ['id' => $slider->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            @include('backend.brand.form')
+                            @include('backend.slider.form')
                         </form>
                     </div>
                 </div>

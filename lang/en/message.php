@@ -56,12 +56,16 @@ return [
         'Product' => 'Product',
         'cartTotal' => 'Cart total',
         'subTotal' => 'Sub total',
-        'proceedToCheckout' => 'Checkout'
+        'proceedToCheckout' => 'Checkout',
+        'insufficient_quantity' => 'Add To Cart failed'
     ],
     'discount' => [
         'sku' => 'Discount code',
         'applyDiscount' => 'Apply discount code',
-        'placeholderApplyDiscount' => 'Enter discount code'
+        'placeholderApplyDiscount' => 'Enter discount code',
+        'errorDiscount' => 'Invalid discount code',
+        'requiredDiscountCode' => 'Please enter discount code',
+        'minimumNotReached' => 'Not eligible to use discount codes'
     ],
     'checkout' => [
         'title' => 'Checkout',
@@ -86,5 +90,20 @@ return [
             'done' => 'Successful',
             'cancel' => 'Cancel Order'
         ]
-    ]
+    ],
+    'inStock' => 'In stock',
+    'outStock' => 'Out of stock',
+    'flavor' => 'Flavors',
+    'Availablity'=>'Availablity',
+    'addToCart' => 'Add To Cart',
+    'customer_reviews' => 'customer reviews',
+    'LoginToComment' => 'Login To Comment',
+    'description' => 'Description',
+    'Reviews' => 'Reviews',
+    'Specification' => 'Specification',
+    'product_view_lastest' => 'Interested',
+    'first_name' => 'First name',
+    'last_name' => 'Last name',
+    'enter_first_name' => 'Enter first name',
+    'enter_last_name' => 'Enter last name',
 ];

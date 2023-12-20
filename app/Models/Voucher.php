@@ -18,4 +18,13 @@ class Voucher extends Model
      * @var array
      */
     protected $guarded = [];
+
+    protected $casts = [
+        'applicable_brands' => 'array',
+    ];
+
+    // Phương thức để kiểm tra xem một thương hiệu có được áp dụng không
+    public function isApplicableToBrand($brandId) {
+        return in_array($brandId, $this->applicable_brands);
+    }
 }

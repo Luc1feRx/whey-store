@@ -74,7 +74,7 @@
 <script src="{{ asset('backend\common\admin_common.js') }}"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 
-<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.0.2/cleave.min.js"></script>
 <script>
   $(function () {
     bsCustomFileInput.init();

@@ -17,6 +17,7 @@ use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
@@ -96,7 +97,10 @@ class HomeController extends Controller
     }
 
     public function productDetail($slug){
-        $productDetail = Product::with(['images', 'flavors', 'reviews' => function ($query) {
+        $productDetail = Product::with(['images', 'flavors'  => function ($query) {
+            $query->withPivot('quantity'); // 'quantity' là cột trong bảng trung gian 'product_flavors'
+        },
+        'reviews' => function ($query) {
             $query->with('user') // Chỉ lấy cột 'id' và 'name' từ bảng 'users'
                   ->orderBy('created_at', 'desc'); // Sắp xếp theo created_at giảm dần
         }])->leftJoin('brands', 'brands.id', 'products.brand_id')
@@ -130,6 +134,9 @@ class HomeController extends Controller
 
             $randomVouchers = Voucher::inRandomOrder()->where('status', 1)->limit(5)->get();
 
+            $productView = Product::withCount('reviews')->where('slug', $slug)->first();
+            $reviewCount = $productView->reviews_count;
+
             if(Auth::check()){
                 $isFavorite = FavoriteProduct::where('user_id', Auth::user()->id)
                 ->where('product_id', $productDetail->id)
@@ -140,7 +147,8 @@ class HomeController extends Controller
             'productDetail' => $productDetail,
             'isFavorite' => isset($isFavorite) ? $isFavorite : null,
             'getProductByViewCount' => $getProductByViewCount,
-            'randomVouchers' => $randomVouchers
+            'randomVouchers' => $randomVouchers,
+            'reviewCount' => $reviewCount
         ]);
     }
 
@@ -186,5 +194,16 @@ class HomeController extends Controller
         return view('frontend.track-order.track-order', [
             'order' => isset($order) ? $order : [],
         ]);
+    }
+
+
+    public function checkFlavorStock(Request $request, $productId, $flavorId)
+    {
+        $quantity = DB::table('product_flavors')
+                    ->where('product_id', $productId)
+                    ->where('flavor_id', $flavorId)
+                    ->value('quantity');
+
+        return response()->json(['inStock' => $quantity > 0]);
     }
 }

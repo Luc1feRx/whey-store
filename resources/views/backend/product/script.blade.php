@@ -14,12 +14,6 @@
                     weight: 'required',
                     serving_size: 'required',
                     price: 'required',
-                    percent: {
-                        required: true,
-                        number: true,
-                        min: 1,
-                        max: 100
-                    },
                     score: 'required',
                     origin: 'required',
                     main_ingredient: 'required',
@@ -35,12 +29,6 @@
                     weight: 'Vui lòng nhập trọng lượng',
                     serving_size: 'Vui lòng nhập khẩu phần',
                     price: 'Vui lòng nhập giá gốc',
-                    percent: {
-                        required: 'Vui lòng nhập phần trăm khuyến mãi',
-                        number: 'Phần trăm khuyến mãi phải là số',
-                        min: 'Phần trăm khuyến mãi tối thiểu là 1',
-                        max: 'Phần trăm khuyến mãi tối đa là 100'
-                    },
                     score: 'Vui lòng nhập điểm bình chọn',
                     origin: 'Vui lòng nhập xuất xứ',
                     main_ingredient: 'Vui lòng nhập thành phần chính',
@@ -53,6 +41,16 @@
                     // Xử lý form khi dữ liệu hợp lệ
                     form.submit();
                 }
+            });
+
+            new Cleave($('[name="price"]'), {
+                numeral: true,
+                delimiter: '.',
+                numeralDecimalMark: ',',
+                numeralThousandsGroupStyle: 'thousand',
+                numeralPositiveOnly: true,
+                numeralDecimalScale: 0,
+                numeralIntegerScale: 18
             });
     });
 </script>

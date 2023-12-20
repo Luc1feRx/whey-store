@@ -4,7 +4,6 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <input type="hidden" name="old_thumbnail" value="" class="old_thumbnail">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên mã giảm giá</label>
@@ -18,27 +17,43 @@
                                 <label for="exampleInputPassword1">Mã giảm giá</label>
                                 <input type="text" class="form-control" name="voucher_sku"
                                     id="exampleInputPassword1" placeholder="Nhập mã giảm giá"
-                                    value="{{ old('slug', $voucher->voucher_sku ?? '') }}">
+                                    value="{{ old('voucher_sku', $voucher->voucher_sku ?? '') }}">
                                 @error('voucher_sku')
                                 <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Số lượng</label>
-                                <input type="number" class="form-control" id="slug" name="quantity"
+                                <input type="number" class="form-control" name="quantity"
                                     id="exampleInputPassword1" placeholder="Nhập số lượng"
-                                    value="{{ old('slug', $voucher->quantity ?? '') }}">
+                                    value="{{ old('quantity', $voucher->quantity ?? '') }}">
                                 @error('quantity')
                                 <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Số % giảm giá</label>
-                                <input type="number" class="form-control" id="slug" name="percentage"
-                                    id="exampleInputPassword1" placeholder="Nhập số % giảm giá"
-                                    value="{{ old('slug', $voucher->percentage ?? '') }}">
-                                @error('percentage')
+                                <label for="exampleInputPassword1">Mô tả</label>
+                                <textarea id="description" name="description" cols="30" rows="3" placeholder="Nhập mô tả" class="form-control">{!! old('description', $voucher->description ?? '') !!}</textarea>
+                                @error('description')
                                 <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Điều kiện để giảm giá</label>
+                                <input type="text" class="form-control" name="min_purchase"
+                                    id="exampleInputPassword1" placeholder="Nhập số tiền tổng đơn hàng tối thiểu để giảm"
+                                    value="{{ old('min_purchase', $voucher->min_purchase ?? '') }}">
+                                @error('min_purchase')
+                                <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Số tiền giảm</label>
+                                <input type="text" class="form-control" name="reduced_amount"
+                                    id="exampleInputPassword1" placeholder="Nhập số tiền giảm giá"
+                                    value="{{ old('reduced_amount', $voucher->reduced_amount ?? '') }}">
+                                @error('reduced_amount')
+                                    <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">

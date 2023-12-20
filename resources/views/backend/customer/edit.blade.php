@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Thêm mới tài khoản @stop
+@section('title') Sửa tài khoản @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -14,15 +14,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Tạo mới tài khoản</h1>
+                    <h1>Sửa tài khoản</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
-                    'breadcrumb'=> [
-                    ['title' => 'Danh sách tài khoản', 'url' => route('admin.accounts.index')],
-                    ['title' => 'Tạo tài khoản', 'url' => '#']
-                    ]
+                        'breadcrumb'=> [
+                            ['title' => 'Danh sách tài khoản', 'url' => route('admin.accounts.index')],
+                            ['title' => 'Sửa tài khoản', 'url' => '#']
+                        ]
                     ])
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.accounts.store') }}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+                        <form action="{{ route('admin.accounts.update', ['id' => $admin->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             @include('backend.account.form')
                         </form>
@@ -68,10 +68,10 @@
 @endsection
 
 @section('addJs')
-<script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
-<script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
-@include('backend.account.script')
-@if (session('error'))
+    <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
+    <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
+    @include('backend.account.script')
+    @if (session('error'))
     @include('backend.layouts.toastr')
 @endif
 @endsection

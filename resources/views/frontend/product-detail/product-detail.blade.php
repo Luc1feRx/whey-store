@@ -1,5 +1,20 @@
 @extends('frontend.layouts.master')
 
+@section('addCss')
+    <style>
+            .out-of-stock {
+                color: red !important; /* Set color to red for out-of-stock items */
+            }
+
+            .dis-none{
+                display: none;
+            }
+
+            .dis-show{
+                display: block;
+            }
+    </style>
+@endsection
 @section('content')
 <div class="single-product">
     <div id="content" class="site-content" tabindex="-1">
@@ -28,7 +43,7 @@
     
                                     <div class="thumbnails-all columns-5 owl-carousel">
                                         @foreach ($productDetail->images as $product_image)
-                                            <a href="" class="first" title=""><img src="{{ asset('storage/' .$product_image->image) }}" data-echo="{{ asset('storage/' .$product_image->image) }}" class="wp-post-image" alt=""></a>
+                                            <a href="" class="" title=""><img src="{{ asset('storage/' .$product_image->image) }}" data-echo="{{ asset('storage/' .$product_image->image) }}" class="wp-post-image" alt=""></a>
                                         @endforeach
                                     </div><!-- .thumbnails-all -->
                                 </div><!-- .electro-gallery -->
@@ -48,7 +63,7 @@
                                         </span>
                                     </div>
     
-                                    <a href="#reviews" class="woocommerce-review-link">(<span itemprop="reviewCount" class="count">3</span> customer reviews)</a>
+                                    <a href="#reviews" class="woocommerce-review-link">(<span itemprop="reviewCount" class="count">{{ $reviewCount }}</span> {{ trans('message.customer_reviews') }})</a>
                                 </div><!-- .woocommerce-product-rating -->
     
                                 <div class="brand">
@@ -56,8 +71,13 @@
                                         <img src="{{ asset('storage/' .$productDetail->brand_thumbnail) }}" alt="{{ $productDetail->brand_name }}" />
                                     </a>
                                 </div><!-- .brand -->
+                                @php
+                                    $totalQuantity = $productDetail->flavors->sum(function($flavor) {
+                                        return $flavor->pivot->quantity;
+                                    });
+                                @endphp
     
-                                <div class="availability in-stock">{{ trans('message.Availablity') }}: <span>In stock</span></div><!-- .availability -->
+                                <div class="availability in-stock">{{ trans('message.Availablity') }}: <span>{{ $totalQuantity > 0 ? trans('message.inStock') : trans('message.outStock') }}</span></div><!-- .availability -->
     
                                 <hr class="single-product-title-divider" />
     
@@ -98,7 +118,7 @@
                                             <tr>
                                                 <td class="label"><label>{{ trans('message.flavor') }}</label></td>
                                                 <td class="value">
-                                                    <select class="flavor-select" name="product_flavor">
+                                                    <select class="flavor-select" name="product_flavor" data-product-id="{{ $productDetail->id }}">
                                                         @foreach ($productDetail->flavors as $flavor)
                                                             <option value="{{ $flavor->id }}">{{ $flavor->name }}</option>
                                                         @endforeach
@@ -133,189 +153,20 @@
     
                         <div class="woocommerce-tabs wc-tabs-wrapper">
                             <ul class="nav nav-tabs electro-nav-tabs tabs wc-tabs" role="tablist">
-                                <li class="nav-item accessories_tab">
-                                    <a href="#tab-accessories" data-toggle="tab">Accessories</a>
-                                </li>
-    
                                 <li class="nav-item description_tab">
-                                    <a href="#tab-description" data-toggle="tab">Description</a>
+                                    <a href="#tab-description" data-toggle="tab">{{ trans('message.description') }}</a>
                                 </li>
     
                                 <li class="nav-item specification_tab">
-                                    <a href="#tab-specification" data-toggle="tab">Specification</a>
+                                    <a href="#tab-specification" data-toggle="tab">{{ trans('message.Specification') }}</a>
                                 </li>
     
                                 <li class="nav-item reviews_tab">
-                                    <a href="#tab-reviews" data-toggle="tab" class="active">Reviews</a>
+                                    <a href="#tab-reviews" data-toggle="tab" class="active">{{ trans('message.Reviews') }}</a>
                                 </li>
                             </ul>
     
                             <div class="tab-content">
-                                <div class="tab-pane panel entry-content wc-tab" id="tab-accessories">
-    
-                                    <div class="accessories">
-    
-                                        <div class="electro-wc-message"></div>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-9 col-left">
-                                                <ul class="products columns-3">
-    
-                                                    <li class="product first">
-                                                        <div class="product-outer">
-                                                            <div class="product-inner">
-                                                                <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                                                <a href="single-product.html">
-                                                                    <h3>Notebook Black Spire V Nitro  VN7-591G</h3>
-                                                                    <div class="product-thumbnail">
-    
-                                                                        <img data-echo="assets/images/products/5.jpg" src="assets/images/blank.gif" alt="">
-    
-                                                                    </div>
-                                                                </a>
-    
-                                                                <div class="price-add-to-cart">
-                                                                    <span class="price">
-                                                                        <span class="electro-price">
-                                                                            <ins><span class="amount">&#036;1,999.00</span></ins>
-                                                                            <del><span class="amount">&#036;2,299.00</span></del>
-                                                                        </span>
-                                                                    </span>
-                                                                    <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                                </div><!-- /.price-add-to-cart -->
-    
-                                                                <div class="hover-area">
-                                                                    <div class="action-buttons">
-                                                                        <a href="#" rel="nofollow" class="add_to_wishlist">Wishlist</a>
-                                                                        <a href="#" class="add-to-compare-link">Compare</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- /.product-inner -->
-                                                        </div><!-- /.product-outer -->
-                                                    </li>
-                                                    <li class="product ">
-                                                        <div class="product-outer">
-                                                            <div class="product-inner">
-                                                                <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                                                <a href="single-product.html">
-                                                                    <h3>Notebook Black Spire V Nitro  VN7-591G</h3>
-                                                                    <div class="product-thumbnail">
-    
-                                                                        <img data-echo="assets/images/products/3.jpg" src="assets/images/blank.gif" alt="">
-    
-                                                                    </div>
-                                                                </a>
-    
-                                                                <div class="price-add-to-cart">
-                                                                    <span class="price">
-                                                                        <span class="electro-price">
-                                                                            <ins><span class="amount">&#036;1,999.00</span></ins>
-                                                                            <del><span class="amount">&#036;2,299.00</span></del>
-                                                                        </span>
-                                                                    </span>
-                                                                    <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                                </div><!-- /.price-add-to-cart -->
-    
-                                                                <div class="hover-area">
-                                                                    <div class="action-buttons">
-                                                                        <a href="#" rel="nofollow" class="add_to_wishlist">Wishlist</a>
-                                                                        <a href="#" class="add-to-compare-link">Compare</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- /.product-inner -->
-                                                        </div><!-- /.product-outer -->
-                                                    </li>
-                                                    <li class="product last">
-                                                        <div class="product-outer">
-                                                            <div class="product-inner">
-                                                                <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                                                <a href="single-product.html">
-                                                                    <h3>Notebook Black Spire V Nitro  VN7-591G</h3>
-                                                                    <div class="product-thumbnail">
-    
-                                                                        <img data-echo="assets/images/products/2.jpg" src="assets/images/blank.gif" alt="">
-    
-                                                                    </div>
-                                                                </a>
-    
-                                                                <div class="price-add-to-cart">
-                                                                    <span class="price">
-                                                                        <span class="electro-price">
-                                                                            <ins><span class="amount">&#036;1,999.00</span></ins>
-                                                                            <del><span class="amount">&#036;2,299.00</span></del>
-                                                                        </span>
-                                                                    </span>
-                                                                    <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                                                </div><!-- /.price-add-to-cart -->
-    
-                                                                <div class="hover-area">
-                                                                    <div class="action-buttons">
-                                                                        <a href="#" rel="nofollow" class="add_to_wishlist">Wishlist</a>
-                                                                        <a href="#" class="add-to-compare-link">Compare</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- /.product-inner -->
-                                                        </div><!-- /.product-outer -->
-                                                    </li>
-    
-                                                </ul><!-- /.products -->
-    
-                                                <div class="check-products">
-                                                    <div class="checkbox accessory-checkbox">
-                                                        <label>
-                                                            <input checked disabled type="checkbox" class="product-check">
-                                                            <span class="product-title">
-                                                                <strong>This product: </strong>Ultra Wireless S50 Headphones S50 with Bluetooth
-                                                            </span>
-                                                            -
-                                                            <span class="accessory-price">
-                                                                <span class="amount">&#36;1,215.00</span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-    
-                                                    <div class="checkbox accessory-checkbox">
-                                                        <label>
-                                                            <input checked type="checkbox" class="product-check">
-                                                            <span class="product-title">Universal Headphones Case in Black</span>
-                                                            -
-                                                            <span class="accessory-price">
-                                                                <span class="amount">&#36;159.00</span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-    
-                                                    <div class="checkbox accessory-checkbox">
-                                                        <label>
-                                                            <input checked type="checkbox" class="product-check">
-                                                            <span class="product-title">Headphones USB Wires</span>
-                                                            -
-                                                            <span class="accessory-price">
-                                                                <span class="amount">&#36;50.00</span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </div><!-- /.check-products -->
-    
-                                            </div><!-- /.col -->
-    
-                                            <div class="col-xs-12 col-sm-3 col-right">
-                                                <div class="total-price">
-                                                    <span class="total-price-html">
-                                                        <span class="amount">&#036;1,424.00</span>
-                                                    </span>
-                                                    for <span class="total-products">3</span>
-                                                    items
-                                                </div><!-- /.total-price -->
-    
-                                                <div class="accessories-add-all-to-cart">
-                                                    <button type="button" class="button btn btn-primary add-all-to-cart">Add all to cart</button>
-                                                </div><!-- /.accessories-add-all-to-cart -->
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-    
-                                    </div><!-- /.accessories -->
-                                </div>
-    
                                 <div class="tab-pane panel entry-content wc-tab" id="tab-description">
                                     <div class="electro-description">
                                         {!! $productDetail->description !!}
@@ -726,7 +577,7 @@
     
             <div id="sidebar" class="sidebar" role="complementary">
                 <aside id="woocommerce_products-2" class="widget woocommerce widget_products">
-                    <h3 class="widget-title">{{ trans('message.detail.product_view_lastest') }}</h3>
+                    <h3 class="widget-title">{{ trans('message.product_view_lastest') }}</h3>
                     <ul class="product_list_widget">
                         @foreach ($getProductByViewCount as $product_by_view)
                             <li>
@@ -851,14 +702,45 @@
                         },
                         success: function(response) {
                             // Xử lý kết quả thành công
-                            if(response.code){
+                            if(response.code == 200){
                                 toastr["success"](response.msg);
                                 jQuery('.cart-items-count').html(response.html);
+                            }else if(response.code == 400){
+                                toastr["error"](response.msg)
                             }
                         },
                         error: function(error) {
                             // Xử lý lỗi
                             console.log(error);
+                        }
+                    });
+                });
+
+
+                jQuery('.flavor-select').on('change', function() {
+                    var productId = jQuery(this).data('product-id'); // Assume you have the product ID stored in a data attribute
+                    var flavorId = jQuery(this).val();
+
+                    jQuery.ajax({
+                        url: '/product/' + productId + '/flavor/' + flavorId + '/quantity',
+                        type: 'GET',
+                        success: function(data) {
+                            var availabilitySpan = jQuery('.availability span');
+                            if(data.inStock) {
+                                availabilitySpan.text('{{ trans('message.inStock') }}');
+                                availabilitySpan.removeClass('out-of-stock').addClass('in-stock');
+
+                                
+                                jQuery('.single_variation_wrap').removeClass('dis-none').addClass('dis-show');
+                            } else {
+                                availabilitySpan.text('{{ trans('message.outStock') }}');
+                                availabilitySpan.removeClass('in-stock').addClass('out-of-stock');
+
+                                jQuery('.single_variation_wrap').removeClass('dis-show').addClass('dis-none');
+                            }
+                        },
+                        error: function(request, status, error) {
+                            console.log("AJAX error:", status, error);
                         }
                     });
                 });
