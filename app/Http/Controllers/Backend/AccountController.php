@@ -60,7 +60,7 @@ class AccountController extends Controller
         } catch (Exception $e) {
             Log::error('[AccountController][store] error ' . $e->getMessage());
             DB::rollBack();
-            return redirect()->back()->with(['error' => 'Thêm tài khoản thành công']);
+            return redirect()->back()->with(['error' => 'Thêm tài khoản thất bại']);
         }
     }
 

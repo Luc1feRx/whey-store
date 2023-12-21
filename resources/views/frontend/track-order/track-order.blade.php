@@ -20,35 +20,32 @@
                 </header><!-- .entry-header -->
 
                 <div class="entry-content" itemprop="mainContentOfPage">
-                    @if (!auth()->check())
-                        <div class="woocommerce">
-                            <form action="{{ route('home.trackOrder') }}" method="GET" class="track_order">
-                                <p>{{ trans('message.trackOrder.info') }}</p>
+                    <div class="woocommerce">
+                        <form action="{{ route('home.trackOrder') }}" method="GET" class="track_order">
+                            <p>{{ trans('message.trackOrder.info') }}</p>
+                            <p class="form-row form-row-first">
+                                <label for="orderid">{{ trans('message.checkout.phone') }}</label>
+                                <input class="input-text" type="text" name="phone" id="orderid" value="{{ auth()->check() ? auth()->user()->phone : '' }}" placeholder="{{ trans('message.trackOrder.phone') }}">
+                                @error('phone')
+                                    <span class="error" style="color: red">{{ $message }}</span>
+                                @enderror
+                            </p>
 
-                                <p class="form-row form-row-first">
-                                    <label for="orderid">{{ trans('message.checkout.phone') }}</label>
-                                    <input class="input-text" type="text" name="phone" id="orderid" placeholder="{{ trans('message.trackOrder.phone') }}">
-                                    @error('phone')
-                                        <span class="error" style="color: red">{{ $message }}</span>
-                                    @enderror
-                                </p>
+                            <p class="form-row form-row-last">
+                                <label for="order_email">Email</label>
+                                <input class="input-text" type="text" name="email" value="{{ auth()->check() ? auth()->user()->email : '' }}" id="order_email" placeholder="Email">
+                                @error('email')
+                                    <span class="error" style="color: red">{{ $message }}</span>
+                                @enderror
+                            </p>
 
-                                <p class="form-row form-row-last">
-                                    <label for="order_email">Email</label>
-                                    <input class="input-text" type="text" name="email" id="order_email" placeholder="Email">
-                                    @error('email')
-                                        <span class="error" style="color: red">{{ $message }}</span>
-                                    @enderror
-                                </p>
+                            <div class="clear"></div>
 
-                                <div class="clear"></div>
-
-                                <p class="form-row">
-                                    <input type="submit" class="button" value="Track">
-                                </p>
-                            </form>
-                        </div>
-                    @endif
+                            <p class="form-row">
+                                <input type="submit" class="button" value="Track">
+                            </p>
+                        </form>
+                    </div>
                     @if (count($orders) > 0)
                         <table class="shop_table shop_table_responsive cart">
                             <thead>

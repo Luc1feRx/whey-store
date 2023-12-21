@@ -53,15 +53,6 @@
                                     @enderror
                                 </div>
                             @endif
-                            <div class="form-group">
-                                <label>Vai trò</label>
-                                <select class="form-control select2-common" name="role_id" aria-hidden="true">
-                                    <option value="">Chọn vai trò</option>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}" {{ isset($admin) && $admin->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +67,7 @@
                 </div>
                 <div class="card-body">
                     <button type="submit" type="submit" name="btnSubmit" value="save" class="btn btn-primary submit btnCreate">
-                        <i class="fa fa-save"></i> {{ isset($admin) ? 'Sửa' : 'Thêm' }}
+                        <i class="fa fa-save"></i> {{ isset($user) ? 'Sửa' : 'Thêm' }}
                     </button>
                     <input name="router" type="hidden" value="" id="router">
                 </div>
@@ -94,7 +85,7 @@
                             <input type="file" name="avatar" id="thumbnail" class="form-control btn_gallery d-none" placeholder="" value="" accept="images/*">
                         </div>
                         <img
-                            src="{{ !empty($admin->avatar) ? asset('storage/' .$admin->avatar) : asset('backend\dist\img\placeholder.png') }}"
+                            src="{{ !empty($user->avatar) ? asset('storage/' .$user->avatar) : asset('backend\dist\img\placeholder.png') }}"
                             alt="Preview image" class="preview_image" width="150">
                         <a class="btn_remove_image" title="Remove image">
                             <i class="fa fa-times"></i>

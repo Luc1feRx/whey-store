@@ -88,7 +88,7 @@ class HomeController extends Controller
             $productsQuery->where('price', '<=', $maxPrice);
         }
     
-        $products = $productsQuery->paginate(10);
+        $products = $productsQuery->paginate(1);
         return view('frontend.category.category', [
             'category' => $category,
             'brands' => $brandsWithProductsCount,
@@ -96,6 +96,36 @@ class HomeController extends Controller
             'products' => $products
         ]);
     }
+
+    public function filter(Request $request, $categorySlug)
+    {
+        // Find the category by slug
+        $category = Category::where('slug_category', $categorySlug)->first();
+
+        // Start the query
+        $query = Product::query();
+
+        // If there is a category, constrain the query to products within that category
+        if ($category) {
+            $query->whereHas('categories', function ($q) use ($category) {
+                $q->where('categories.id', $category->id);
+            });
+        }
+
+        // If brands are selected, add that to the query
+        if ($request->has('brands')) {
+            $brandIds = $request->get('brands');
+            $query->whereIn('brand_id', $brandIds);
+        }
+
+        // Apply other filters if needed
+        $products = $query->paginate(10)->appends($request->except('page'));
+
+        return response()->json([
+            'view' => view('frontend.category.productList', compact('products'))->render(),
+        ]);
+    }
+
 
     public function productDetail($slug){
         $productDetail = Product::with(['images', 'flavors'  => function ($query) {

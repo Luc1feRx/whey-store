@@ -58,6 +58,7 @@
             <main id="main" class="site-main">
                 <header class="page-header">
                     <h1 class="page-title">{{ $category->name_category }}</h1>
+                    <input type="text" hidden name="slug" value="{{ $category->slug_category }}" id="">
                 </header>
 
                 <div class="shop-control-bar">
@@ -65,14 +66,6 @@
                         <li class="nav-item"><a class="nav-link " data-toggle="tab" title="List View" href="#list-view"><i class="fa fa-list"></i></a></li>
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" title="Grid View" href="#grid"><i class="fa fa-th"></i></a></li>
                     </ul>
-                    <form class="woocommerce-ordering" method="get">
-                        <select name="orderby" class="select-order orderby">
-                            <option value="?sort=asc"  selected='selected'>{{ trans('message.categories.sortA-Z') }}</option>
-                            <option value="?sort=desc" >{{ trans('message.categories.sortZ-A') }}</option>
-                            <option value="?price=asc" >{{ trans('message.categories.sortPriceRaise') }}</option>
-                            <option value="?price=desc" >{{ trans('message.categories.sortPriceLow') }}</option>
-                        </select>
-                    </form>
                 </div>
 
                 <div class="tab-content">
@@ -82,880 +75,9 @@
                         @include('frontend.category.productList')
                     </div>
                 
-                    <div role="tabpanel" class="tab-pane" id="list-view" aria-expanded="true">
-                        <ul class="products columns-3">
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/1.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/2.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/3.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/4.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/5.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/6.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/4.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/2.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/5.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/1.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/6.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/3.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/5.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/4.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product list-view">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="single-product.html">
-                                            <img class="wp-post-image" data-echo="assets/images/products/2.jpg" src="assets/images/blank.gif" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="loop-product-categories"><a rel="tag" href="#">Tablets</a></span><a href="single-product.html"><h3>Tablet Air 3 WiFi 64GB  Gold</h3>
-                                                    <div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>
-                                                    <div class="product-short-description">
-                                                        <ul style="padding-left: 18px;">
-                                                            <li>4.5 inch HD Screen</li>
-                                                            <li>Android 4.4 KitKat OS</li>
-                                                            <li>1.4 GHz Quad Core&trade; Processor</li>
-                                                            <li>20 MP front Camera</li>
-                                                        </ul>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-12">
-                
-                                                <div class="availability in-stock">Availablity: <span>In stock</span></div>
-                
-                                                <span class="price"><span class="electro-price"><span class="amount">$629.00</span></span></span>
-                                                <a class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_sku="5487FB8/35" data-product_id="2706" data-quantity="1" href="single-product.html" rel="nofollow">Add to cart</a>
-                                                <div class="hover-area">
-                                                    <div class="action-buttons">
-                                                        <div class="yith-wcwl-add-to-wishlist add-to-wishlist-2706">
-                                                            <a class="add_to_wishlist" data-product-type="simple" data-product-id="2706" rel="nofollow" href="#">Wishlist</a>
-                
-                                                            <div style="display:none;" class="yith-wcwl-wishlistaddedbrowse hide">
-                                                                <span class="feedback">Product added!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="display:none" class="yith-wcwl-wishlistexistsbrowse hide">
-                                                                <span class="feedback">The product is already in the wishlist!</span>
-                                                                <a rel="nofollow" href="#">Wishlist</a>
-                                                            </div>
-                
-                                                            <div style="clear:both"></div>
-                                                            <div class="yith-wcwl-wishlistaddresponse"></div>
-                
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <a data-product_id="2706" class="add-to-compare-link" href="#">Compare</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+                <div class="">
+                    {!! $products->appends(request()->all())->links('pagination::bootstrap-4') !!}
                 </div>
 
             </main><!-- #main -->
@@ -969,38 +91,64 @@
 
 @section('addJs')
     <script>
+        function setSelectedBrandsFromUrl() {
+            var currentUrl = new URL(window.location);
+            var selectedBrands = currentUrl.searchParams.get('brands');
+            if (selectedBrands) {
+                selectedBrands = selectedBrands.split(',');
+                jQuery('.brand-filter').each(function() {
+                    jQuery(this).prop('checked', selectedBrands.includes(jQuery(this).val()));
+                });
+            }
+        }
         jQuery(document).ready(function() {
-            // Your jQuery code here
-            jQuery(document).on('click', '.brand-filter', function(e) {
-                var brand = [],
-                    tempArray = [];
+            setSelectedBrandsFromUrl();
+            function updateUrlWithSelectedBrands() {
+                var selectedBrands = jQuery('.brand-filter:checked').map(function() {
+                    return jQuery(this).val();
+                }).get().join(',');
 
-                jQuery.each(jQuery("[data-filters='brand']:checked"), function() {
-                    tempArray.push(jQuery(this).val());
+                var currentUrl = new URL(window.location);
+                if (selectedBrands.length > 0) {
+                    currentUrl.searchParams.set('brands', selectedBrands);
+                } else {
+                    currentUrl.searchParams.delete('brands');
+                }
+                history.pushState({}, '', currentUrl);
+            }
+            // Your jQuery code here
+            // When a filter checkbox changes
+            jQuery('.brand-filter').on('change', function() {
+                updateUrlWithSelectedBrands();
+                var currentCategorySlug = jQuery('[name="slug"]').val();
+                var selectedBrands = [];
+                jQuery('.brand-filter:checked').each(function() {
+                    selectedBrands.push(jQuery(this).val());
                 });
 
-                
-                // Kiểm tra xem có checkbox nào được chọn không
-                if (tempArray.length === 0) {
-                    // Nếu không có checkbox nào được chọn, lấy tất cả sản phẩm
-                    var url = window.location.href;
-                    var newUrl = url.split('?')[0]; // Lấy phần URL trước dấu '?' (nếu có)
-                    window.history.replaceState({}, document.title, newUrl);
-                    window.location.href = newUrl;
-                }
+                var data = {
+                    brands: selectedBrands,
+                    // Include other filter data if necessary
+                };
 
-                jQuery.each(jQuery("[data-filters='brand']:not(:checked)"), function() {
-                    var index = tempArray.indexOf(jQuery(this).val());
-                    if (index !== -1) {
-                        tempArray.splice(index, 1);
+                // Make the AJAX call
+                jQuery.ajax({
+                    url: '/products/brand-filter/' + currentCategorySlug, // Update this to your route
+                    type: 'GET',
+                    data: data,
+                    success: function(response) {
+                        // Update your product list with the response
+                        jQuery('.products').html(response.view);
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
                 });
+            });
 
-                tempArray.reverse();
-                if (tempArray.length !== 0) {
-                    brand += '?brand=' + tempArray.toString();
-                }
-                window.location.href = brand;
+            // If you have a filter button, you can also trigger the AJAX call when it's clicked
+            jQuery('#filter-button').on('click', function() {
+                jQuery('.brand-filter').first().trigger('change');
             });
 
             // jQuery('.select-order').change(function(){
@@ -1013,10 +161,11 @@
             // });
         });
         jQuery(function() {
+            var urlParams = new URLSearchParams(window.location.search);
             jQuery(".price_slider").slider({
             range: true,
-            min: 500000, // Giá tiền tối thiểu
-            max: 2000000, // Giá tiền tối đa
+            min: urlParams.get('from')||500000, // Giá tiền tối thiểu
+            max: urlParams.get('to')||2000000, // Giá tiền tối đa
             values: [500000, 1000000], // Giá trị khởi tạo ban đầu cho slider
             slide: function(event, ui) {
                 jQuery(".price_label .from").text(ui.values[0] + "VNĐ");

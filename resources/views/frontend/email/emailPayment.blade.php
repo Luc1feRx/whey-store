@@ -1,10 +1,5 @@
 <div style="width: 100%;max-width: 600px;margin:0 auto">
     <div style="height: 55px;background: #000;padding: 10px">
-        <div style="width: 50%">
-            <a href="">
-                <img style="height: 55px" src="http://tranining.previewcode.net/images/icon/Logo.png">
-            </a>
-        </div>
         <div style="width: 50%"></div>
     </div>
     <div style="background: white;padding: 15px;border:1px solid #dedede;">
@@ -12,7 +7,7 @@
         <div>
             @foreach($shopping as $key => $item)
                 <div style="border-bottom: 1px solid #dedede;padding-bottom: 10px;padding-top: 10px;">
-                    <div style="width: 80%;float: right;">
+                    <div style="width: 80%;">
                         <h4 style="margin:10px 0">{{ $item->name }}</h4>
                         <p style="margin: 4px 0;font-size: 14px;">Loại sản phẩm: <span>{{ $item->options->flavor }}</span></p>
                         <p style="margin: 4px 0;font-size: 14px;">Giá <span>{{  number_format($item->price,0,',','.') }} đ</span></p>
@@ -21,7 +16,7 @@
                     <div style="clear: both;"></div>
                 </div>
                 @endforeach
-            <h2>Tổng tiền : <b>{{ number_format(\Cart::subtotal(0),0,',','.') }} đ</b></h2>
+            <h2>Tổng tiền : <b>{{ \Cart::subtotal(0) }} đ</b></h2>
         </div>
         <div>
             <p>Đây là email tự động xin vui không không trả lời vào email này</p>

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Helpers\Common;
+use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
@@ -41,7 +46,24 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+            $avatar_upload = UploadImage::handleUploadFile('avatar', 'img/user/', $request);
+            $user->avatar = $avatar_upload;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            DB::commit();
+            return redirect()->route('admin.customers.index')->with(['success' => 'Thêm tài khoản thành công']);
+        } catch (Exception $e) {
+            Log::error('[CustomerController][store] error ' . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with(['error' => 'Thêm tài khoản thất bại']);
+        }
     }
 
     /**

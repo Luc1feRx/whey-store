@@ -5,18 +5,9 @@
             <aside class="widget woocommerce widget_layered_nav">
                 <h3 class="widget-title">{{ trans('message.brands') }}</h3>
                 <ul>
-                    @php
-                        $brand_id = [];
-                        $brand_arr = [];
-                        if(isset(request()->brand)){
-                            $brand_id = request()->brand;
-                            $brand_arr = explode(',',$brand_id);
-                        }
-                    @endphp
                     @foreach ($brands as $brand)
                         <li style="">
-                            <input name="brand-filter" data-filters="brand" 
-                            {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }}
+                            <input name="brands[]" data-filters="brand" 
                             data-getslug="{{ $slug }}" type="checkbox" class="brand-filter" value="{{ $brand->id }}">
                             <label class="item">{{ $brand->name }}</label>
                             <span class="count">({{ $brand->products_count }})</span>
