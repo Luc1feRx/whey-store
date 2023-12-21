@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    <title>{{ trans('message.cart.title') }}</title>
+@endsection
+
 @section('content')
 <div class="container">
     <nav class="woocommerce-breadcrumb"><a href="{{ route('home.index') }}">{{ trans('message.home') }}</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ trans('message.cart.title') }}</nav>

@@ -2,8 +2,7 @@
     <div class="container">
         <nav>
             <ul id="menu-top-bar-right" class="nav nav-inline pull-right animate-dropdown flip">
-                <li class="menu-item animate-dropdown"><a title="Store Locator" href="#"><i class="ec ec-map-pointer"></i>Store Locator</a></li>
-                <li class="menu-item animate-dropdown"><a title="Track Your Order" href="{{ route('home.trackOrder') }}"><i class="ec ec-transport"></i>Track Your Order</a></li>
+                <li class="menu-item animate-dropdown"><a title="Track Your Order" href="{{ route('home.trackOrder') }}"><i class="ec ec-transport"></i>{{ trans('message.trackYourOrder') }}</a></li>
                 @if (!Auth::check())
                     <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.login-view') }}"><i class="ec ec-user"></i>{{ trans('message.login') }}</a></li>
                     <li class="menu-item animate-dropdown"><a title="My Account" href="{{ route('home.register-view') }}"><i class="ec ec-user"></i>{{ trans('message.register') }}</a></li>

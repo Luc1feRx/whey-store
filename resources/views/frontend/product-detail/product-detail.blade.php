@@ -15,6 +15,11 @@
             }
     </style>
 @endsection
+
+@section('title')
+    <title>{{ $productDetail->product_name }}</title>
+@endsection
+
 @section('content')
 <div class="single-product">
     <div id="content" class="site-content" tabindex="-1">
@@ -189,80 +194,28 @@
                                 </div>
     
                                 <div class="tab-pane in panel entry-content wc-tab" id="tab-specification">
-                                    <h3>Technical Specifications</h3>
+                                    <h3>{{ trans('message.specifications') }}</h3>
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td>Brand</td>
-                                                <td>Apple</td>
+                                                <td>{{ trans('message.spec.weight') }}</td>
+                                                <td>{{ $productDetail->product_weight }} kg</td>
                                             </tr>
                                             <tr>
-                                                <td>Item Height</td>
-                                                <td>18 Millimeters</td>
+                                                <td>{{ trans('message.spec.score') }}</td>
+                                                <td>{{ $productDetail->score }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Item Width</td>
-                                                <td>31.4 Centimeters</td>
+                                                <td>{{ trans('message.spec.origin') }}</td>
+                                                <td>{{ $productDetail->origin }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Screen Size</td>
-                                                <td>13 Inches</td>
+                                                <td>Serving Size</td>
+                                                <td>{{ $productDetail->serving_size }} scoop</td>
                                             </tr>
                                             <tr class="size-weight">
-                                                <td>Item Weight</td>
-                                                <td>1.6 Kg</td>
-                                            </tr>
-                                            <tr class="size-weight">
-                                                <td>Product Dimensions</td>
-                                                <td>21.9 x 31.4 x 1.8 cm</td>
-                                            </tr>
-                                            <tr class="item-model-number">
-                                                <td>Item model number</td>
-                                                <td>MF841HN/A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Processor Brand</td>
-                                                <td>Intel</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Processor Type</td>
-                                                <td>Core i5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Processor Speed</td>
-                                                <td>2.9 GHz</td>
-                                            </tr>
-                                            <tr>
-                                                <td>RAM Size</td>
-                                                <td>8 GB</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hard Drive Size</td>
-                                                <td>512 GB</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hard Disk Technology</td>
-                                                <td>Solid State Drive</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Graphics Coprocessor</td>
-                                                <td>Intel Integrated Graphics</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Graphics Card Description</td>
-                                                <td>Integrated Graphics Card</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hardware Platform</td>
-                                                <td>Mac</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Operating System</td>
-                                                <td>Mac OS</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Average Battery Life (in hours)</td>
-                                                <td>9</td>
+                                                <td>{{ trans('message.spec.main_ingredient') }}</td>
+                                                <td>{{ $productDetail->main_ingredient }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -272,63 +225,27 @@
                                     <div id="reviews" class="electro-advanced-reviews">
                                         <div class="advanced-review row">
                                             <div class="col-xs-12 col-md-6">
-                                                <h2 class="based-title">Based on 3 reviews</h2>
+                                                <h2 class="based-title">{{ trans('message.all_comments', ['attributes' => $totalComments]) }}</h2>
                                                 <div class="avg-rating">
-                                                    <span class="avg-rating-number">4.3</span> overall
+                                                    <span class="avg-rating-number">{{ $averageRating }}</span> {{ trans('message.overall') }}
                                                 </div>
     
                                                 <div class="rating-histogram">
-                                                    <div class="rating-bar">
-                                                        <div class="star-rating" title="Rated 5 out of 5">
-                                                            <span style="width:100%"></span>
-                                                        </div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span style="width:33%" class="rating-percentage">
-    
-                                                            </span>
-                                                        </div>
-                                                        <div class="rating-count">1</div>
-                                                    </div><!-- .rating-bar -->
-    
-                                                    <div class="rating-bar">
-                                                        <div class="star-rating" title="Rated 4 out of 5">
-                                                            <span style="width:80%"></span>
-                                                        </div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span style="width:67%" class="rating-percentage"></span>
-                                                        </div>
-                                                        <div class="rating-count">2</div>
-                                                    </div><!-- .rating-bar -->
-    
-                                                    <div class="rating-bar">
-                                                        <div class="star-rating" title="Rated 3 out of 5">
-                                                            <span style="width:60%"></span>
-                                                        </div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span style="width:0%" class="rating-percentage"></span>
-                                                        </div>
-                                                        <div class="rating-count zero">0</div>
-                                                    </div><!-- .rating-bar -->
-    
-                                                    <div class="rating-bar">
-                                                        <div class="star-rating" title="Rated 2 out of 5">
-                                                            <span style="width:40%"></span>
-                                                        </div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span style="width:0%" class="rating-percentage"></span>
-                                                        </div>
-                                                        <div class="rating-count zero">0</div>
-                                                    </div><!-- .rating-bar -->
-    
-                                                    <div class="rating-bar">
-                                                        <div class="star-rating" title="Rated 1 out of 5">
-                                                            <span style="width:20%"></span>
-                                                        </div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span style="width:0%" class="rating-percentage"></span>
-                                                        </div>
-                                                        <div class="rating-count zero">0</div>
-                                                    </div><!-- .rating-bar -->
+                                                    @for ($i = 5; $i >= 1; $i--)
+                                                        <div class="rating-bar">
+                                                            <div class="star-rating" title="Rated {{ $i }} out of 5">
+                                                                <span style="width:{{ $i*20 }}%"></span> {{-- Ví dụ: 5 sao sẽ là 100%, 4 sao là 80%, v.v. --}}
+                                                            </div>
+                                                            <div class="rating-percentage-bar">
+                                                                {{-- Tính phần trăm rating dựa trên tổng số đánh giá --}}
+                                                                @php
+                                                                    $percentage = ($totalComments > 0) ? ($ratings[$i] / $totalComments * 100) : 0;
+                                                                @endphp
+                                                                <span style="width:{{ $percentage }}%" class="rating-percentage"></span>
+                                                            </div>
+                                                            <div class="rating-count{{ $ratings[$i] == 0 ? ' zero' : '' }}">{{ $ratings[$i] }}</div>
+                                                        </div><!-- .rating-bar -->
+                                                    @endfor
                                                 </div>
                                             </div><!-- /.col -->
     
@@ -337,14 +254,10 @@
                                                     <div id="review_form_wrapper">
                                                         <div id="review_form">
                                                             <div id="respond" class="comment-respond">
-                                                                <h3 id="reply-title" class="comment-reply-title">Add a review
-                                                                    <small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Cancel reply</a>
-                                                                    </small>
-                                                                </h3>
         
                                                                 <form action="#" method="post" id="commentform" class="comment-form">
                                                                     <p class="comment-form-rating">
-                                                                        <label>Your Rating</label>
+                                                                        <label>{{ trans('message.rating') }}</label>
                                                                     </p>
 
                                                                     <div id="rateYo"></div>
@@ -353,12 +266,12 @@
                                                                     <input type="hidden" value="{{ $productDetail->id }}" name="product_id" id="product_id">
         
                                                                     <p class="comment-form-comment">
-                                                                        <label for="comment">Your Review</label>
+                                                                        <label for="comment">{{ trans('message.review') }}</label>
                                                                         <textarea id="comment" name="content" cols="45" rows="8" aria-required="true"></textarea>
                                                                     </p>
         
                                                                     <p class="form-submit">
-                                                                        <input name="submit" type="submit" id="submit" class="submit" value="Add Review" />
+                                                                        <input name="submit" type="submit" id="submit" class="submit" value="{{ trans('message.add_comment') }}" />
                                                                         <input type='hidden' name='comment_post_ID' value='2452' id='comment_post_ID' />
                                                                         <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
                                                                     </p>
@@ -447,128 +360,44 @@
                             </div>
                         </div><!-- /.woocommerce-tabs -->
                         <div class="related products">
-                            <h2>Related Products</h2>
+                            <h2>{{ trans('message.related_products') }}</h2>
     
                             <ul class="products columns-5">
+                                @foreach ($relatedProducts as $product_related)
                                 <li class="product">
                                     <div class="product-outer">
                                         <div class="product-inner">
-                                            <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                            <a href="single-product.html">
-                                                <h3>Notebook Black Spire V Nitro  VN7-591G</h3>
+                                            <a href="{{ route('home.product-detail', ['slug'=>$product_related->slug]) }}">
+                                                <h3>{{ $product_related->name }}</h3>
                                                 <div class="product-thumbnail">
-                                                    <img data-echo="assets/images/products/1.jpg" src="assets/images/blank.gif" alt="">
+                                                    <img data-echo="{{ asset('storage/' .$product_related->thumbnail) }}" src="{{ asset('storage/' .$product_related->thumbnail) }}" alt="">
                                                 </div>
                                             </a>
     
                                             <div class="price-add-to-cart">
                                                 <span class="price">
                                                     <span class="electro-price">
-                                                        <ins><span class="amount">&#036;1,999.00</span></ins>
+                                                        @if (!empty($product_related->percent))
+                                                            <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($product_related->discount_price) }} đ</span></ins>
+                                                            <del><span class="amount"> {{ \App\Helpers\Common::numberFormat($product_related->price) }} đ</span></del>
+                                                            <span class="amount"> </span>
+                                                        @else
+                                                            <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($product_related->price) }} đ</span></ins>
+                                                        @endif
                                                     </span>
                                                 </span>
-                                                <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
+                                                <a rel="nofollow" href="{{ route('home.product-detail', ['slug'=>$product_related->slug]) }}" class="button add_to_cart_button">Add to cart</a>
                                             </div><!-- /.price-add-to-cart -->
     
                                             <div class="hover-area">
                                                 <div class="action-buttons">
-                                                    <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-                                                    <a href="#" class="add-to-compare-link">Compare</a>
+                                                    <a href="{{ route('home.addToFavorites', ['productId'=>$product_related->id]) }}" rel="nofollow" class="add_to_wishlist"> {{ trans('message.wishlist') }}</a>
                                                 </div>
                                             </div>
                                         </div><!-- /.product-inner -->
                                     </div><!-- /.product-outer -->
                                 </li>
-    
-                                <li class="product">
-                                    <div class="product-outer">
-                                        <div class="product-inner">
-                                            <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                            <a href="single-product.html">
-                                                <h3>Notebook Black Spire V Nitro  VN7-591G</h3>
-                                                <div class="product-thumbnail">
-                                                    <img data-echo="assets/images/products/2.jpg" src="assets/images/blank.gif" alt="">
-                                                </div>
-                                            </a>
-    
-                                            <div class="price-add-to-cart">
-                                                <span class="price">
-                                                    <span class="electro-price">
-                                                        <ins><span class="amount">&#036;1,999.00</span></ins>
-                                                    </span>
-                                                </span>
-                                                <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                            </div><!-- /.price-add-to-cart -->
-    
-                                            <div class="hover-area">
-                                                <div class="action-buttons">
-                                                    <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-                                                    <a href="#" class="add-to-compare-link">Compare</a>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.product-inner -->
-                                    </div><!-- /.product-outer -->
-                                </li>
-    
-                                <li class="product">
-                                    <div class="product-outer">
-                                        <div class="product-inner">
-                                            <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                            <a href="single-product.html">
-                                                <h3>Notebook Black Spire V Nitro  VN7-591G</h3>
-                                                <div class="product-thumbnail">
-                                                    <img data-echo="assets/images/products/3.jpg" src="assets/images/blank.gif" alt="">
-                                                </div>
-                                            </a>
-    
-                                            <div class="price-add-to-cart">
-                                                <span class="price">
-                                                    <span class="electro-price">
-                                                        <ins><span class="amount">&#036;1,999.00</span></ins>
-                                                    </span>
-                                                </span>
-                                                <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                            </div><!-- /.price-add-to-cart -->
-    
-                                            <div class="hover-area">
-                                                <div class="action-buttons">
-                                                    <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-                                                    <a href="#" class="add-to-compare-link">Compare</a>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.product-inner -->
-                                    </div><!-- /.product-outer -->
-                                </li>
-    
-                                <li class="product">
-                                    <div class="product-outer">
-                                        <div class="product-inner">
-                                            <span class="loop-product-categories"><a href="product-category.html" rel="tag">Smartphones</a></span>
-                                            <a href="single-product.html">
-                                                <h3>Notebook Black Spire V Nitro  VN7-591G</h3>
-                                                <div class="product-thumbnail">
-                                                    <img data-echo="assets/images/products/4.jpg" src="assets/images/blank.gif" alt="">
-                                                </div>
-                                            </a>
-    
-                                            <div class="price-add-to-cart">
-                                                <span class="price">
-                                                    <span class="electro-price">
-                                                        <ins><span class="amount">&#036;1,999.00</span></ins>
-                                                    </span>
-                                                </span>
-                                                <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Add to cart</a>
-                                            </div><!-- /.price-add-to-cart -->
-    
-                                            <div class="hover-area">
-                                                <div class="action-buttons">
-                                                    <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
-                                                    <a href="#" class="add-to-compare-link">Compare</a>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.product-inner -->
-                                    </div><!-- /.product-outer -->
-                                </li>
+                                @endforeach
                             </ul><!-- /.products -->
                         </div><!-- /.related -->
                     </div>

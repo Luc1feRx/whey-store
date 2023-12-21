@@ -12,6 +12,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Slider;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
@@ -134,6 +135,12 @@ class HomeController extends Controller
 
             $randomVouchers = Voucher::inRandomOrder()->where('status', 1)->limit(5)->get();
 
+            $totalComments = Review::where('product_id', $productDetail->id)->count();
+            // Tính điểm trung bình rating
+            $averageRating = Review::where('product_id', $productDetail->id)->avg('rating');
+            // Định dạng điểm trung bình với 1 chữ số thập phân
+            $averageRating = number_format($averageRating, 1);
+
             $productView = Product::withCount('reviews')->where('slug', $slug)->first();
             $reviewCount = $productView->reviews_count;
 
@@ -143,12 +150,33 @@ class HomeController extends Controller
                 ->exists();
             }
 
+            // Tính toán số lượng rating cho mỗi mức từ 1 đến 5
+            $ratings = [];
+            for ($i = 1; $i <= 5; $i++) {
+                $ratings[$i] = Review::where('product_id', $productDetail->id)->where('rating', $i)->count();
+            }
+
+            $product = Product::with('categories')->find($productDetail->id); // Đảm bảo rằng bạn đã tải trước quan hệ 'categories'
+            $categoryIds = $product->categories->pluck('id');
+            $relatedProducts = Product::whereHas('categories', function ($query) use ($categoryIds) {
+                $query->whereIn('category_id', $categoryIds);
+            })
+            ->where('id', '!=', $productDetail->id) // Loại trừ sản phẩm hiện tại
+            ->take(4) // Lấy 4 sản phẩm liên quan
+            ->get();
+
+            
+
         return view('frontend.product-detail.product-detail', [
             'productDetail' => $productDetail,
             'isFavorite' => isset($isFavorite) ? $isFavorite : null,
             'getProductByViewCount' => $getProductByViewCount,
             'randomVouchers' => $randomVouchers,
-            'reviewCount' => $reviewCount
+            'reviewCount' => $reviewCount,
+            'totalComments' => $totalComments,
+            'averageRating' => $averageRating,
+            'ratings' => $ratings,
+            'relatedProducts' => $relatedProducts
         ]);
     }
 

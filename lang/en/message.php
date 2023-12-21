@@ -72,6 +72,7 @@ return [
         'detail' => 'Billing detail',
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
+        'note' => 'Ghi chú'
     ],
     'trackOrder' => [
         'title' => 'Tracking order',
@@ -106,4 +107,18 @@ return [
     'last_name' => 'Last name',
     'enter_first_name' => 'Enter first name',
     'enter_last_name' => 'Enter last name',
+    'specifications' => 'Product Specifications',
+    'spec' => [
+        'weight' => 'Weight',
+        'score' => 'Score of Bodybuilding.com',
+        'origin' => 'Origin',
+        'main_ingredient' => 'Main Ingredient'
+    ],
+    'all_comments' => 'Comment list (:attributes comments)',
+    'overall' => 'Overall',
+    'rating' => 'Ratings',
+    'review' => 'Reviews',
+    'add_comment' => 'Add a review',
+    'trackYourOrder' => 'Track your order',
+    'related_products' => 'Related products',
 ];
