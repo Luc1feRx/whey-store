@@ -116,6 +116,7 @@ class CartController extends Controller
             $discountAmount = $discount->reduced_amount; // Giả sử trường này chứa số tiền giảm giá cố định
             $totalAfterDiscount = max(0, $totalCart - $discountAmount);
             Session::put('discount_name', $discount->voucher_sku);
+            Cart::setGlobalDiscount($discount->reduced_amount);
 
             $discount->quantity = $discount->quantity - 1;
             $discount->save();
