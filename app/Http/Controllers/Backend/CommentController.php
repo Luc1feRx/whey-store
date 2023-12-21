@@ -33,8 +33,6 @@ class CommentController extends Controller
             $reviews->appends(['keyword' => $request->keyword]);
         }
 
-        dd(Common::getIp());
-
         return view('backend.comment.index', [
             'reviews' => $reviews
         ]);

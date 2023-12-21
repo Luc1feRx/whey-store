@@ -29,8 +29,7 @@ class UpdateUserLoginInfo
         $agent = new Agent();
         $user = $event->user;
         if ($user instanceof \App\Models\User) {
-            $ipAddress = Common::getIp();
-            $ipInfo = $this->getCountryByIp($ipAddress);
+            $ipAddress = $this->getServerIp();
             $user->login_ip = $ipAddress;
             $user->browser_info = $agent->browser();
             $user->last_login = Carbon::now();
@@ -38,14 +37,18 @@ class UpdateUserLoginInfo
         }
     }
 
-    private function getCountryByIp(String $ip)
-    {
-        try {
-            $ipdat = @json_decode(file_get_contents(
-                "http://www.geoplugin.net/json.gp?ip=" . $ip));
-            return $ipdat;
-        } catch (Exception $exception) {
-            Log::error('[LogAccessListener][handle] error: ' . $exception->getMessage());
+    public function getServerIp() {
+        // Lấy địa chỉ IP từ interface mạng trên UNIX/Linux
+        $ip = shell_exec("hostname -I");
+        
+        if ($ip) {
+            // Cắt khoảng trắng và lấy IP đầu tiên (nếu có nhiều IP)
+            $ip = explode(' ', trim($ip))[0];
+        } else {
+            // Lấy địa chỉ IP từ interface mạng trên Windows
+            $ip = gethostbyname(trim(`hostname`));
         }
+    
+        return $ip;
     }
 }
