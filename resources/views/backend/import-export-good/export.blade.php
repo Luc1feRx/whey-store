@@ -8,7 +8,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{ route('admin.good-issues.export') }}" method="post">
+        <form action="{{ route('admin.good-issues.exportProduct') }}" method="post">
           <div class="modal-body">
               {{ csrf_field() }}
               <div class="form-group">

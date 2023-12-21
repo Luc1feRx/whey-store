@@ -119,7 +119,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::get('/', [GoodIssueController::class, 'index'])->name('index');
             Route::get('/get-import', [GoodIssueController::class, 'create'])->name('create');
             Route::post('/store', [GoodIssueController::class, 'store'])->name('store');
-            Route::post('/export', [GoodIssueController::class, 'export'])->name('export');
+            Route::post('/export', [GoodIssueController::class, 'export'])->name('exportProduct');
             Route::get('/list-export-import', [GoodIssueController::class, 'listImportExportGood'])->name('list');
             Route::get('/export', [GoodIssueController::class, 'ExportGood'])->name('export');
         });
