@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Helpers\Common;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VoucherRequest;
+use App\Models\Brand;
 use App\Models\Voucher;
 use Exception;
 use Illuminate\Http\Request;
@@ -40,7 +41,10 @@ class VoucherController extends Controller
 
     public function create(Request $request)
     {
-        return view('backend.voucher.create');
+        $brands = Brand::orderBy('id','desc')->get();
+        return view('backend.voucher.create',[
+            'brands' => $brands
+        ]);
     }
 
     public function store(VoucherRequest $request)
@@ -52,7 +56,9 @@ class VoucherController extends Controller
             $voucher->voucher_sku = $request->voucher_sku;
             $voucher->quantity = $request->quantity;
             $voucher->status = $request->status;
-            $voucher->percentage = $request->percentage;
+            $voucher->reduced_amount = (int)str_replace('.', '', $request->reduced_amount);
+            $voucher->min_purchase = (int)str_replace('.', '', $request->min_purchase);
+            $voucher->description = $request->description;
             $voucher->save();
             DB::commit();
             return redirect()->route('admin.vouchers.index')->with(['success' => 'Thêm mã giảm giá thành công']);
@@ -66,6 +72,7 @@ class VoucherController extends Controller
     public function edit(Request $request, $id)
     {
         $voucher = Voucher::findorFail($id);
+        $brands = Brand::orderBy('id','desc')->get();
         return view('backend.voucher.edit',[
             'voucher' => $voucher
         ]);
@@ -80,7 +87,9 @@ class VoucherController extends Controller
             $voucher->voucher_sku = $request->voucher_sku;
             $voucher->quantity = $request->quantity;
             $voucher->status = $request->status;
-            $voucher->percentage = $request->percentage;
+            $voucher->reduced_amount = (int)str_replace('.', '', $request->reduced_amount);
+            $voucher->min_purchase = (int)str_replace('.', '', $request->min_purchase);
+            $voucher->description = $request->description;
             $voucher->save();
             DB::commit();
             return redirect()->route('admin.vouchers.index')->with(['success' => 'Sửa mã giảm giá thành công']);

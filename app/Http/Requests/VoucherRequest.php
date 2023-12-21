@@ -25,7 +25,8 @@ class VoucherRequest extends FormRequest
             'name' => 'required|max:255|unique:vouchers,name,' . $this->route('id'),
             'voucher_sku' => 'required|max:20|unique:vouchers,voucher_sku,' . $this->route('id'),
             'quantity' => 'required|numeric',
-            'percentage' => 'required|numeric',
+            'min_purchase' => 'required',
+            'reduced_amount' => 'required'
         ];
         return $rules;
     }
@@ -46,8 +47,8 @@ class VoucherRequest extends FormRequest
             'voucher_sku.unique' => "Mã giảm giá không được trùng nhau",
             'quantity.required' => "Số lượng không được để trống",
             'quantity.numeric' => "Số lượng phải là chữ số",
-            'percentage.required' => "Vui lòng nhập số phần trăm giảm giá",
-            'percentage.numeric' => "Số phần trăm giảm giá phải là chữ số",
+            'reduced_amount.required' => "Vui lòng nhập số tiền giảm giá",
+            'min_purchase.required' => "Vui lòng nhập điều kiện giảm giá",
         );
         return $messages;
     }

@@ -29,7 +29,10 @@
                         </div>
                         <div class="media-body media-middle feature-text">
                             <input type="hidden" name="" class="copy_voucher_{{ $voucher->voucher_sku }}" value="{{ $voucher->voucher_sku }}">
-                            <strong>{{ trans('message.voucher') }} {{ $voucher->name }}</strong> {{ $voucher->voucher_sku }}
+                            <strong>{{ $voucher->name }}</strong>
+                            <p>
+                                {{ $voucher->description }}
+                            </p>
                         </div>
                         <div style="display: flex;
                         justify-content: flex-end;

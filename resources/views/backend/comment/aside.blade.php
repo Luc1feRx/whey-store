@@ -12,7 +12,7 @@
 @endphp
 <li class="nav-item {{ $menuOpen }}">
     <a href="{{ route('admin.comments.index') }}" class="nav-link {{ $active }}">
-      <i class="nav-icon fas fa-tachometer-alt"></i>
+      <i class="nav-icon fas fa-comments"></i>
       <p>
         Quản lý bình luận
       </p>

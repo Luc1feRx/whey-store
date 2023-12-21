@@ -18,6 +18,11 @@
                             aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa fa-filter"></i> Lọc
                         </button>
+                        <a href="{{ route('admin.orders.index') }}" class="btn btn-success"
+                        title="Refresh">
+                        <i class="fa fa-refresh"></i><span
+                                class="hidden-xs"> Làm mới</span>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         @include('backend.partials.breadcrumb', [
@@ -56,20 +61,22 @@
                                         <th>Email</th>
                                         <th>Địa chỉ</th>
                                         <th>Số điện thoại</th>
+                                        <th>Loại khách hàng</th>
                                         <th>Phương thức thanh toán</th>
                                         <th>Tổng tiền</th>
-                                        <th>Trạng thái</th>
+                                        <th style="min-width: 195px;">Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($orders as $order)
+                                    @foreach ($orders as $k => $order)
                                     <tr>
-                                        <td>{{ $order->id }}</td>
+                                        <td>{{ ($orders->currentPage() - 1) * $orders->perPage() + $k + 1 }}</td>
                                         <td>{{ $order->user_name }}</td>
                                         <td>{{ $order->email }}</td>
                                         <td>{{ $order->address }}</td>
                                         <td>{{ $order->phone }}</td>
+                                        <td>{{ !empty($order->user_id) ? 'Thành viên' : 'Khách' }}</td>
                                         <td>{!! $order->payment_method == 1 ? '<img style="width: 150px; width: 70px;" src="\backend\dist\img\vnpay-logo-inkythuatso-01-13-16-26-42.jpg" alt="" srcset="">' : '' !!}</td>
                                         <td>{{ \App\Helpers\Common::numberFormat($order->order_total) }} VNĐ</td>
                                         <td>
@@ -98,7 +105,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="card-footer clearfix">
+                            <div class="card-footer clearfix" style="min-width: 1585px;">
                                 {!! $orders->links('pagination::bootstrap-4') !!}
                             </div>
                         </div>

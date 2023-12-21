@@ -41,22 +41,22 @@
                                                     </p>
 
                                                     <p class="form-row form-row-wide">
-                                                        <label for="first_name">{{ trans('message.register.first_name')
+                                                        <label for="first_name">{{ trans('message.first_name')
                                                             }}<span class="required">*</span></label>
                                                         <input type="text" class="input-text" name="first_name"
                                                             id="first_name"
-                                                            placeholder="{{ trans('message.register.enter_first_name') }}" />
+                                                            placeholder="{{ trans('message.enter_first_name') }}" />
                                                         @error('first_name')
                                                         <span class="error" style="color: red">{{ $message }}</span>
                                                         @enderror
                                                     </p>
 
                                                     <p class="form-row form-row-wide">
-                                                        <label for="last_name">{{ trans('message.register.last_name')
+                                                        <label for="last_name">{{ trans('message.last_name')
                                                             }}<span class="required">*</span></label>
                                                         <input type="text" class="input-text" name="last_name"
                                                             id="last_name"
-                                                            placeholder="{{ trans('message.register.last_name') }}" />
+                                                            placeholder="{{ trans('message.enter_last_name') }}" />
                                                         @error('last_name')
                                                         <span class="error" style="color: red">{{ $message }}</span>
                                                         @enderror

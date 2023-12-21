@@ -67,9 +67,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($admins as $admin)
+                                    @foreach ($admins as $k => $admin)
                                     <tr>
-                                        <td>{{ $admin->id }}</td>
+                                        <td>{{ ($admins->currentPage() - 1) * $admins->perPage() + $k + 1 }}</td>
                                         <td>{{ $admin->name }}</td>
                                         <td>{{ $admin->email }}</td>
                                         <td>

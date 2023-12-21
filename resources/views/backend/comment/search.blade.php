@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Nhập tên sản phẩm hoặc tên người dùng">
+                            <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Nhập tên sản phẩm hoặc tên người dùng, nội dung bình luận">
                         </div>
                     </div>
                     <div class="col-md-2">

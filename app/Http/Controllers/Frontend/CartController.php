@@ -9,6 +9,7 @@ use App\Models\Voucher;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -19,10 +20,18 @@ class CartController extends Controller
         if (!$product) return redirect()->to('/');
 
         // 2. Kiểm tra số lượng sản phẩm
-        // if ($product->pro_number < 1) {
-        //     //4. Thông báo
-        //     return response()->json(['code' => 400, 'msg' => 'Số lượng sản phẩm không đủ']);
-        // }
+        $quantity = DB::table('product_flavors')
+                    ->where('product_id', $product->id)
+                    ->where('flavor_id', $request->product_flavor_id)
+                    ->value('quantity');
+
+        if ($quantity < $request->product_quantity || empty($request->product_quantity)) {
+            //4. Thông báo không đủ số lượng
+            return response()->json([
+                'code' => 400,
+                'msg' => __('message.cart.insufficient_quantity')
+            ]);
+        }        
 
         // 3. Thêm sản phẩm vào giỏ hàng
         $cart = Cart::add([
@@ -60,6 +69,13 @@ class CartController extends Controller
         {
             $discount = Voucher::where('voucher_sku', $request->discount_code)->first();
 
+            if(empty($request->discount_code)){
+                return response([
+                    'code'       => 400,
+                    'msg'    => trans('message.discount.requiredDiscountCode'),
+                ]);
+            }
+
             if(empty($discount)){
                 return response([
                     'code'       => 400,
@@ -76,6 +92,8 @@ class CartController extends Controller
                         'msg' => trans('message.discount.alreadyApplied')
                     ]);
                 }
+                
+            
 
             if ($discount->quantity == 0) {
                 return response([
@@ -84,8 +102,19 @@ class CartController extends Controller
                     'msg'    => trans('message.discount.outOfDiscount')
                 ]);
             }
+            
 
-            Cart::setGlobalDiscount($discount->percentage);
+            $totalCart = Cart::subtotal(0, '.', '');
+                    // Kiểm tra xem tổng giá trị đơn hàng có đạt giá trị tối thiểu không
+            if ($totalCart < $discount->min_purchase) {
+                return response()->json([
+                    'code' => 400,
+                    'msg' => trans('message.discount.minimumNotReached')
+                ]);
+            }
+                    // Tính tổng tiền sau khi đã áp dụng mã giảm giá
+            $discountAmount = $discount->reduced_amount; // Giả sử trường này chứa số tiền giảm giá cố định
+            $totalAfterDiscount = max(0, $totalCart - $discountAmount);
             Session::put('discount_name', $discount->voucher_sku);
 
             $discount->quantity = $discount->quantity - 1;
@@ -93,8 +122,8 @@ class CartController extends Controller
 
 
             return response([
-                'totalMoney' => Cart::subtotal(0),
-                'percentage' => Cart::discount(),
+                'totalMoney' => $totalAfterDiscount,
+                'discountAmount' => $discountAmount,
                 'nameDiscount' => $discount->voucher_sku,
                 'code'       => 200,
                 'msg'    => trans('message.discount.success')
@@ -141,6 +170,7 @@ class CartController extends Controller
         {
             // Xoá sản phẩm khỏi đơn hàng thành công
             Cart::remove($rowId);
+            session()->forget('discount_name');
             return response([
                 'totalMoney' => Cart::subtotal(0),
                 'cartCount' => Cart::count(),

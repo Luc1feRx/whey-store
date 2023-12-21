@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title') Thêm mới tài khoản @stop
+@section('title') Thêm mới khách hàng @stop
 
 @section('addCss')
 <link rel="stylesheet" href="{{ asset('backend\plugins\select2\css\select2.css') }}">
@@ -14,14 +14,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Tạo mới tài khoản</h1>
+                    <h1>Tạo mới khách hàng</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                     'breadcrumb'=> [
-                    ['title' => 'Danh sách tài khoản', 'url' => route('admin.accounts.index')],
-                    ['title' => 'Tạo tài khoản', 'url' => '#']
+                    ['title' => 'Danh sách khách hàng', 'url' => route('admin.customers.index')],
+                    ['title' => 'Tạo khách hàng', 'url' => '#']
                     ]
                     ])
                 </div>
@@ -52,9 +52,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.accounts.store') }}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+                        <form action="{{ route('admin.customers.store') }}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
                             {{ csrf_field() }}
-                            @include('backend.account.form')
+                            @include('backend.customer.form')
                         </form>
                     </div>
                 </div>

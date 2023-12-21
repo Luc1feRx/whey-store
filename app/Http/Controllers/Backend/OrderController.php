@@ -22,7 +22,8 @@ class OrderController extends Controller
             $orders->where(function ($q) use ($searchKeyword) {
                 $q->where('phone', 'LIKE', "%" . $searchKeyword . "%")
                     ->orWhere('address', 'LIKE', "%" . $searchKeyword . "%")
-                    ->orWhere('user_name', 'LIKE', "%" . $searchKeyword . "%");
+                    ->orWhere('user_name', 'LIKE', "%" . $searchKeyword . "%")
+                    ->orWhere('email', 'LIKE', "%" . $searchKeyword . "%");
             });
         }
         

@@ -51,6 +51,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/products/filter', [HomeController::class, 'ajaxFilter'])->name('products.ajaxFilter');
 
+    Route::get('/product/{productId}/flavor/{flavorId}/quantity', [HomeController::class, 'checkFlavorStock'])->name('products.ajaxCheckFlavorStock');
+
     //checkout
     Route::group(['prefix' => 'checkout'], function () {
         Route::get('/', [CheckoutController::class, 'checkout'])->name('home.checkout');

@@ -56,12 +56,16 @@ return [
         'Product' => 'Sản phẩm',
         'cartTotal' => 'Thanh toán',
         'subTotal' => 'Tổng tiền',
-        'proceedToCheckout' => 'Đặt hàng'
+        'proceedToCheckout' => 'Đặt hàng',
+        'insufficient_quantity' => 'Thêm sản phẩm vào giỏ thất bại'
     ],
     'discount' => [
         'sku' => 'Mã giảm giá',
         'applyDiscount' => 'Áp mã giảm giá',
-        'placeholderApplyDiscount' => 'Nhập mã giảm giá'
+        'placeholderApplyDiscount' => 'Nhập mã giảm giá',
+        'minimumNotReached' => 'Không đủ điều kiện sử dụng mã giảm giá',
+        'errorDiscount' => 'Mã giảm giá không hợp lệ',
+        'requiredDiscountCode' => 'Vui lòng nhập mã giảm giá'
     ],
     'checkout' => [
         'title' => 'Đặt hàng',
@@ -91,6 +95,20 @@ return [
             'done' => 'Thành công',
             'cancel' => 'Đơn hàng đã hủy'
         ]
-    ]
-
+    ],
+    'inStock' => 'Còn hàng',
+    'outStock' => 'Hết hàng',
+    'flavor' => 'Loại sản phẩm',
+    'Availablity' => 'Trạng thái',
+    'addToCart' => 'Thêm vào giỏ hàng',
+    'customer_reviews' => 'Số khách hàng đánh giá',
+    'LoginToComment' => 'Đăng nhập để nhận xét sản phẩm',
+    'description' => 'Mô tả',
+    'Reviews' => 'Đánh giá',
+    'Specification' => 'Thông số',
+    'product_view_lastest' => 'Có thể bạn quan tâm',
+    'first_name' => 'Tên',
+    'last_name' => 'Họ',
+    'enter_first_name' => 'Nhập tên',
+    'enter_last_name' => 'Nhập họ'
 ];

@@ -1,8 +1,8 @@
 @php
 $arg_aside= array(
-'admin.products.index',
-'admin.products.create',
-'admin.products.edit',
+'admin.customers.index',
+'admin.customers.create',
+'admin.customers.edit',
 );
 $active = '';
 $is_open = '';
@@ -13,24 +13,24 @@ $is_open = 'menu-open';
 @endphp
 <li class="nav-item {{ $is_open }}">
   <a href="#" class="nav-link {{ $active }}">
-    <i class="nav-icon fas fa-dumbbell"></i>
+    <i class="nav-icon fas fa-people-arrows"></i>
     <p>
-      Quản lý sản phẩm
+      Quản lý khách hàng
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="{{ route('admin.products.index') }}"
-        class="nav-link {{ Request::routeIs('admin.categories.index') ? 'active' : '' }}">
+      <a href="{{ route('admin.customers.index') }}"
+        class="nav-link {{ Request::routeIs('admin.customers.index') ? 'active' : '' }}">
         <i class="nav-icon fas fa-list"></i>
-        <p>Danh sách sản phẩm</p>
+        <p>Danh sách khách hàng</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('admin.products.create') }}" class="nav-link {{ Request::routeIs('admin.products.create') ? 'active' : '' }}">
+      <a href="{{ route('admin.customers.create') }}" class="nav-link {{ Request::routeIs('admin.customers.create') ? 'active' : '' }}">
         <i class="nav-icon fas fa-plus"></i>
-        <p>Thêm mới sản phẩm</p>
+        <p>Thêm mới khách hàng</p>
       </a>
     </li>
   </ul>

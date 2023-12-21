@@ -31,7 +31,6 @@ class ProductRequest extends FormRequest
             'origin' => 'required|max:50',
             'main_ingredient' => 'required|max:50',
             'price' => 'required',
-            'percent' => 'required',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ];
         return $rules;

@@ -132,9 +132,9 @@ class DestroyController extends Controller
                     $msg = 'Xóa thất bại';
                     return response()->json(array('status' => false, 'msg' => $msg));
                 }
-                $datas = $datas->update([
-                    'deleted_at' => Carbon::now()
-                ]);
+                foreach ($datas as $data) {
+                    $data->delete(); 
+                }
             } else if($model == Product::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
                 if($datas){
@@ -178,14 +178,15 @@ class DestroyController extends Controller
                 $datas = $model::whereIn('id', $arr_id)->delete();
             }else {
                 $datas = $model::whereIn('id', $arr_id)->get();
-                if(count($datas)<=0){
+                if ($datas->isEmpty()) {
                     $msg = 'Xóa thất bại';
-                    return response()->json(array('status' => false, 'msg' => $msg));
+                    return response()->json(['status' => false, 'msg' => $msg]);
                 }
-                $datas = $datas->update([
-                    'deleted_at' => Carbon::now()
-                ]);
-                $deleteThumb = UploadImage::handleRemoveFile($imagePath);
+            
+                foreach ($datas as $data) {
+                    $data->delete(); 
+                    UploadImage::handleRemoveFile($imagePath);
+                }
             }
             $msg = 'Xóa thành công';
             return response()->json(array('status' => true, 'msg' => $msg));
