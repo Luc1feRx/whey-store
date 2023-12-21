@@ -76,7 +76,8 @@ return [
         'phone' => 'Số điện thoại', 
         'product' => 'Sản phẩm',
         'total' => 'Tổng tiền',
-        'place_order' => 'Đặt hàng'
+        'place_order' => 'Đặt hàng',
+        'note' => 'Ghi chú'
     ],
     'trackOrder' => [
         'title' => 'Tra cứu đơn hàng',
@@ -110,5 +111,19 @@ return [
     'first_name' => 'Tên',
     'last_name' => 'Họ',
     'enter_first_name' => 'Nhập tên',
-    'enter_last_name' => 'Nhập họ'
+    'enter_last_name' => 'Nhập họ',
+    'specifications' => 'Thông tin sản phẩm',
+    'spec' => [
+        'weight' => 'Trọng lượng',
+        'score' => 'Điểm Bodybuilding.com',
+        'origin' => 'Xuất xứ',
+        'main_ingredient' => 'Thành phần chính'
+    ],
+    'all_comments' => 'Nhận xét đánh giá (:attributes đánh giá)',
+    'overall' => 'Điểm trung bình',
+    'rating' => 'Điểm đánh giá',
+    'review' => 'Nội dung',
+    'add_comment' => 'Đánh giá',
+    'trackYourOrder' => 'Tra cứu đơn hàng',
+    'related_products' => 'Sản phẩm liên quan'
 ];

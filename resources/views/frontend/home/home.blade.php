@@ -1,5 +1,8 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    <title>{{ trans('message.home') }}</title>
+@endsection
 
 @section('content')
 <div id="content" class="site-content" tabindex="-1">
@@ -85,9 +88,8 @@
                                                             <div class="hover-area">
                                                                 <div class="action-buttons">
 
-                                                                    <a href="#" rel="nofollow" class="add_to_wishlist"> {{ trans('message.wishlist') }}</a>
+                                                                    <a href="{{ route('home.addToFavorites', ['productId'=>$productFeatured->id]) }}" rel="nofollow" class="add_to_wishlist"> {{ trans('message.wishlist') }}</a>
 
-                                                                    <a href="compare.html" class="add-to-compare-link"> Compare</a>
                                                                 </div>
                                                             </div>
                                                         </div><!-- /.product-inner -->
@@ -142,7 +144,7 @@
                                                                         @endif
                                                                     </span>
                                                                 </span>
-                                                                <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">{{ trans('message.addToCart') }}</a>
+                                                                <a rel="nofollow" href="{{ route('home.product-detail', ['slug'=>$review_product->slug]) }}" class="button add_to_cart_button">{{ trans('message.addToCart') }}</a>
                                                             </div><!-- /.price-add-to-cart -->
 
                                                             <div class="hover-area">

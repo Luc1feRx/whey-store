@@ -92,8 +92,6 @@ class CartController extends Controller
                         'msg' => trans('message.discount.alreadyApplied')
                     ]);
                 }
-                
-            
 
             if ($discount->quantity == 0) {
                 return response([
@@ -102,8 +100,7 @@ class CartController extends Controller
                     'msg'    => trans('message.discount.outOfDiscount')
                 ]);
             }
-            
-
+ 
             $totalCart = Cart::subtotal(0, '.', '');
                     // Kiểm tra xem tổng giá trị đơn hàng có đạt giá trị tối thiểu không
             if ($totalCart < $discount->min_purchase) {
@@ -112,23 +109,26 @@ class CartController extends Controller
                     'msg' => trans('message.discount.minimumNotReached')
                 ]);
             }
-                    // Tính tổng tiền sau khi đã áp dụng mã giảm giá
-            $discountAmount = $discount->reduced_amount; // Giả sử trường này chứa số tiền giảm giá cố định
-            $totalAfterDiscount = max(0, $totalCart - $discountAmount);
+            // Tính tổng tiền sau khi đã áp dụng mã giảm giá
+            // Tính giá trị giảm giá và phần trăm giảm giá tương ứng với tổng giỏ hàng
+            $discountAmount = $discount->reduced_amount; // Số tiền giảm giá cố định
+            $discountPercentage = ($discountAmount / $totalCart) * 100;
+            // Áp dụng phần trăm giảm giá vào giỏ hàng
+            Cart::setGlobalDiscount($discountPercentage);
+            Session::put('reducedAmount', $discount->reduced_amount);
             Session::put('discount_name', $discount->voucher_sku);
-            Cart::setGlobalDiscount($discount->reduced_amount);
 
             $discount->quantity = $discount->quantity - 1;
             $discount->save();
 
 
             return response([
-                'totalMoney' => $totalAfterDiscount,
-                'discountAmount' => $discountAmount,
+                'totalMoney' => Cart::subtotal(0),
+                'discountAmount' => number_format(Session::get('discountAmount'), 0),
                 'nameDiscount' => $discount->voucher_sku,
                 'code'       => 200,
                 'msg'    => trans('message.discount.success')
-            ]);  
+            ]);
         }
     }
 
@@ -172,6 +172,10 @@ class CartController extends Controller
             // Xoá sản phẩm khỏi đơn hàng thành công
             Cart::remove($rowId);
             session()->forget('discount_name');
+            session()->forget('reducedAmount');
+            session()->forget('discount_amount');
+            session()->forget('cart_total');
+            session()->forget('discountAmount');
             return response([
                 'totalMoney' => Cart::subtotal(0),
                 'cartCount' => Cart::count(),
