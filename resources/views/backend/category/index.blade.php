@@ -73,7 +73,7 @@
                                                     <td>{{ $cate->name_category }}</td>
                                                     <td>{{ $cate->slug_category }}</td>
                                                     <td>
-                                                        <img style="width: 300px;" src="{{ asset('storage/'.$cate->thumbnail) }}" alt="" srcset="">
+                                                        <img style="width: 120px;" src="{{ asset('storage/'.$cate->thumbnail) }}" alt="" srcset="">
                                                     </td>
                                                     <td>{{ optional($cate->parentCategory)->name_category }}</td>
                                                     <td>
