@@ -72,13 +72,12 @@
                                                             <div class="price-add-to-cart">
                                                                 <span class="price">
                                                                     <span class="electro-price">
-                                                                        @if (!empty($productFeatured->discount_price))
+                                                                        @if (!empty($productFeatured->percent))
                                                                             <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($productFeatured->discount_price) }} đ</span></ins>
                                                                             <del><span class="amount"> {{ \App\Helpers\Common::numberFormat($productFeatured->price) }} đ</span></del>
                                                                             <span class="amount"> </span>
                                                                         @else
-                                                                            <ins><span class="amount"> </span></ins>
-                                                                            <span class="amount"> {{ \App\Helpers\Common::numberFormat($productFeatured->price) }} đ</span>
+                                                                            <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($productFeatured->price) }} đ</span></ins>
                                                                         @endif
                                                                     </span>
                                                                 </span>
@@ -201,13 +200,13 @@
                                                     <div class="price-add-to-cart">
                                                         <span class="price">
                                                             <span class="electro-price">
-                                                                @if (!empty($productByCategory->discount_price))
+                                                                @if (!empty($productByCategory->percent))
                                                                     <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($productByCategory->discount_price) }} đ</span></ins>
                                                                     <del><span class="amount"> {{ \App\Helpers\Common::numberFormat($productByCategory->price) }} đ</span></del>
                                                                     <span class="amount"> </span>
                                                                 @else
                                                                     <ins><span class="amount"> </span></ins>
-                                                                    <span class="amount"> {{ \App\Helpers\Common::numberFormat($productByCategory->price) }} đ</span>
+                                                                    <ins><span class="amount"> {{ \App\Helpers\Common::numberFormat($productByCategory->price) }} đ</span></ins>
                                                                 @endif
                                                             </span>
                                                         </span>
@@ -300,7 +299,7 @@
                                         <img class="wp-post-image" data-echo="{{ asset('storage/' .$feature_item->thumbnail) }}" src="{{ asset('storage/' .$feature_item->thumbnail) }}" alt="">
                                         <span class="product-title">{{ $feature_item->name }}</span>
                                     </a>
-                                    <span class="electro-price"><span class="amount">{{ !empty($feature_item->discount_price) ? \App\Helpers\Common::numberFormat($feature_item->discount_price) : \App\Helpers\Common::numberFormat($feature_item->price) }} đ</span></span>
+                                    <span class="electro-price"><span class="amount">{{ !empty($feature_item->percent) ? \App\Helpers\Common::numberFormat($feature_item->discount_price) : \App\Helpers\Common::numberFormat($feature_item->price) }} đ</span></span>
                                 </li>
                             @endforeach
                         </ul>
@@ -310,31 +309,17 @@
             <div class="col-lg-6 col-md-6 col-xs-12">
                 <aside class="widget clearfix">
                     <div class="body">
-                        <h4 class="widget-title">Top Rated Products</h4>
+                        <h4 class="widget-title">Đánh giá cao</h4>
                         <ul class="product_list_widget">
+                            @foreach ($getProductViewCount as $viewProduct)
                             <li>
-                                <a href="single-product.html" title="Notebook Black Spire V Nitro  VN7-591G">
-                                    <img class="wp-post-image" data-echo="assets/images/footer/6.jpg" src="assets/images/blank.gif" alt="">
-                                    <span class="product-title">Notebook Black Spire V Nitro  VN7-591G</span>
+                                <a href="{{ route('home.product-detail', ['slug'=>$viewProduct->slug]) }}" title="Tablet Thin EliteBook  Revolve 810 G6">
+                                    <img class="wp-post-image" data-echo="{{ asset('storage/' .$viewProduct->thumbnail) }}" src="{{ asset('storage/' .$viewProduct->thumbnail) }}" alt="">
+                                    <span class="product-title">{{ $viewProduct->name }}</span>
                                 </a>
-                                <div class="star-rating" title="Rated 5 out of 5"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div>		<span class="electro-price"><ins><span class="amount">&#36;1,999.00</span></ins> <del><span class="amount">&#36;2,299.00</span></del></span>
+                                <span class="electro-price"><span class="amount">{{ !empty($viewProduct->percent) ? \App\Helpers\Common::numberFormat($viewProduct->discount_price) : \App\Helpers\Common::numberFormat($viewProduct->price) }} đ</span></span>
                             </li>
-
-                            <li>
-                                <a href="single-product.html" title="Apple MacBook Pro MF841HN/A 13-inch Laptop">
-                                    <img class="wp-post-image" data-echo="assets/images/footer/7.jpg" src="assets/images/blank.gif" alt="">
-                                    <span class="product-title">Apple MacBook Pro MF841HN/A 13-inch Laptop</span>
-                                </a>
-                                <div class="star-rating" title="Rated 5 out of 5"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div>		<span class="electro-price"><span class="amount">&#36;1,800.00</span></span>
-                            </li>
-
-                            <li>
-                                <a href="single-product.html" title="Tablet White EliteBook Revolve  810 G2">
-                                    <img class="wp-post-image" data-echo="assets/images/footer/2.jpg" src="assets/images/blank.gif" alt="">
-                                    <span class="product-title">Tablet White EliteBook Revolve  810 G2</span>
-                                </a>
-                                <div class="star-rating" title="Rated 5 out of 5"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div>		<span class="electro-price"><span class="amount">&#36;1,999.00</span></span>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </aside>

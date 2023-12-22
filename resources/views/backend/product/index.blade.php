@@ -86,13 +86,15 @@
                                         </td>
                                         <td><span class="badge bg-success" style="font-size: 15px!important">{{ $product->brand_name }}</span></td>
                                         <td>{{ \App\Helpers\Common::numberFormat($product->price) }} VNĐ</td>
-                                        <td>{{ $product->status == App\Models\Product::DISPLAY ? 'Hiển thị' : 'Ẩn' }}</td>
+                                        <td>{{ $product->status == 1 ? 'Hiển thị' : 'Ẩn' }}</td>
                                         <td>
+                                            @if ($product->status == 1)
                                             <a href="{{ route('admin.products.edit', ['id'=>$product->id]) }}"
                                                 class="btn btn-icon btn-sm tip"><i class="fas fa-pencil-alt"></i></a>
                                             <a data-id="{{ $product->id }}" data-image="{{ $product->thumbnail }}"
                                                 class="btn btn-icon btn-sm deleteDialog tip " data-toggle="tooltip"
                                                 title=""><i class="fa fa-trash"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

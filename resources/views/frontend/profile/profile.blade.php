@@ -27,7 +27,7 @@
 @section('content')
 <div class="container">
 
-    <nav class="woocommerce-breadcrumb"><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ trans('message.profile') }}</nav>
+    <nav class="woocommerce-breadcrumb"><a href="home.html">Trang chủ</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ trans('message.profile.title') }}</nav>
 
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
@@ -42,7 +42,7 @@
                                 <div class="wpb_wrapper">
                                     <div class="wpb_text_column wpb_content_element ">
                                         <div class="wpb_wrapper">
-                                            <h2 class="contact-page-title">{{ trans('message.profile') }}</h2>
+                                            <h2 class="contact-page-title">{{ trans('message.profile.title') }}</h2>
                                         </div>
                                     </div>
                                     <div lang="en-US" dir="ltr" id="wpcf7-f2507-p2508-o1" class="wpcf7" role="form">
@@ -89,7 +89,7 @@
                                             <div class="form-group">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" id="password-checkbox" onclick="openInputPassword()">
-                                                    <label class="form-check-label" style="margin-bottom: 10px">{{ trans('message.changePassword') }}</label>
+                                                    <label class="form-check-label" style="margin-bottom: 10px">{{ trans('message.profile.changePassword') }}</label>
                                                 </div>
                                                 <input type="text" style="display:none" class="form-control" id="password" placeholder="Nhập password"
                                                     name="password"

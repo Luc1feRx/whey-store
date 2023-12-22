@@ -138,6 +138,9 @@ class DestroyController extends Controller
             } else if($model == Product::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
                 if($datas){
+                    $model::whereIn('id', $arr_id)->update([
+                        'status' => 2
+                    ]);
                     $deleteThumb = UploadImage::handleRemoveFile($imagePath);
                 }else{
                     $msg = 'Xóa thất bại';

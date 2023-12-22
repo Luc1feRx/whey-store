@@ -124,7 +124,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::get('/export', [GoodIssueController::class, 'ExportGood'])->name('export');
         });
 
-        //product
+        //customers
         Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
             Route::get('/', [CustomerController::class, 'index'])->name('index');
             Route::get('/create', [CustomerController::class, 'create'])->name('create');

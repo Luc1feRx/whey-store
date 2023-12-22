@@ -14,14 +14,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sửa tài khoản</h1>
+                    <h1>Sửa tài khoản khách hàng</h1>
                 </div>
                 <div class="col-sm-6">
                     @include('backend.partials.breadcrumb',
                     [
                         'breadcrumb'=> [
-                            ['title' => 'Danh sách tài khoản', 'url' => route('admin.accounts.index')],
-                            ['title' => 'Sửa tài khoản', 'url' => '#']
+                            ['title' => 'Danh sách tài khoản khách hàng', 'url' => route('admin.customers.index')],
+                            ['title' => 'Sửa tài khoản khách hàng', 'url' => '#']
                         ]
                     ])
                 </div>
@@ -52,9 +52,9 @@
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form action="{{ route('admin.accounts.update', ['id' => $admin->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.customers.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            @include('backend.account.form')
+                            @include('backend.customer.form')
                         </form>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
 @section('addJs')
     <script src="{{ asset('backend\plugins\select2\js\select2.min.js') }}"></script>
     <script src="{{ asset('backend\common\ChangeSlug.js') }}"></script>
-    @include('backend.account.script')
+    @include('backend.customer.script')
     @if (session('error'))
     @include('backend.layouts.toastr')
 @endif

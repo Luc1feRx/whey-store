@@ -294,7 +294,7 @@
                                         <div id="comments">
     
                                             <ol class="commentlist">
-                                                @foreach ($productDetail->reviews as $review)
+                                                @foreach ($reviews as $review)
                                                 <li class="comment odd alt thread-odd thread-alt depth-1">
             
                                                     <div class="comment_container">
@@ -351,6 +351,7 @@
                                                 </li><!-- #comment-## --> --}}
 
                                             </ol><!-- /.commentlist -->
+                                            <div>{!! $reviews->links('pagination::bootstrap-4') !!}</div>
     
                                         </div><!-- /#comments -->
     

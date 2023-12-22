@@ -121,4 +121,9 @@ return [
     'add_comment' => 'Add a review',
     'trackYourOrder' => 'Track your order',
     'related_products' => 'Related products',
+    'profile' => [
+        'choose_image' => 'Choose image',
+        'title' => 'Your information',
+        'changePassword' => 'Change password'
+    ],
 ];

@@ -85,7 +85,7 @@
                                         <td>{{ $user->login_ip}}</td>
                                         <td>{{ $user->browser_info}}</td>
                                         <td>
-                                            <a href="{{ route('admin.accounts.edit', ['id'=>$user->id]) }}"
+                                            <a href="{{ route('admin.customers.edit', ['id'=>$user->id]) }}"
                                                 class="btn btn-icon btn-sm tip"><i class="fas fa-pencil-alt"></i></a>
                                             <a data-id="{{ $user->id }}" data-image="{{ $user->avatar }}"
                                                 class="btn btn-icon btn-sm deleteDialog tip " data-toggle="tooltip"

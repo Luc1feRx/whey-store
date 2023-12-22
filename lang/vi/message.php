@@ -65,7 +65,8 @@ return [
         'placeholderApplyDiscount' => 'Nhập mã giảm giá',
         'minimumNotReached' => 'Không đủ điều kiện sử dụng mã giảm giá',
         'errorDiscount' => 'Mã giảm giá không hợp lệ',
-        'requiredDiscountCode' => 'Vui lòng nhập mã giảm giá'
+        'requiredDiscountCode' => 'Vui lòng nhập mã giảm giá',
+        'success' => 'Áp mã giảm giá thành công'
     ],
     'checkout' => [
         'title' => 'Đặt hàng',
@@ -125,5 +126,10 @@ return [
     'review' => 'Nội dung',
     'add_comment' => 'Đánh giá',
     'trackYourOrder' => 'Tra cứu đơn hàng',
-    'related_products' => 'Sản phẩm liên quan'
+    'related_products' => 'Sản phẩm liên quan',
+    'profile' => [
+        'choose_image' => 'Chọn hình ảnh',
+        'title' => 'Thông tin tài khoản',
+        'changePassword' => 'Đổi mật khẩu'
+    ],
 ];

@@ -38,6 +38,12 @@ class HomeController extends Controller
         ->orderByDesc('reviews_count') // Sắp xếp theo số lượng đánh giá giảm dần
         ->take(6)
         ->get();
+
+        $getProductViewCount = Product::with(['reviews'])
+        ->withCount('reviews') // Đếm số lượng đánh giá
+        ->orderByDesc('reviews_count') // Sắp xếp theo số lượng đánh giá giảm dần
+        ->take(5)
+        ->get();
         return view('frontend.home.home', [
             'sliders' => $sliders,
             'getProductFeatured' => $getProductFeatured,
@@ -46,7 +52,8 @@ class HomeController extends Controller
             'getLastestProduct' => $getLastestProduct,
             'getCategoryProduct' => $getCategoryProduct,
             'getProductReview' => $getProductReview,
-            'randomVouchers' => $randomVouchers
+            'randomVouchers' => $randomVouchers,
+            'getProductViewCount' => $getProductViewCount
         ]);
     }
 
@@ -130,10 +137,6 @@ class HomeController extends Controller
     public function productDetail($slug){
         $productDetail = Product::with(['images', 'flavors'  => function ($query) {
             $query->withPivot('quantity'); // 'quantity' là cột trong bảng trung gian 'product_flavors'
-        },
-        'reviews' => function ($query) {
-            $query->with('user') // Chỉ lấy cột 'id' và 'name' từ bảng 'users'
-                  ->orderBy('created_at', 'desc'); // Sắp xếp theo created_at giảm dần
         }])->leftJoin('brands', 'brands.id', 'products.brand_id')
             ->where('products.slug', $slug)
             ->select([
@@ -157,6 +160,12 @@ class HomeController extends Controller
                 'products.thumbnail as product_thumbnail'
             ])
             ->first();
+
+
+            $reviews = Review::with('user')
+            ->where('product_id', $productDetail->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
             $getProductByViewCount = Product::orderBy('view_counts', 'desc')->take(6)->get();
 
@@ -186,7 +195,7 @@ class HomeController extends Controller
                 $ratings[$i] = Review::where('product_id', $productDetail->id)->where('rating', $i)->count();
             }
 
-            $product = Product::with('categories')->find($productDetail->id); // Đảm bảo rằng bạn đã tải trước quan hệ 'categories'
+            $product = Product::with('categories')->find($productDetail->id);
             $categoryIds = $product->categories->pluck('id');
             $relatedProducts = Product::whereHas('categories', function ($query) use ($categoryIds) {
                 $query->whereIn('category_id', $categoryIds);
@@ -206,7 +215,8 @@ class HomeController extends Controller
             'totalComments' => $totalComments,
             'averageRating' => $averageRating,
             'ratings' => $ratings,
-            'relatedProducts' => $relatedProducts
+            'relatedProducts' => $relatedProducts,
+            'reviews' => $reviews,
         ]);
     }
 

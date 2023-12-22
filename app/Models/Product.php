@@ -13,8 +13,8 @@ class Product extends Model
 
     protected $guard = 'products';
 
-    CONST HIDDEN = 0;
-    CONST DISPLAY = 1;
+    CONST HIDDEN = 1;
+    CONST DISPLAY = 0;
 
     CONST ISFEATURED = 1;
 

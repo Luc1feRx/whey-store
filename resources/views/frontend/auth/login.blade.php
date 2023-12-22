@@ -48,7 +48,6 @@
                                                         <input class="button" type="submit" value="{{ trans('message.login') }}">
                                                     </p>
 
-                                                    <p class="lost_password"><a href="login-and-register.html">{{ trans('message.lost-password') }}</a></p>
 
                                                     <p class="lost_password"><a href="{{ route('home.register-view') }}">{{ trans('message.register') }}</a></p>
 
