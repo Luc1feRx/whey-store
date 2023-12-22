@@ -158,6 +158,7 @@ class CheckoutController extends Controller
                     }
                 }
                 Cart::destroy();
+                Session::forget('discount_name');
                 DB::commit();
                 return view('frontend.vnpay.vnpay_return', [
                     'vnpayData' => $vnpayData

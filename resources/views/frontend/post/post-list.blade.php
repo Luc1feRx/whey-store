@@ -29,8 +29,8 @@
                                 {{ $post->description }}
                             </div><!-- .post-excerpt -->
 
-                            <div class="post-readmore"><a href="blog-single.html" class="btn btn-primary">Read More</a></div>
-                            <span class="comments-link"><a href="blog-single.html#comments">Leave a comment</a></span>
+                            <div class="post-readmore"><a href="{{ route('home.post.detail', ['slug'=>$post->slug]) }}" class="btn btn-primary">Read More</a></div>
+                            <span class="comments-link"><a href="{{ route('home.post.detail', ['slug'=>$post->slug]) }}">Leave a comment</a></span>
                         </div>
 
                     </article><!-- #post-## -->

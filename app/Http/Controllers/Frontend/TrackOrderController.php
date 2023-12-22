@@ -45,7 +45,7 @@ class TrackOrderController extends Controller
             ->orderBy('order_details.id', 'desc')
             ->get();
 
-        $order = Order::where('orders.id', $id)->join('order_times', 'order_times.order_id', '=', 'orders.id')
+        $order = Order::where('orders.id', $id)->leftJoin('order_times', 'order_times.order_id', '=', 'orders.id')
             ->select([
                 'order_times.status as order_status',
                 'orders.status as order_times_status',

@@ -20,12 +20,12 @@
 </div><!-- /.top-bar -->
 <header id="masthead" class="site-header header-v2">
     <div class="container">
-        <div class="row">
+        <div style="display: flex; align-items: center" class="row">
 
             <!-- ============================================================= Header Logo ============================================================= -->
             <div class="header-logo">
                 <a href="{{ route('home.index') }}" class="header-logo-link">
-                    <img src="{{ asset('frontend\assets\images\love-fitness-gym-logo-design-template-design-gym-fitness-club-vector-illustration_722324-99.avif') }}" alt="">
+                    <img style="width: 100px" src="{{ asset('frontend\assets\images\love-fitness-gym-logo-design-template-design-gym-fitness-club-vector-illustration_722324-99.avif') }}" alt="">
                 </a>
             </div> 
             <!-- ============================================================= Header Logo : End============================================================= -->
@@ -220,11 +220,6 @@
         <ul class="navbar-wishlist nav navbar-nav pull-right flip">
             <li class="nav-item">
                 <a href="{{ route('home.favouriteList') }}" class="nav-link"><i class="ec ec-favorites"></i></a>
-            </li>
-        </ul>
-        <ul class="navbar-compare nav navbar-nav pull-right flip">
-            <li class="nav-item">
-                <a href="compare.html" class="nav-link"><i class="ec ec-compare"></i></a>
             </li>
         </ul>
     </div>

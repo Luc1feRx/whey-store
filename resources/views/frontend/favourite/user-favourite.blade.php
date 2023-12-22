@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
 
-    <nav class="woocommerce-breadcrumb"><a href="home.html">Home</a><span class="delimiter"><i
-                class="fa fa-angle-right"></i></span>Wishlist</nav>
+    <nav class="woocommerce-breadcrumb"><a href="{{ route('home.index') }}">Trang chủ</a><span class="delimiter"><i
+                class="fa fa-angle-right"></i></span>Danh sách yêu thích</nav>
     <div class="content-area" id="primary">
         <main class="site-main" id="main">
             <article class="page type-page status-publish hentry">
@@ -18,7 +18,7 @@
 								name="_wp_http_referer">
 							<!-- TITLE -->
 							<div class="wishlist-title ">
-								<h2>My wishlist on Electro</h2>
+								<h2>Danh sách sản phẩm yêu thích</h2>
 							</div>
 
 							<!-- WISHLIST TABLE -->
@@ -33,14 +33,14 @@
 										<th class="product-thumbnail"></th>
 
 										<th class="product-name">
-											<span class="nobr">Product Name</span>
+											<span class="nobr">Tên sản phẩm</span>
 										</th>
 
 										<th class="product-price">
-											<span class="nobr">Unit Price</span>
+											<span class="nobr">Giá tiền</span>
 										</th>
 										<th class="product-stock-stauts">
-											<span class="nobr">Stock Status</span>
+											<span class="nobr">Tình trạng</span>
 										</th>
 
 										<th class="product-add-to-cart"></th>
@@ -73,16 +73,6 @@
 
 										<td class="product-stock-status">
 											<span class="in-stock">In stock</span>
-										</td>
-
-										<td class="product-add-to-cart">
-											<!-- Date added -->
-
-											<!-- Add to cart button -->
-											<a href="#" class="button">{{ __('message.addToCart') }}</a>
-											<!-- Change wishlist -->
-
-											<!-- Remove from wishlist -->
 										</td>
 									</tr>
 									@endforeach
