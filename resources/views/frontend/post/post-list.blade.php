@@ -1,10 +1,14 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    <title>Danh sách bài viết</title>
+@endsection
+
 @section('content')
 <div id="content" class="site-content" tabindex="-1">
     <div class="container">
 
-        <nav class="woocommerce-breadcrumb"><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>Blog</nav>
+        <nav class="woocommerce-breadcrumb"><a href="home.html">Trang chủ</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>Blog</nav>
 
         <div id="primary" class="content-area">
             <main id="main" class="site-main">
@@ -51,7 +55,7 @@
                     <input type="submit" class="search-submit" value="Search">
                 </form>
             </aside>
-            <aside class="widget electro_recent_posts_widget"><h3 class="widget-title">Recent Posts</h3>
+            <aside class="widget electro_recent_posts_widget"><h3 class="widget-title">Bài viết mới</h3>
                 <ul>
                     @foreach ($feature_posts as $feature)                        
                     <li>

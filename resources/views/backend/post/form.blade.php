@@ -42,6 +42,13 @@
                                   </div>
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputPassword1">Mô tả</label>
+                                <textarea id="description" name="description" cols="30" rows="3" placeholder="Nhập mô tả" class="form-control">{!! old('description', $post->description ?? '') !!}</textarea>
+                                @error('description')
+                                <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputPassword1">Nội dung</label>
                                 <textarea id="content" name="content" cols="30" rows="10" placeholder="Nhập nội dung" class="form-control content-post summernote">{!! old('content', $post->content ?? '') !!}</textarea>
                                 @error('content')

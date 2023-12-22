@@ -23,6 +23,7 @@ class PostController extends Controller
         $listPost = $listPost->orderBy('id', 'desc')
             ->paginate(10);
         $feature_posts = Post::query()->where('is_featured', 1)->take(4)->get();
+
         return view('frontend.post.post-list', [
             'listPost' => $listPost,
             'feature_posts' => $feature_posts

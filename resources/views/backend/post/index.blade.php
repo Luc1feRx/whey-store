@@ -59,20 +59,18 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Tên tin tức</th>
-                                        <th>Slug</th>
                                         <th>Ảnh</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($posts as $post)
+                                    @foreach ($posts as $k => $post)
                                     <tr>
-                                        <td>{{ $post->id }}</td>
+                                        <td>{{ ($posts->currentPage() - 1) * $posts->perPage() + $k + 1 }}</td>
                                         <td>{{ $post->name }}</td>
-                                        <td>{{ $post->slug }}</td>
                                         <td>
-                                            <img style="width: 300px;" src="{{ asset('storage/'.$post->thumbnail) }}"
+                                            <img style="width: 100px;" src="{{ asset('storage/'.$post->thumbnail) }}"
                                                 alt="" srcset="">
                                         </td>
                                         <td>{{ $post->status == 1 ? 'Hiển thị' : 'Ẩn' }}</td>

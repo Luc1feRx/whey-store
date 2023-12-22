@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Helpers\Common;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductFlavor;
 use App\Models\Voucher;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\View;
@@ -58,8 +59,10 @@ class CartController extends Controller
 
     public function listCart(){
         $carts = Cart::content();
+        $randomVouchers = Voucher::inRandomOrder()->where('status', 1)->limit(5)->get();
         return view('frontend.cart.castList', [
-            'carts' => $carts
+            'carts' => $carts,
+            'randomVouchers' => $randomVouchers
         ]);
     }
 
@@ -86,7 +89,7 @@ class CartController extends Controller
                 // Kiểm tra xem mã giảm giá đã được áp dụng hay chưa
                 $appliedDiscount = Session::get('discount_name');
 
-                if (!empty($appliedDiscount) && $appliedDiscount == $discount->voucher_sku) {
+                if (!empty($appliedDiscount) || $appliedDiscount == $discount->voucher_sku) {
                     return response([
                         'code' => 400,
                         'msg' => trans('message.discount.alreadyApplied')
@@ -140,18 +143,51 @@ class CartController extends Controller
             $qty       = $request->quantity ?? 1;
             $idProduct = $request->product_id;
             $product   = Product::find($idProduct);
+            $flavorId  = $request->flavorId;
 
             //2. Kiểm tra tồn tại sản phẩm
-            if (!$product) return response(['messages' => 'Không tồn tại sản sản phẩm cần update']);
+            if (!$product) return response([
+                'msg' => 'Không tồn tại sản sản phẩm cần update',
+                'cartCount' => Cart::count(),
+                'totalMoney' => Cart::subtotal(0)
+            ]);
 
-            //3. Kiểm tra số lượng sản phẩm còn ko
-            // if ($product->pro_number < $qty) {
-            //     return response([
-            //         'messages' => 'Số lượng cập nhật không đủ',
-            //         'error'    => true
-            //     ]);
-            // }
-
+            // Kiểm tra số lượng có sẵn của sản phẩm theo hương vị
+            $flavor = ProductFlavor::where('product_id', $idProduct)->where('flavor_id',$flavorId)->first();
+            if (!$flavor || $flavor->quantity < $qty) {
+                return response([
+                    'code' => 400,
+                    'msg' => 'Số lượng sản phẩm không đủ',
+                    'cartCount' => Cart::count(),
+                    'totalMoney' => Cart::subtotal(0)
+                ]);
+            }
+            $discountCode = Session::get('discount_name');
+            if ($discountCode) {
+                $discount = Voucher::where('voucher_sku', $discountCode)->first();
+    
+                if ($discount) {
+                    $totalCart = Cart::subtotal(0, '.', '');
+    
+                    // Kiểm tra xem tổng giỏ hàng có đạt điều kiện áp mã giảm giá không
+                    if ($totalCart < $discount->min_purchase) {
+                        // Xóa thông tin mã giảm giá khỏi session
+                        Session::forget('discount_code');
+                        Session::forget('discount_name');
+                        Session::forget('reducedAmount');
+    
+                        // Áp dụng giá ban đầu cho giỏ hàng
+                        Cart::setGlobalDiscount(0);
+                        return response([
+                            'code' => 400,
+                            'msg' => 'Mã không sử dụng được nữa',
+                            'error' => true,
+                            'cartCount' => Cart::count(),
+                            'totalMoney' => Cart::subtotal(0)
+                        ]);
+                    }
+                }
+            }
             //4. Update
             Cart::update($id, $qty);
 

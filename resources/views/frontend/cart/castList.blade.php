@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <nav class="woocommerce-breadcrumb"><a href="{{ route('home.index') }}">{{ trans('message.home') }}</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>{{ trans('message.cart.title') }}</nav>
-    {{-- <aside id="electro_features_block_widget-2" class="widget widget_electro_features_block_widget">
+    <aside id="electro_features_block_widget-2" class="widget widget_electro_features_block_widget">
         <div class="features-list columns-1">
             @foreach ($randomVouchers as $voucher)
                 <div class="feature">
@@ -17,7 +17,10 @@
                         </div>
                         <div class="media-body media-middle feature-text">
                             <input type="hidden" name="" class="copy_voucher_{{ $voucher->voucher_sku }}" value="{{ $voucher->voucher_sku }}">
-                            <strong>{{ trans('message.voucher') }} {{ $voucher->name }}</strong> {{ $voucher->voucher_sku }}
+                            <strong>{{ $voucher->name }}</strong>
+                            <p>
+                                {{ $voucher->description }}
+                            </p>
                         </div>
                         <div style="display: flex;
                         justify-content: flex-end;
@@ -28,7 +31,7 @@
                 </div>
             @endforeach
         </div>
-    </aside> --}}
+    </aside>
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
             @if (!empty($carts))
@@ -76,10 +79,10 @@
 
                                         <td data-title="Quantity" class="product-quantity">
                                             <div class="quantity buttons_added">
-                                                <input type="button" class="minus" data-price="{{ $item->price }}" data-url="{{  route('home.cart.update', ['id' => $key]) }}" data-product-id="{{  $item->id }}" value="-">
+                                                <input type="button" class="minus" data-price="{{ $item->price }}" data-url="{{  route('home.cart.update', ['id' => $key]) }}" data-product-id="{{  $item->id }}" data-flavor-id="{{  $item->options->flavor_id }}" value="-">
                                                 <label>{{ __('message.quantity') }}</label>
-                                                <input type="number" size="4" class="input-text qty text" title="Qty" value="{{ $item->qty }}" name="quantity" max="29" min="0" step="1">
-                                                <input type="button" data-price="{{ $item->price }}" data-url="{{  route('home.cart.update', ['id' => $key]) }}" data-product-id="{{  $item->id }}" class="plus" value="+">
+                                                <input type="number" size="4" class="input-text qty text" readonly title="Qty" value="{{ $item->qty }}" name="quantity" max="29" min="0" step="1">
+                                                <input type="button" data-price="{{ $item->price }}" data-url="{{  route('home.cart.update', ['id' => $key]) }}" data-product-id="{{  $item->id }}" data-flavor-id="{{  $item->options->flavor_id }}" class="plus" value="+">
                                             </div>
                                         </td>
 
@@ -255,6 +258,7 @@
                 var url = button.data('url');
                 var productId = button.data('product-id');
                 var quantity = button.closest('.quantity').find('.qty').val();
+                var flavorId = button.data('flavor-id');
                 var price = button.data('price');
 
                 // Gửi yêu cầu AJAX để cập nhật giỏ hàng
@@ -267,16 +271,22 @@
                     data: {
                         product_id: productId,
                         quantity: quantity,
-                        price: price
+                        price: price,
+                        flavorId: flavorId
                     },
                     success: function(response) {
-                        // Xử lý kết quả nếu cần
-                        // Cập nhật số tiền hiển thị cho sản phẩm cụ thể
-                        jQuery(".productTotalAmount_" + response.id).text(response.totalItem +' đ');
-
-                        // Cập nhật tổng cả giỏ hàng
-                        jQuery('.sub-amount').text(response.totalMoney + ' đ');
-                        jQuery('.cart-items-count').text(response.cartCount);
+                        if(response.code == 400){
+                           toastr["error"](response.msg);
+                           location.reload();
+                        }else{
+                            // Xử lý kết quả nếu cần
+                            // Cập nhật số tiền hiển thị cho sản phẩm cụ thể
+                            jQuery(".productTotalAmount_" + response.id).text(response.totalItem +' đ');
+                            toastr["success"](response.msg);
+                            // Cập nhật tổng cả giỏ hàng
+                            jQuery('.sub-amount').text(response.totalMoney + ' đ');
+                            jQuery('.cart-items-count').text(response.cartCount);
+                        }
                         
                     },
                     error: function(error) {

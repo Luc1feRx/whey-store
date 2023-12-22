@@ -1,5 +1,8 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    <title>Đặt hàng</title>
+@endsection
 
 @section('content')
     <div class="container">

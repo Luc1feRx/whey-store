@@ -25,7 +25,7 @@
             <!-- ============================================================= Header Logo ============================================================= -->
             <div class="header-logo">
                 <a href="{{ route('home.index') }}" class="header-logo-link">
-                    <img style="width: 100px" src="{{ asset('frontend\assets\images\love-fitness-gym-logo-design-template-design-gym-fitness-club-vector-illustration_722324-99.avif') }}" alt="">
+                    <img style="width: 100px" src="{{ asset('frontend/assets/images/love-fitness-gym-logo-design-template-design-gym-fitness-club-vector-illustration_722324-99.avif') }}" alt="">
                 </a>
             </div> 
             <!-- ============================================================= Header Logo : End============================================================= -->

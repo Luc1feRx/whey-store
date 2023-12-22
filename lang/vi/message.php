@@ -57,7 +57,10 @@ return [
         'cartTotal' => 'Thanh toán',
         'subTotal' => 'Tổng tiền',
         'proceedToCheckout' => 'Đặt hàng',
-        'insufficient_quantity' => 'Thêm sản phẩm vào giỏ thất bại'
+        'insufficient_quantity' => 'Thêm sản phẩm vào giỏ thất bại',
+        'update' => [
+            'success' => 'Cập nhật thành công'
+        ]
     ],
     'discount' => [
         'sku' => 'Mã giảm giá',
@@ -66,7 +69,8 @@ return [
         'minimumNotReached' => 'Không đủ điều kiện sử dụng mã giảm giá',
         'errorDiscount' => 'Mã giảm giá không hợp lệ',
         'requiredDiscountCode' => 'Vui lòng nhập mã giảm giá',
-        'success' => 'Áp mã giảm giá thành công'
+        'success' => 'Áp mã giảm giá thành công',
+        'alreadyApplied' => 'Mã đã được áp'
     ],
     'checkout' => [
         'title' => 'Đặt hàng',
@@ -78,7 +82,8 @@ return [
         'product' => 'Sản phẩm',
         'total' => 'Tổng tiền',
         'place_order' => 'Đặt hàng',
-        'note' => 'Ghi chú'
+        'note' => 'Ghi chú',
+        'MyOrder' => 'Đơn hàng của tôi'
     ],
     'trackOrder' => [
         'title' => 'Tra cứu đơn hàng',
@@ -132,4 +137,5 @@ return [
         'title' => 'Thông tin tài khoản',
         'changePassword' => 'Đổi mật khẩu'
     ],
+    
 ];

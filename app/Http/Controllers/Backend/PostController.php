@@ -52,6 +52,7 @@ class PostController extends Controller
             $post->status = $request->status;
             $post->is_featured = $request->is_featured ?? 0;
             $post->content = $request->content;
+            $post->description = $request->description;
             $post->save();
             DB::commit();
             return redirect()->route('admin.posts.index')->with(['success' => 'Thêm tin tức thành công']);
@@ -85,6 +86,7 @@ class PostController extends Controller
             $post->status = $request->status;
             $post->is_featured = $request->is_featured;
             $post->content = $request->content;
+            $post->description = $request->description;
             $post->save();
             DB::commit();
             return redirect()->route('admin.posts.index')->with(['success' => 'Sửa tin tức thành công']);
