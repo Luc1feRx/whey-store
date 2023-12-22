@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use App\Models\GoodIssue;
 use Illuminate\Support\Str;
+use App\Models\ProductFlavor;
 
 class CheckoutController extends Controller
 {
@@ -127,6 +129,32 @@ class CheckoutController extends Controller
                             'quantity' => $item->qty,
                             'price' => $item->price
                         ]);
+
+                        $getProductFlavor = ProductFlavor::where('product_id', $item->id)
+                        ->where('flavor_id', $item->options->flavor_id)
+                        ->first();
+
+                        
+                        GoodIssue::create(
+                            [
+                                'product_id' => $item->id,
+                                'flavor_id' => $item->options->flavor_id, 
+                                'quantity' => DB::raw('quantity - ' . $item->qty),
+                                'export_good_quantity' => DB::raw('export_good_quantity + ' . $item->qty),
+                                'stock_good_quantity' => $getProductFlavor->quantity-$item->qty,
+                                'type' => 2,
+                            ]
+                        );
+
+                        ProductFlavor::updateOrCreate(
+                            [
+                                'product_id' => $item->id,
+                                'flavor_id' => $item->options->flavor_id
+                            ],
+                            [
+                                'quantity' => DB::raw('quantity - ' . $item->qty),
+                            ]
+                        );
                     }
                 }
                 Cart::destroy();

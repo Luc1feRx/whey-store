@@ -138,11 +138,6 @@ class DestroyController extends Controller
             } else if($model == Product::class){
                 $datas = $model::whereIn('id', $arr_id)->delete();
                 if($datas){
-                    $datas->images()->detach();
-                    foreach ($datas->images as $productImage) {
-                        // Xóa tệp lưu trữ
-                        Storage::delete($productImage->image);
-                    }
                     $deleteThumb = UploadImage::handleRemoveFile($imagePath);
                 }else{
                     $msg = 'Xóa thất bại';

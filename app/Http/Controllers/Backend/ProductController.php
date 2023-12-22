@@ -156,9 +156,10 @@ class ProductController extends Controller
             $product->origin = $request->origin;
             $product->main_ingredient = $request->main_ingredient;
             $product->brand_id = $request->brand_id;
-            $product->price = $request->price;
+            $price = (int)str_replace('.', '', $request->price);
+            $product->price = $price;
             $product->percent = $request->percent;
-            $product->discount_price = $request->price - (($request->price * $request->percent) / 100);
+            $product->discount_price = $price - (($price * $request->percent) / 100);
     
             // Handle the product's thumbnail
             if ($request->hasFile('thumbnail')) {

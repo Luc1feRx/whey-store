@@ -61,19 +61,23 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Ảnh</th>
                                         <th>Tên sản phẩm</th>
                                         <th>Danh mục</th>
                                         <th>Thương hiệu</th>
-                                        <th>Ảnh</th>
                                         <th>Giá sản phẩm (VNĐ)</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
+                                    @foreach ($products as $k=>$product)
                                     <tr>
-                                        <td>{{ $product->id }}</td>
+                                        <td>{{ ($products->currentPage() - 1) * $products->perPage() + $k + 1 }}</td>
+                                        <td>
+                                            <img style="width: 100px;" src="{{ asset('storage/'.$product->thumbnail) }}"
+                                            alt="" srcset="">
+                                        </td>
                                         <td>{{ $product->product_name }}</td>
                                         <td>
                                             @foreach ($product->categories as $cate)
@@ -81,10 +85,6 @@
                                             @endforeach
                                         </td>
                                         <td><span class="badge bg-success" style="font-size: 15px!important">{{ $product->brand_name }}</span></td>
-                                        <td>
-                                            <img style="width: 200px;" src="{{ asset('storage/'.$product->thumbnail) }}"
-                                            alt="" srcset="">
-                                        </td>
                                         <td>{{ \App\Helpers\Common::numberFormat($product->price) }} VNĐ</td>
                                         <td>{{ $product->status == App\Models\Product::DISPLAY ? 'Hiển thị' : 'Ẩn' }}</td>
                                         <td>

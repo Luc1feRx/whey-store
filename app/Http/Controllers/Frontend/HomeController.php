@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\View;
 class HomeController extends Controller
 {
     public function index(){
-        $getProductFeatured = Product::with(['categories', 'images'])->where('is_featured_product', Product::ISFEATURED)->take(10)->get();
+        $getProductFeatured = Product::with(['categories', 'images'])->where('is_featured_product', Product::ISFEATURED)->take(5)->get();
         $getLastestProduct = Product::orderBy('id', 'desc')->take(6)->get();
         $sliders = Slider::whereNull('deleted_at')->get();
         $brands = Brand::whereNull('deleted_at')->get();
@@ -88,7 +88,7 @@ class HomeController extends Controller
             $productsQuery->where('price', '<=', $maxPrice);
         }
     
-        $products = $productsQuery->paginate(1);
+        $products = $productsQuery->paginate(10);
         return view('frontend.category.category', [
             'category' => $category,
             'brands' => $brandsWithProductsCount,

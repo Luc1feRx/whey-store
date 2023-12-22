@@ -22,7 +22,7 @@ $is_open = 'menu-open';
   <ul class="nav nav-treeview">
     <li class="nav-item">
       <a href="{{ route('admin.products.index') }}"
-        class="nav-link {{ Request::routeIs('admin.categories.index') ? 'active' : '' }}">
+        class="nav-link {{ Request::routeIs('admin.products.index') ? 'active' : '' }}">
         <i class="nav-icon fas fa-list"></i>
         <p>Danh sách sản phẩm</p>
       </a>
