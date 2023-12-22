@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 {{-- search --}}
                 <section class="dataTables_wrapper">
-                    @include('backend.account.search')
+                    @include('backend.customer.search')
                 </section>
 
                 <div class="row mb-2">
@@ -76,7 +76,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            <img style="width: 300px;" src="{{ asset('storage/'.$user->avatar) }}"
+                                            <img style="width: 100px;" src="{{ asset('storage/'.$user->avatar) }}"
                                                 alt="" srcset="">
                                         </td>
                                         <td>{{ \App\Helpers\Common::formatPhone($user->phone)}}</td>

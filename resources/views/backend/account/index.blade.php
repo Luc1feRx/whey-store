@@ -73,7 +73,7 @@
                                         <td>{{ $admin->name }}</td>
                                         <td>{{ $admin->email }}</td>
                                         <td>
-                                            <img style="width: 300px;" src="{{ asset('storage/'.$admin->avatar) }}"
+                                            <img style="width: 100px;" src="{{ asset('storage/'.$admin->avatar) }}"
                                                 alt="" srcset="">
                                         </td>
                                         <td>{{ \App\Helpers\Common::formatPhone($admin->phone)}}</td>
